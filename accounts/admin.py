@@ -12,11 +12,13 @@ class CustomUserAdmin(UserAdmin):
     model = CustomUser
     list_display = ('email', 'username')
 
-    add_fieldsets = UserAdmin.add_fieldsets + (
-        (None, {
-            "fields": (
-                'email',
-            ),
-        }),
+    add_fieldsets = (
+        (
+            None,
+            {
+                "classes": ("wide",),
+                "fields": ("username", "email", "usable_password", "password1", "password2"),
+            },
+        ),
     )
    
