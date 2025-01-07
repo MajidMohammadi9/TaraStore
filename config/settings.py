@@ -41,11 +41,15 @@ INSTALLED_APPS = [
     # third party apps
     'crispy_forms',
     'crispy_bootstrap5',
+    'allauth',
+    'allauth.account',
 
     # local apps
     "accounts",
     "pages",
 ]
+
+SITE_ID=1
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -55,6 +59,8 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+
+    "allauth.account.middleware.AccountMiddleware",
 ]
 
 ROOT_URLCONF = "config.urls"
@@ -111,12 +117,22 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
+AUTHENTICATION_BACKENDS = [   
+     # Needed to login by username in Django admin, regardless of `allauth`	
+    'django.contrib.auth.backends.ModelBackend',
+
+     # `allauth` specific authentication methods, such as login by email
+    'allauth.account.auth_backends.AuthenticationBackend',
+ ]
+
+EMAIL_BACKEND='django.core.mail.backends.console.EmailBackend'
+
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
 
 LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = "UTC"
+TIME_ZONE = "Asia/Muscat"
 
 USE_I18N = True
 
@@ -141,3 +157,11 @@ LOGOUT_REDIRECT_URL='home'
 # crispy forms settings
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
+
+# allauth settings
+ACCOUNT_SESSION_REMEMBER=True               # for 'remember me' in login page, if you don't set here(True or False), you have to set in login page
+ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE=False   # You don't need to enter the password twice in the signup page
+ACCOUNT_USERNAME_REQUIRED=False             # 'username' filed no need in signup page
+ACCOUNT_AUTHENTICATION_METHOD='email'       # use email instead of username
+ACCOUNT_EMAIL_REQUIRED=True
+ACCOUNT_UNIQUE_EMAIL=True
