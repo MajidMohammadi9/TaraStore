@@ -130,7 +130,16 @@ AUTHENTICATION_BACKENDS = [
     'allauth.account.auth_backends.AuthenticationBackend',
  ]
 
+# send email by django to console
 EMAIL_BACKEND='django.core.mail.backends.console.EmailBackend'
+
+# send email by smtp.gmail to gmail
+# EMAIL_BACKEND="django.core.mail.backends.smtp.EmailBackend"
+# EMAIL_HOST="smtp.gmail.com"
+# EMAIL_USE_TLS="True"
+# EMAIL_PORT="587"
+# EMAIL_HOST_USER="your_account@gmail.com"
+# EMAIL_HOST_PASSWORD="your_password"
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
@@ -165,7 +174,7 @@ CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 # allauth settings
 ACCOUNT_SESSION_REMEMBER=True               # for 'remember me' in login page, if you don't set here(True or False), you have to set in login page
-ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE=False   # You don't need to enter the password twice in the signup page
+ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE=True   # if False, You don't need to enter the password twice in the signup page
 ACCOUNT_USERNAME_REQUIRED=False             # 'username' filed no need in signup page
 ACCOUNT_AUTHENTICATION_METHOD='email'       # use email instead of username
 ACCOUNT_EMAIL_REQUIRED=True
