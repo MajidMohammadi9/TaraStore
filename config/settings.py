@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'debug_toolbar',
+    'phonenumber_field',
 
     # local apps
     "accounts",
