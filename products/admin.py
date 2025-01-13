@@ -1,6 +1,16 @@
 from django.contrib import admin,messages
 
-from .models import Product, Category
+from .models import Product, Category, Comment
+
+
+class CommentInline(admin.TabularInline):
+    model=Comment
+    fields=['id', 'author','body', 'stars', 'status','active']
+    extra=0
+    
+    def get_queryset(self, request):
+        queryset = super().get_queryset(request)
+        return queryset.select_related('author','product')
 
 
 class InventoryFilter(admin.SimpleListFilter):
@@ -28,7 +38,7 @@ class InventoryFilter(admin.SimpleListFilter):
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display=['id', 'name', 'inventory', 'unit_price', 'inventory_status', 'category']
+    list_display=['id', 'name', 'inventory', 'unit_price', 'inventory_status', 'category', 'active']
     prepopulated_fields={'slug': ['name',]}
     list_per_page=10
     list_editable=['unit_price']
@@ -36,6 +46,8 @@ class ProductAdmin(admin.ModelAdmin):
     list_filter=['datetime_created', InventoryFilter]
     search_fields=['name',]
     actions=['clear_inventory']
+    inlines=[CommentInline]
+    list_display_links=['id', 'name']
 
     def inventory_status(self, product):
         if product.inventory<10:
@@ -51,3 +63,11 @@ class ProductAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Category)
+
+
+@admin.register(Comment)
+class CommentAdmin(admin.ModelAdmin):
+    list_display=['id', 'product', 'author', 'status','active']
+    list_editable=['status']
+    list_per_page=10
+    autocomplete_fields=['product']

@@ -1,8 +1,8 @@
 from django.db import models
 from django.core.validators import MinValueValidator
 from django.conf import settings
-from django.contrib.auth import get_user_model
-from uuid import uuid4
+from django.urls import reverse
+
 
 
 class Category(models.Model):
@@ -38,7 +38,44 @@ class Product(models.Model):
 
     def __str__(self):
         return self.name
+    
+    def get_absolute_url(self):
+        return reverse("product_detail", kwargs={"pk": self.pk})
+    
 
 
+class Comment(models.Model):
+    COMMENT_STATUS_WAITING='w'
+    COMMENT_STATUS_APPROVED='a'
+    COMMENT_STATUS_NOT_APPROVED='na'
 
+    COMMENT_STATUS=[
+        (COMMENT_STATUS_WAITING, 'Waiting'),
+        (COMMENT_STATUS_APPROVED, 'Approved'),
+        (COMMENT_STATUS_NOT_APPROVED, 'Not Approved')
+    ]
+
+    PRODUCT_STARS=[
+        ('1', 'Very Bad'),
+        ('2', 'Bad'),
+        ('3', 'Normal'),
+        ('4', 'Good'),
+        ('5', 'Perfect'),
+    ]
+
+    product=models.ForeignKey(Product, on_delete=models.CASCADE, related_name='comments')
+    author=models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='comments')
+    body=models.TextField()
+    stars=models.CharField(max_length=10, choices=PRODUCT_STARS)
+    datatime_created=models.DateTimeField(auto_now_add=True)
+    datetime_modified=models.DateTimeField(auto_now=True)
+    status=models.CharField(max_length=2, choices=COMMENT_STATUS)
+    active=models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.product.name
+    
+    def get_absolute_url(self):
+        return reverse("product_detail", kwargs={"pk": self.pk})
+    
 
