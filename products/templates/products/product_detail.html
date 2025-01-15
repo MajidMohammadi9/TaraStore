@@ -1,0 +1,35 @@
+{% extends '_base.html' %}
+{% load crispy_forms_tags %}
+
+{% block page_title %}
+  Product detail
+{% endblock %}
+
+{% block content %}
+  <h3>{{ product.name }}</h3>
+
+  <p>{{ product.short_description }}</p>
+
+  <h3>Comments List</h3>
+  <ul>
+    {% for comment in product.active_comments %}
+      <li>
+        <strong>{{ comment.author.username }}:</strong> {{ comment.datetime_created }}
+        <div>
+          <p>{{ comment.body }}</p>
+        </div>
+        <small>Raiting: {{ comment.stars }}</small>
+      </li>
+      <br>
+    {% empty %}
+      <li>No comments available.</li>
+    {% endfor %}
+  </ul>
+
+  <form action="" method="POST">
+    {% csrf_token %}
+    {{comment_form|crispy}}
+    <input type="submit" value="Send">
+  </form>
+{% endblock %}
+

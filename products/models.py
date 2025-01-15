@@ -67,9 +67,9 @@ class Comment(models.Model):
     author=models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='comments')
     body=models.TextField()
     stars=models.CharField(max_length=10, choices=PRODUCT_STARS)
-    datatime_created=models.DateTimeField(auto_now_add=True)
+    datetime_created=models.DateTimeField(auto_now_add=True)
     datetime_modified=models.DateTimeField(auto_now=True)
-    status=models.CharField(max_length=2, choices=COMMENT_STATUS)
+    status=models.CharField(max_length=2, choices=COMMENT_STATUS, default=COMMENT_STATUS_WAITING)
     active=models.BooleanField(default=True)
 
     def __str__(self):

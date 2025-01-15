@@ -17,6 +17,17 @@
     {% else %}
       <a href="{% url 'account_login' %}">Login</a> | <a href="{% url 'account_signup' %}">Signup</a>
     {% endif %}
+
+    {% if messages %}
+    <div class="container">
+       {% for message in messages %}
+         <div class="alert alert-{{message.tags}}">
+           {{message}}
+         </div>
+       {% endfor %}
+    </div>
+   {% endif %}
+   
     {% block content %}
 
     {% endblock %}

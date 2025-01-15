@@ -3,7 +3,7 @@
 {% block content %}
 <h1>Products list</h1>
   {% for product in products %}
-    <p>{{ product.name }}</p>
+    <p><a href="{{ product.get_absolute_url }}">{{ product.name }}</a></p>
     <p>----------------</p>
   {% endfor %}
 {% endblock %}
