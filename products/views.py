@@ -26,7 +26,11 @@ class ProductDetailView(DetailView):
             Prefetch(
                 'comments',
                 queryset = Comment.objects.filter(active=True, status='a').select_related('author'),
-                to_attr='active_comments' # stores filtered comments
+                # you can also use the Comment Manager, like the line below istead of the code above:
+                # queryset = Comment.active_aproved_comment.all()
+                # queryset = Comment.objects.get_active_and_approved()
+
+                # to_attr='active_comments' # stores filtered comments (To display active comments in template, use ptroduct.active_comments)
             )
         )
     

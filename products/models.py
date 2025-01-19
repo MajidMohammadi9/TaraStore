@@ -43,6 +43,31 @@ class Product(models.Model):
         return reverse("product_detail", kwargs={"pk": self.pk})
     
 
+class CommentManager(models.Manager):
+    def get_active_and_approved(self):
+        return self.get_queryset().filter(active=True, status=Comment.COMMENT_STATUS_APPROVED).select_related('product', 'author')
+    
+    def get_active(self):
+        return self.get_queryset().filter(active=True).select_related('product', 'author')
+    
+    def get_approved(self):
+        return self.get_queryset().filter(status=Comment.COMMENT_STATUS_APPROVED).select_related('product', 'author')
+    
+
+class ActiveCommentManager(models.Manager):
+    def get_queryset(self):
+        return super().get_queryset().filter(active=True).select_related('product', 'author')
+    
+
+class ApprovedCommentManager(models.Manager):
+    def get_queryset(self):
+        return super().get_queryset().filter(status=Comment.COMMENT_STATUS_APPROVED).select_related('product', 'author')
+    
+
+class AvtiveApprovedCommentManager(models.Manager):
+    def get_queryset(self):
+        return super().get_queryset().filter(active=True, status=Comment.COMMENT_STATUS_APPROVED).select_related('product', 'author')
+
 
 class Comment(models.Model):
     COMMENT_STATUS_WAITING='w'
@@ -71,6 +96,12 @@ class Comment(models.Model):
     datetime_modified=models.DateTimeField(auto_now=True)
     status=models.CharField(max_length=2, choices=COMMENT_STATUS, default=COMMENT_STATUS_WAITING)
     active=models.BooleanField(default=True)
+
+    # Manager
+    objects=CommentManager()
+    active_aproved_comment=AvtiveApprovedCommentManager()
+    approved_comment=ApprovedCommentManager()
+    active_comment=ActiveCommentManager()
 
     def __str__(self):
         return self.product.name

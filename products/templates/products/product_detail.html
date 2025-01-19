@@ -10,9 +10,9 @@
 
   <p>{{ product.short_description }}</p>
 
-  <h3>Comments List</h3>
+  <h3>Comments List ({{ product.comments.count }})</h3>
   <ul>
-    {% for comment in product.active_comments %}
+    {% for comment in product.comments.all %}
       <li>
         <strong>{{ comment.author.username }}:</strong> {{ comment.datetime_created }}
         <div>

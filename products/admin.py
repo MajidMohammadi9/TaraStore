@@ -68,6 +68,6 @@ admin.site.register(Category)
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
     list_display=['id', 'product', 'author', 'status','active']
-    list_editable=['status']
+    list_editable=['status', 'active']
     list_per_page=10
     autocomplete_fields=['product']
