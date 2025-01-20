@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 from environs import Env
+import os
 
 env=Env()
 env.read_env()
@@ -65,6 +66,7 @@ MIDDLEWARE = [
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
+    "django.middleware.locale.LocaleMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
@@ -152,15 +154,24 @@ EMAIL_BACKEND='django.core.mail.backends.console.EmailBackend'
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
 
-LANGUAGE_CODE = "en-us"
+LANGUAGE_CODE = "en"
+
+LANGUAGES = [
+    ('en', 'English'),
+    ('fa', 'Persian'),
+    ('ar', 'Arabic') 
+]
 
 TIME_ZONE = "Asia/Muscat"
 
 USE_I18N = True
+USE_L10N = True
 
 USE_TZ = True
 
-
+LOCALE_PATHS = [
+    os.path.join(BASE_DIR, 'locale'),
+]
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
@@ -187,3 +198,7 @@ ACCOUNT_USERNAME_REQUIRED=False             # 'username' filed no need in signup
 ACCOUNT_AUTHENTICATION_METHOD='email'       # use email instead of username
 ACCOUNT_EMAIL_REQUIRED=True
 ACCOUNT_UNIQUE_EMAIL=True
+
+# Comment
+COMMENT_STATUS_APPROVED = 'a'
+

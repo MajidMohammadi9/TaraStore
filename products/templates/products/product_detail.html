@@ -1,8 +1,9 @@
 {% extends '_base.html' %}
 {% load crispy_forms_tags %}
+{% load i18n %}
 
 {% block page_title %}
-  Product detail
+  {% trans "Product detail" %}
 {% endblock %}
 
 {% block content %}
@@ -10,7 +11,7 @@
 
   <p>{{ product.short_description }}</p>
 
-  <h3>Comments List ({{ product.comments.count }})</h3>
+  <h3>{% trans "Comments List" %} ({{ product.comments.count }})</h3>
   <ul>
     {% for comment in product.comments.all %}
       <li>
@@ -18,18 +19,18 @@
         <div>
           <p>{{ comment.body }}</p>
         </div>
-        <small>Raiting: {{ comment.stars }}</small>
+        <small>{% trans "Product Rating" %}: {{ comment.stars }}</small>
       </li>
       <br>
     {% empty %}
-      <li>No comments available.</li>
+      <li>{% trans "No comments available." %}</li>
     {% endfor %}
   </ul>
 
   <form action="" method="POST">
     {% csrf_token %}
     {{comment_form|crispy}}
-    <input type="submit" value="Send">
+    <input type="submit" value="{% trans "Send" %}">
   </form>
 {% endblock %}
 

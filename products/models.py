@@ -2,38 +2,38 @@ from django.db import models
 from django.core.validators import MinValueValidator
 from django.conf import settings
 from django.urls import reverse
-
+from django.utils.translation import gettext_lazy as _
 
 
 class Category(models.Model):
-    title = models.CharField(max_length=255)
-    description = models.CharField(max_length=500, blank=True)
-    top_product = models.ForeignKey('Product', on_delete=models.SET_NULL, blank=True, null=True, related_name='+')
+    title = models.CharField(max_length=255, verbose_name=_('Title'))
+    description = models.CharField(max_length=500, blank=True, verbose_name=_('Description'))
+    top_product = models.ForeignKey('Product', on_delete=models.SET_NULL, blank=True, null=True, related_name='+', verbose_name=_('Top Product'))
 
     def __str__(self):
         return self.title
 
 
 class Discount(models.Model):
-    discount = models.FloatField()
-    description = models.CharField(max_length=255)
+    discount = models.FloatField(verbose_name=_('Discount'))
+    description = models.CharField(max_length=255, verbose_name=_('Description'))
 
     def __str__(self):
         return f'{str(self.discount)} | {self.description}'
 
 
 class Product(models.Model):
-    name = models.CharField(max_length=255)
-    category = models.ForeignKey(Category, on_delete=models.PROTECT, related_name='products')
-    slug = models.SlugField()
-    description = models.TextField()
-    short_description=models.TextField(verbose_name='short description',blank=True)
-    unit_price = models.DecimalField(max_digits=6, decimal_places=3)
-    inventory = models.IntegerField(validators=[MinValueValidator(0)])
-    datetime_created = models.DateTimeField(auto_now_add=True)
-    datetime_modified = models.DateTimeField(auto_now=True)
-    discounts = models.ManyToManyField(Discount, blank=True)
-    active=models.BooleanField(verbose_name='active',default=True)
+    name = models.CharField(max_length=255, verbose_name=_('Product Name'))
+    category = models.ForeignKey(Category, on_delete=models.PROTECT, related_name='products', verbose_name=_('Category'))
+    slug = models.SlugField(verbose_name=_('Slug'))
+    description = models.TextField(verbose_name=_('Description'))
+    short_description=models.TextField(blank=True, verbose_name=_('Short Description'))
+    unit_price = models.DecimalField(max_digits=6, decimal_places=3, verbose_name=_('Price'))
+    inventory = models.IntegerField(validators=[MinValueValidator(0)], verbose_name=_('Inventory'))
+    datetime_created = models.DateTimeField(auto_now_add=True, verbose_name=_('Date Time Created'))
+    datetime_modified = models.DateTimeField(auto_now=True, verbose_name=_('Date Time Modified'))
+    discounts = models.ManyToManyField(Discount, blank=True, verbose_name=_('Discount'))
+    active=models.BooleanField(default=True, verbose_name=_('Active'))
     # image=models.ImageField(verbose_name='Product image',upload_to='product/product_cover/',blank=True,)
 
     def __str__(self):
@@ -75,27 +75,27 @@ class Comment(models.Model):
     COMMENT_STATUS_NOT_APPROVED='na'
 
     COMMENT_STATUS=[
-        (COMMENT_STATUS_WAITING, 'Waiting'),
-        (COMMENT_STATUS_APPROVED, 'Approved'),
-        (COMMENT_STATUS_NOT_APPROVED, 'Not Approved')
+        (COMMENT_STATUS_WAITING, _('Waiting')),
+        (COMMENT_STATUS_APPROVED, _('Approved')),
+        (COMMENT_STATUS_NOT_APPROVED, _('Not Approved'))
     ]
 
     PRODUCT_STARS=[
-        ('1', 'Very Bad'),
-        ('2', 'Bad'),
-        ('3', 'Normal'),
-        ('4', 'Good'),
-        ('5', 'Perfect'),
+        ('1', _('Very Bad')),
+        ('2', _('Bad')),
+        ('3', _('Normal')),
+        ('4', _('Good')),
+        ('5', _('Perfect')),
     ]
 
-    product=models.ForeignKey(Product, on_delete=models.CASCADE, related_name='comments')
-    author=models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='comments')
-    body=models.TextField()
-    stars=models.CharField(max_length=10, choices=PRODUCT_STARS)
-    datetime_created=models.DateTimeField(auto_now_add=True)
-    datetime_modified=models.DateTimeField(auto_now=True)
-    status=models.CharField(max_length=2, choices=COMMENT_STATUS, default=COMMENT_STATUS_WAITING)
-    active=models.BooleanField(default=True)
+    product=models.ForeignKey(Product, on_delete=models.CASCADE, related_name='comments', verbose_name=_('Product'))
+    author=models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='comments', verbose_name=_('Author'))
+    body=models.TextField(verbose_name=_('Comment Text'))
+    stars=models.CharField(max_length=10, choices=PRODUCT_STARS, verbose_name=_('Product Rating'))
+    datetime_created=models.DateTimeField(auto_now_add=True, verbose_name=_('Date Time Created'))
+    datetime_modified=models.DateTimeField(auto_now=True, verbose_name=_('Date Time Modified'))
+    status=models.CharField(max_length=2, choices=COMMENT_STATUS, default=COMMENT_STATUS_WAITING, verbose_name=_('Status'))
+    active=models.BooleanField(default=True, verbose_name=_('Active'))
 
     # Manager
     objects=CommentManager()
