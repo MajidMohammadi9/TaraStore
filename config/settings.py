@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 from pathlib import Path
 from environs import Env
 import os
+from django.contrib.messages import constants as messages
 
 env=Env()
 env.read_env()
@@ -203,3 +204,7 @@ ACCOUNT_UNIQUE_EMAIL=True
 # Comment
 COMMENT_STATUS_APPROVED = 'a'
 
+# for message framework
+MESSAGE_TAGS={
+    messages.ERROR:'danger'
+}

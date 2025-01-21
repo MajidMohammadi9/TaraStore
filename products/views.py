@@ -3,7 +3,8 @@ from django.db.models import Prefetch
 from django.contrib import messages
 from django.urls import reverse
 from django.utils.translation import gettext as _
-from django.views.generic import ListView,DetailView
+from django.views.generic import ListView,DetailView,CreateView
+from django.utils.text import slugify
 
 from .models import Product,Comment
 from .forms import CommentForm
@@ -55,4 +56,17 @@ class ProductDetailView(DetailView):
         context=self.get_context_data()
         context['comment_form']=comment_form
         return self.render_to_response(context)
+    
+
+class ProductCreateView(CreateView):
+    model=Product
+    fields=['name', 'category', 'description', 'short_description', 'unit_price', 'inventory',]
+    template_name='products/product_create.html'
+    context_object_name='form'
+
+    def form_valid(self, form):
+        form.instance.slug=slugify(form.instance.name)
+        messages.success(self.request, _('Product has been created successfully!'))
+        return super().form_valid(form)
+    
         

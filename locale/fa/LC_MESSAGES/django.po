@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-20 23:32+0400\n"
-"PO-Revision-Date: 2025-01-21 00:22+0400\n"
+"POT-Creation-Date: 2025-01-22 00:07+0400\n"
+"PO-Revision-Date: 2025-01-22 00:14+0400\n"
 "Last-Translator:   <majid@majid.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -155,12 +155,22 @@ msgid "Comment Text"
 msgstr "متن ديدگاه"
 
 #: .\products\models.py:94
+#: .\products\templates\products\product_detail.html:22
 msgid "Product Rating"
 msgstr "امتياز محصول"
 
 #: .\products\models.py:97
 msgid "Status"
 msgstr "وضعيت"
+
+#: .\products\templates\products\product_create.html:6
+#: .\templates\_base.html:33
+msgid "Create Product"
+msgstr "اضافه كردن محصول"
+
+#: .\products\templates\products\product_create.html:13
+msgid "Submit"
+msgstr "ارسال"
 
 #: .\products\templates\products\product_detail.html:6
 msgid "Product detail"
@@ -178,27 +188,43 @@ msgstr "هيج ديدگاهى موجود نيست."
 msgid "Send"
 msgstr "ارسال"
 
-#: .\products\templates\products\product_list.html:4
+#: .\products\templates\products\product_list.html:5
 msgid "Products list"
 msgstr "ليست محصولات"
 
-#: .\products\views.py:50
+#: .\products\views.py:51
 msgid "Comment successfully created."
 msgstr "نظر با موفقيت ساخته شد."
 
-#: .\templates\_base.html:32
-msgid "welcome"
+#: .\products\views.py:69
+msgid "Product has been created successfully!"
+msgstr "محصول با موفقيت ايجاد شده است!"
+
+#: .\templates\_base.html:22
+msgid "Tara Store"
+msgstr "تارا استور"
+
+#: .\templates\_base.html:36 .\templates\home.html:5
+msgid "Home"
+msgstr "خانه"
+
+#: .\templates\_base.html:45
+msgid "Select Language"
+msgstr "زبان را انتخاب كنيد"
+
+#: .\templates\_base.html:61
+msgid "Welcome"
 msgstr "خوش آمدید"
 
-#: .\templates\_base.html:32
+#: .\templates\_base.html:64
 msgid "Logout"
 msgstr "خروج"
 
-#: .\templates\_base.html:34
+#: .\templates\_base.html:68
 msgid "Login"
 msgstr "ورود"
 
-#: .\templates\_base.html:34
+#: .\templates\_base.html:71
 msgid "Signup"
 msgstr "ثبت نام"
 
@@ -238,10 +264,6 @@ msgid ""
 "This email confirmation link expired or is invalid. Please <a "
 "href=\"%(email_url)s\">issue a new email confirmation request</a>."
 msgstr ""
-
-#: .\templates\home.html:5
-msgid "Home"
-msgstr "خانه"
 
 #: .\templates\home.html:9
 msgid "Home Page"
