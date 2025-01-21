@@ -26,6 +26,7 @@ from django.conf.urls.i18n import i18n_patterns
 #     path('', include('pages.urls')),
 #     path('accounts/', include('allauth.urls')),
 #     path('products/', include('products.urls')),
+#     path('rosetta/', include('rosetta.urls')),
 # ] + debug_toolbar_urls()
 
 urlpatterns = [
@@ -37,6 +38,7 @@ urlpatterns = urlpatterns + i18n_patterns(
     path('', include('pages.urls')),
     path('accounts/', include('allauth.urls')),
     path('products/', include('products.urls')),
+    path('rosetta/', include('rosetta.urls')),
     )
 
 urlpatterns += debug_toolbar_urls()

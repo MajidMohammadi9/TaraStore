@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'debug_toolbar',
     'phonenumber_field',
+    'rosetta',
 
     # local apps
     "accounts",
