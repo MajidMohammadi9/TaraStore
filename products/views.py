@@ -5,7 +5,7 @@ from django.urls import reverse
 from django.utils.translation import gettext as _
 from django.views.generic import ListView,DetailView,CreateView
 from django.utils.text import slugify
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin,UserPassesTestMixin
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 
@@ -62,11 +62,18 @@ class ProductDetailView(DetailView):
         return self.render_to_response(context)
     
 
-class ProductCreateView(LoginRequiredMixin,CreateView):
+class ProductCreateView(UserPassesTestMixin,CreateView):
     model=Product
     fields=['name', 'category', 'description', 'short_description', 'unit_price', 'inventory',]
     template_name='products/product_create.html'
     context_object_name='form'
+
+    def test_func(self):
+        return self.request.user.is_staff
+    
+    def handle_no_permission(self):
+        messages.error(self.request, _("You don't have permission to access this page."))
+        return redirect('product_list')
 
     def form_valid(self, form):
         form.instance.slug=slugify(form.instance.name)
