@@ -5,6 +5,9 @@ from django.urls import reverse
 from django.utils.translation import gettext as _
 from django.views.generic import ListView,DetailView,CreateView
 from django.utils.text import slugify
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 
 from .models import Product,Comment
 from .forms import CommentForm
@@ -12,10 +15,10 @@ from .forms import CommentForm
 
 class ProductListView(ListView):
     queryset=Product.objects.filter(active=True)
+    paginate_by=3
     template_name='products/product_list.html'
     context_object_name='products'
     
-
 
 class ProductDetailView(DetailView):
     model=Product
@@ -40,6 +43,7 @@ class ProductDetailView(DetailView):
         context['comment_form'] =CommentForm() 
         return context
     
+    @method_decorator(login_required)
     def post(self, request, *args, **kwargs):
         self.object=self.get_object()
         comment_form=CommentForm(request.POST)
@@ -58,7 +62,7 @@ class ProductDetailView(DetailView):
         return self.render_to_response(context)
     
 
-class ProductCreateView(CreateView):
+class ProductCreateView(LoginRequiredMixin,CreateView):
     model=Product
     fields=['name', 'category', 'description', 'short_description', 'unit_price', 'inventory',]
     template_name='products/product_create.html'

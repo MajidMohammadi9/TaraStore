@@ -94,7 +94,7 @@ class Comment(models.Model):
     stars=models.CharField(max_length=10, choices=PRODUCT_STARS, verbose_name=_('Product Rating'))
     datetime_created=models.DateTimeField(auto_now_add=True, verbose_name=_('Date Time Created'))
     datetime_modified=models.DateTimeField(auto_now=True, verbose_name=_('Date Time Modified'))
-    status=models.CharField(max_length=2, choices=COMMENT_STATUS, default=COMMENT_STATUS_WAITING, verbose_name=_('Status'))
+    status=models.CharField(max_length=2, choices=COMMENT_STATUS, default=COMMENT_STATUS_APPROVED, verbose_name=_('Status'))
     active=models.BooleanField(default=True, verbose_name=_('Active'))
 
     # Manager
