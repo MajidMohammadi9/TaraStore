@@ -18,7 +18,7 @@
       <div class="container">
         <!-- Brand Name / Logo -->
         <a class="navbar-brand text-dark" href="{% url 'product_list' %}">{% trans "Tara Store" %}</a>
-    
+        
         <!-- Mobile Toggle Button -->
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -40,8 +40,6 @@
           <!-- Language Selection Form -->
           <form class="d-flex me-3" action="{% url 'set_language' %}" method="post">
             {% csrf_token %}
-            <input type="hidden" name="next" value="{{ request.path }}">
-
             <label for="language-select" class="me-2">{% trans "Select Language" %}:</label>
             <select id="language-select" name="language" class="form-select" onchange="this.form.submit()">
               {% get_available_languages as LANGUAGES %}
@@ -52,6 +50,7 @@
                 </option>
               {% endfor %}
             </select>
+            <input type="hidden" name="next" value="{{ request.get_full_path }}">
           </form>
     
           <!-- User Authentication Links -->

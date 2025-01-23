@@ -1,6 +1,8 @@
 {% extends '_base.html' %}
 {% load crispy_forms_tags %}
 {% load i18n %}
+{% load translation_tags %}
+
 
 {% block page_title %}
   {% trans 'Product detail' %}
@@ -8,18 +10,19 @@
 
 {% block content %}
   <h3>{{ product.name }}</h3>
+  <p>{% trans "Price" %}: {{ product.unit_price|translate_number}} {% trans "$" %}</p>
 
   <p>{{ product.description|linebreaks }}</p>
 
-  <h3>{% trans 'Comments List' %}({{ product.comments.count }})</h3>
+  <h3>{% trans 'Comments List' %}({{ product.comments.count|translate_number }})</h3>
   <ul>
     {% for comment in product.comments.all %}
       <li>
-        <strong>{{ comment.author.username }}:</strong> {{ comment.datetime_created }}
+        <strong>{{ comment.author.username }}:</strong> {{ comment.datetime_created|translate_datetime|translate_number }}
         <div>
           <p>{{ comment.body|linebreaks }}</p>
         </div>
-        <small>{% trans 'Product Rating' %}: {{ comment.stars }}</small>
+        <small>{% trans 'Product Rating' %}: {{ comment.stars|translate_number }}</small>
       </li>
       <br />
     {% empty %}

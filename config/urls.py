@@ -21,13 +21,6 @@ from debug_toolbar.toolbar import debug_toolbar_urls
 from django.views.i18n import set_language
 from django.conf.urls.i18n import i18n_patterns
 
-# urlpatterns = [
-#     path("admin/", admin.site.urls),
-#     path('', include('pages.urls')),
-#     path('accounts/', include('allauth.urls')),
-#     path('products/', include('products.urls')),
-#     path('rosetta/', include('rosetta.urls')),
-# ] + debug_toolbar_urls()
 
 urlpatterns = [
     path('set-language/', set_language, name='set_language'),
