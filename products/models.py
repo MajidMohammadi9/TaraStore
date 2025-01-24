@@ -28,7 +28,7 @@ class Product(models.Model):
     slug = models.SlugField(verbose_name=_('Slug'))
     description = models.TextField(verbose_name=_('Description'))
     short_description=models.TextField(blank=True, verbose_name=_('Short Description'))
-    unit_price = models.DecimalField(max_digits=6, decimal_places=3, verbose_name=_('Price'))
+    unit_price = models.DecimalField(max_digits=7, decimal_places=3, verbose_name=_('Price'))
     inventory = models.IntegerField(validators=[MinValueValidator(0)], verbose_name=_('Inventory'))
     datetime_created = models.DateTimeField(auto_now_add=True, verbose_name=_('Date Time Created'))
     datetime_modified = models.DateTimeField(auto_now=True, verbose_name=_('Date Time Modified'))

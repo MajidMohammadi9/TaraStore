@@ -2,6 +2,7 @@
 {% load crispy_forms_tags %}
 {% load i18n %}
 {% load translation_tags %}
+{% load humanize %}
 
 
 {% block page_title %}
@@ -10,7 +11,7 @@
 
 {% block content %}
   <h3>{{ product.name }}</h3>
-  <p>{% trans "Price" %}: {{ product.unit_price|translate_number}} {% trans "$" %}</p>
+  <p>{% trans "Price" %}: {{ product.unit_price|intcomma:False|translate_number}} {% trans "$" %}</p>
 
   <p>{{ product.description|linebreaks }}</p>
 

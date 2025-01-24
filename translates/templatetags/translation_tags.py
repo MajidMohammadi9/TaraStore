@@ -2,7 +2,7 @@ from django import template
 from django.utils.translation import get_language
 from babel.dates import format_datetime
 from jalali_date.templatetags.jalali_tags import to_jalali
-from datetime import datetime
+
 
 register = template.Library()
 
