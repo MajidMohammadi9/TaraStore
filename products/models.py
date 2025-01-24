@@ -4,6 +4,8 @@ from django.conf import settings
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 
+from ckeditor.fields import RichTextField
+
 
 class Category(models.Model):
     title = models.CharField(max_length=255, verbose_name=_('Title'))
@@ -26,8 +28,8 @@ class Product(models.Model):
     name = models.CharField(max_length=255, verbose_name=_('Product Name'))
     category = models.ForeignKey(Category, on_delete=models.PROTECT, related_name='products', verbose_name=_('Category'))
     slug = models.SlugField(verbose_name=_('Slug'))
-    description = models.TextField(verbose_name=_('Description'))
-    short_description=models.TextField(blank=True, verbose_name=_('Short Description'))
+    description = RichTextField(verbose_name=_('Description'))
+    short_description = models.TextField(blank=True, verbose_name=_('Short Description'))
     unit_price = models.DecimalField(max_digits=7, decimal_places=3, verbose_name=_('Price'))
     inventory = models.IntegerField(validators=[MinValueValidator(0)], verbose_name=_('Inventory'))
     datetime_created = models.DateTimeField(auto_now_add=True, verbose_name=_('Date Time Created'))
@@ -90,7 +92,7 @@ class Comment(models.Model):
 
     product=models.ForeignKey(Product, on_delete=models.CASCADE, related_name='comments', verbose_name=_('Product'))
     author=models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='comments', verbose_name=_('Author'))
-    body=models.TextField(verbose_name=_('Comment Text'))
+    body=RichTextField(verbose_name=_('Comment Text'))
     stars=models.CharField(max_length=10, choices=PRODUCT_STARS, verbose_name=_('Product Rating'))
     datetime_created=models.DateTimeField(auto_now_add=True, verbose_name=_('Date Time Created'))
     datetime_modified=models.DateTimeField(auto_now=True, verbose_name=_('Date Time Modified'))

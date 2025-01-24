@@ -13,7 +13,7 @@
   <h3>{{ product.name }}</h3>
   <p>{% trans "Price" %}: {{ product.unit_price|intcomma:False|translate_number}} {% trans "$" %}</p>
 
-  <p>{{ product.description|linebreaks }}</p>
+  <p>{{ product.description|safe|linebreaks }}</p>
 
   <h3>{% trans 'Comments List' %}({{ product.comments.count|translate_number }})</h3>
   <ul>
@@ -21,7 +21,7 @@
       <li>
         <strong>{{ comment.author.username }}:</strong> {{ comment.datetime_created|translate_datetime|translate_number }}
         <div>
-          <p>{{ comment.body|linebreaks }}</p>
+          <p>{{ comment.body|safe|linebreaks }}</p>
         </div>
         <small>{% trans 'Product Rating' %}: {{ comment.stars|translate_number }}</small>
       </li>
@@ -36,6 +36,7 @@
   {% if user.is_authenticated %}
     <form action="" method="POST">
       {% csrf_token %}
+      {{comment_form.media}}
       {{ comment_form|crispy }}
       <input type="submit" value="{% trans 'Send' %}" />
     </form>

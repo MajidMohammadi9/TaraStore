@@ -10,11 +10,11 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 
 from .models import Product,Comment
-from .forms import CommentForm
-
+from .forms import CommentForm,ProductForm
+from ckeditor.widgets import CKEditorWidget
 
 class ProductListView(ListView):
-    queryset=Product.objects.filter(active=True)
+    queryset=Product.objects.filter(active=True).order_by('-datetime_created')
     paginate_by=3
     template_name='products/product_list.html'
     context_object_name='products'
@@ -64,7 +64,8 @@ class ProductDetailView(DetailView):
 
 class ProductCreateView(UserPassesTestMixin,CreateView):
     model=Product
-    fields=['name', 'category', 'description', 'short_description', 'unit_price', 'inventory',]
+    # fields=['name', 'category', 'description', 'short_description', 'unit_price', 'inventory',]
+    form_class=ProductForm
     template_name='products/product_create.html'
     context_object_name='form'
 
@@ -74,6 +75,12 @@ class ProductCreateView(UserPassesTestMixin,CreateView):
     def handle_no_permission(self):
         messages.error(self.request, _("You don't have permission to access this page."))
         return redirect('product_list')
+    
+    # def get_form(self, form_class = None):
+    #     form=super().get_form(form_class)
+    #     form.fields['description'].widget = CKEditorWidget()
+    #     return form
+   
 
     def form_valid(self, form):
         form.instance.slug=slugify(form.instance.name)
