@@ -17,7 +17,7 @@ class CommentForm(forms.ModelForm):
 class ProductForm(forms.ModelForm):
             class Meta:
                 model = Product
-                fields=['name', 'category', 'description', 'short_description', 'unit_price', 'inventory',]
+                fields=['name', 'category', 'description', 'short_description', 'unit_price', 'inventory', 'image']
                 widgets = {
                     'description': CKEditorWidget(),
                 }

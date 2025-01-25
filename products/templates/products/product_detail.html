@@ -10,6 +10,7 @@
 {% endblock %}
 
 {% block content %}
+  <img src="{{ product.image.url}}" alt="">
   <h3>{{ product.name }}</h3>
   <p>{% trans "Price" %}: {{ product.unit_price|intcomma:False|translate_number}} {% trans "$" %}</p>
 

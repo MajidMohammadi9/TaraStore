@@ -36,7 +36,7 @@ class Product(models.Model):
     datetime_modified = models.DateTimeField(auto_now=True, verbose_name=_('Date Time Modified'))
     discounts = models.ManyToManyField(Discount, blank=True, verbose_name=_('Discount'))
     active=models.BooleanField(default=True, verbose_name=_('Active'))
-    # image=models.ImageField(verbose_name='Product image',upload_to='product/product_cover/',blank=True,)
+    image=models.ImageField(upload_to='product/product_cover/',blank=True, verbose_name=_('Product image'))
 
     def __str__(self):
         return self.name

@@ -20,6 +20,8 @@ from django.urls import path,include
 from debug_toolbar.toolbar import debug_toolbar_urls
 from django.views.i18n import set_language
 from django.conf.urls.i18n import i18n_patterns
+from django.conf import settings
+from django.conf.urls.static import static
 
 
 urlpatterns = [
@@ -33,5 +35,7 @@ urlpatterns = urlpatterns + i18n_patterns(
     path('products/', include('products.urls')),
     path('rosetta/', include('rosetta.urls')),
     )
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 urlpatterns += debug_toolbar_urls()
