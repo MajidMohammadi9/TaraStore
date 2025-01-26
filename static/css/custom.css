@@ -1,0 +1,41 @@
+/* Wrapper for proper positioning */
+.cart-wrapper {
+    position: relative;  /* Ensures child elements are positioned relative to this */
+    display: inline-block;
+}
+
+/* Cart count badge */
+.cart-count {
+    background: red;         /* Red background */
+    color: white;            /* White text */
+    font-size: 14px;         /* Text size */
+    border-radius: 50%;      /* Perfect circle */
+    width: 22px;             /* Equal width for circle */
+    height: 22px;            /* Equal height for circle */
+    line-height: 22px;       /* Center the number vertically */
+    text-align: center;      /* Center the number horizontally */
+    font-weight: bold;       /* Bold number */
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translate(50%, -50%); /* Adjust position */
+    box-shadow: 0 0 5px rgba(0,0,0,0.3); /* Optional shadow */
+}
+
+/* Shopping cart icon styling */
+.scroll-to-section a .fa-shopping-cart {
+    font-size: 32px; /* Adjust the size */
+    color: #333;  /* Change color if needed */
+}
+
+.submenu a i {
+    margin-right: 8px;
+    font-size: 24px;  /* تغییر اندازه آیکون */
+}
+
+.submenu a span {
+    margin-left: 8px;
+    font-size: 16px; /* اندازه فونت */
+    color: #000; /* رنگ متن */
+}
+
