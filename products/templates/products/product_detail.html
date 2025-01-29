@@ -4,7 +4,6 @@
 {% load translation_tags %}
 {% load humanize %}
 
-
 {% block page_title %}
   {% trans 'Product detail' %}
 {% endblock %}
@@ -49,4 +48,5 @@
       <strong>*{% trans 'You must be logged in to leave a comment.' %}</strong>
     </p>
   {% endif %}
+  {% include 'cart/cart_sidebar.html' %}
 {% endblock %}

@@ -248,6 +248,9 @@ header
 }
 
 .header-area .main-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   min-height: 80px;
   background: transparent;
 }
@@ -272,6 +275,19 @@ header
 
 .background-header .nav {
   margin-top: 20px !important;
+}
+
+.header-area .main-nav ul.nav {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.header-area .main-nav .logo-wrapper {
+  display: flex;
+  align-items: center;
 }
 
 .header-area .main-nav .nav {

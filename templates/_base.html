@@ -5,12 +5,12 @@
 <!DOCTYPE html>
 <html lang="{{ request.LANGUAGE_CODE }}">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    
-    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet" />
 
     <title>
       {% block page_title %}
@@ -18,116 +18,149 @@
       {% endblock %}
     </title>
 
-
     <!-- Additional CSS Files -->
-    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}" />
 
-    <link rel="stylesheet" type="text/css" href="{% static 'css/font-awesome.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/font-awesome.css' %}" />
 
-    <link rel="stylesheet" href="{% static 'css/templatemo-hexashop.css' %}">
+    <link rel="stylesheet" href="{% static 'css/tarastore.css' %}" />
 
-    <link rel="stylesheet" href="{% static 'css/owl-carousel.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl-carousel.css' %}" />
 
-    <link rel="stylesheet" href="{% static 'css/lightbox.css' %}">
+    <link rel="stylesheet" href="{% static 'css/lightbox.css' %}" />
 
-    <link rel="stylesheet" href="{% static 'css/flex-slider.css' %}">
+    <link rel="stylesheet" href="{% static 'css/flex-slider.css' %}" />
 
-    <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+    <link rel="stylesheet" href="{% static 'css/custom.css' %}" />
   </head>
   <body>
-        <!-- ***** Preloader Start ***** -->
-        <div id="preloader">
-          <div class="jumper">
-              <div></div>
-              <div></div>
-              <div></div>
-          </div>
-      </div>  
-      <!-- ***** Preloader End ***** -->
-      
-      
-      <!-- ***** Header Area Start ***** -->
-      <header class="header-area header-sticky">
-          <div class="container">
-              <div class="row">
-                  <div class="col-12">
-                      <nav class="main-nav">
-                          <!-- ***** Logo Start ***** -->
-                          <a href="index.html" class="logo">
-                              <img src="{% static 'images/TARAStore-logo.png' %}">
-                          </a>
-                          <!-- ***** Logo End ***** -->
-                          <!-- ***** Menu Start ***** -->
-                          <ul class="nav">
-                            <li class="scroll-to-section"><a href="{% url "product_list" %}" class="active">Home</a></li>
-                            <li class="scroll-to-section"><a href="#men">Men's</a></li>
-                            <li class="scroll-to-section"><a href="#women">Women's</a></li>
-                            <li class="scroll-to-section"><a href="#kids">Kid's</a></li>
-                            <li class="submenu">
-                                <a href="javascript:;">Pages</a>
-                                <ul>
-                                    <li><a href="about.html">About Us</a></li>
-                                    <li><a href="products.html">Products</a></li>
-                                    <li><a href="single-product.html">Single Product</a></li>
-                                    <li><a href="contact.html">Contact Us</a></li>
-                                </ul>
-                            </li>
-                            {% comment %} <li class="submenu">
-                                <a href="javascript:;">Features</a>
-                                <ul>
-                                    <li><a href="#">Features Page 1</a></li>
-                                    <li><a href="#">Features Page 2</a></li>
-                                    <li><a href="#">Features Page 3</a></li>
-                                    <li><a rel="nofollow" href="https://templatemo.com/page/4" target="_blank">Template Page 4</a></li>
-                                </ul>
-                            </li> {% endcomment %}
-                            <li class="scroll-to-section"><a href="#explore">Explore</a></li>
-                            <li class="submenu">
-                              <a href="javascript:;">Languages</a>
-                              <ul id="language-list">
-                                {% get_available_languages as LANGUAGES %}
-                                {% for lang_code, lang_name in LANGUAGES %}
-                                    <li><a href="javascript:;" data-lang="{{ lang_code }}">{{ lang_name }}</a></li>
-                                {% endfor %}
-                              </ul>
-                            </li>
-                            <li class="scroll-to-section cart-wrapper">
-                              <a href="#">
-                                  <i class="fa fa-shopping-cart"></i>
-                                  <span class="cart-count">
-                                      {{ request.session.cart|length }}
-                                  </span>
-                              </a>
-                            </li>
-                            <li class="submenu">
-                              <a href="javascript:;">
-                                  <i class="fa fa-user"></i>
-                                  {% if user.is_authenticated %}
-                                    <span>{{ user.username }}</span>
-                                  {% endif %}
-                              </a>
-                              <ul>
-                                  {% if user.is_authenticated %}
-                                      <li><a href="#profile">Profile</a></li>
-                                      <li><a href="{% url "account_logout" %}">Logout</a></li>
-                                  {% else %}
-                                      <li><a href="{% url "account_login" %}">Login</a></li>
-                                      <li><a href="{% url "account_signup" %}">Sign Up</a></li>
-                                  {% endif %}
-                              </ul>
-                            </li>
-                          </ul>        
-                          <a class='menu-trigger'>
-                              <span>Menu</span>
-                          </a>
-                          <!-- ***** Menu End ***** -->
-                      </nav>
-                  </div>
-              </div>
-          </div>
-      </header>
-      <!-- ***** Header Area End ***** -->
+    <!-- ***** Preloader Start ***** -->
+    <div id="preloader">
+      <div class="jumper">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </div>
+    <!-- ***** Preloader End ***** -->
 
+    <!-- ***** Header Area Start ***** -->
+    <header class="header-area header-sticky">
+      <div class="row">
+        <div class="col-12">
+          <nav class="main-nav d-flex align-items-center justify-content-between">
+            <!-- ***** Logo Start ***** -->
+            <div class="logo-wrapper">
+              <a href="{% url 'product_list' %}" class="logo"><img src="{% static 'images/TARAStore-logo.png' %}" alt="Logo" /></a>
+            </div>
+            <!-- ***** Logo End ***** -->
+
+            <!-- ***** Menu Start ***** -->
+            <ul class="nav">
+              <li class="scroll-to-section">
+                <a href="{% url 'product_list' %}" class="active">{% trans 'Home' %}</a>
+              </li>
+              <li class="scroll-to-section">
+                <a href="#men">{% trans "Men's" %}</a>
+              </li>
+              <li class="scroll-to-section">
+                <a href="#women">{% trans "Women's" %}</a>
+              </li>
+              <li class="scroll-to-section">
+                <a href="#kids">{% trans "Kid's" %}</a>
+              </li>
+              <li class="submenu">
+                <a href="javascript:;">{% trans 'Pages' %}</a>
+                <ul>
+                  <li>
+                    <a href="about.html">{% trans 'About Us' %}</a>
+                  </li>
+                  <li>
+                    <a href="products.html">{% trans 'Products' %}</a>
+                  </li>
+                  <li>
+                    <a href="single-product.html">Single Product</a>
+                  </li>
+                  <li>
+                    <a href="contact.html">{% trans 'Contact Us' %}</a>
+                  </li>
+                </ul>
+              </li>
+              <li class="submenu">
+                <a href="javascript:;">Features</a>
+                <ul>
+                  <li>
+                    <a href="#">Features Page 1</a>
+                  </li>
+                  <li>
+                    <a href="#">Features Page 2</a>
+                  </li>
+                  <li>
+                    <a href="#">Features Page 3</a>
+                  </li>
+                  <li>
+                    <a rel="nofollow" href="https://templatemo.com/page/4" target="_blank">Template Page 4</a>
+                  </li>
+                </ul>
+              </li>
+              <li class="scroll-to-section">
+                <a href="#explore">{% trans 'Explore' %}</a>
+              </li>
+              <li class="submenu">
+                <a href="javascript:;">{% trans 'Languages' %}</a>
+                <ul id="language-list">
+                  {% get_available_languages as LANGUAGES %}
+                  {% for lang_code, lang_name in LANGUAGES %}
+                    <li>
+                      <a href="javascript:;" data-lang="{{ lang_code }}">{{ lang_name }}</a>
+                    </li>
+                  {% endfor %}
+                </ul>
+              </li>
+              <li class="scroll-to-section cart-wrapper">
+                <a href="#miniCart">
+                  <i class="fa fa-shopping-cart"></i>
+                  <span class="cart-count">1</span>
+                </a>
+              </li>
+              <li class="submenu">
+                <a href="javascript:;">
+                  <i class="fa fa-user"></i>
+                  {% if user.is_authenticated %}
+                    <span>{{ user.username }}</span>
+                  {% endif %}
+                </a>
+                <ul>
+                  {% if user.is_authenticated %}
+                    <li>
+                      <a href="#profile">{% trans 'Profile' %}</a>
+                    </li>
+                    <li>
+                      <a href="{% url 'account_logout' %}">{% trans 'Logout' %}</a>
+                    </li>
+                  {% else %}
+                    <li>
+                      <a href="{% url 'account_login' %}">{% trans 'Login' %}</a>
+                    </li>
+                    <li>
+                      <a href="{% url 'account_signup' %}">{% trans 'Sign Up' %}</a>
+                    </li>
+                  {% endif %}
+                </ul>
+              </li>
+              <li class="scroll-to-section">
+                <form class="d-flex align-items-center" role="search" method="GET" action="">
+                  <input class="form-control me-2" type="search" name="q" placeholder="{% trans 'Search' %}" aria-label="Search" style="max-width: 200px;" />
+                  <button class="btn btn-outline-success" type="submit"><i class="fa fa-search"></i></button>
+                </form>
+              </li>
+            </ul>
+            <!-- ***** Menu End ***** -->
+          </nav>
+        </div>
+      </div>
+    </header>
+    <!-- ***** Header Area End ***** -->
 
     {% if messages %}
       <div class="container">
@@ -137,14 +170,12 @@
       </div>
     {% endif %}
 
-
     <div class="content" style="padding-top: 110px;">
       {% block content %}
 
       {% endblock %}
     </div>
-    
-    
+
     <!-- jQuery -->
     <script src="{% static 'js/jquery-2.1.0.min.js' %}"></script>
 
@@ -159,59 +190,59 @@
     <script src="{% static 'js/scrollreveal.min.js' %}"></script>
     <script src="{% static 'js/waypoints.min.js' %}"></script>
     <script src="{% static 'js/jquery.counterup.min.js' %}"></script>
-    <script src="{% static 'js/imgfix.min.js' %}"></script> 
-    <script src="{% static 'js/slick.js' %}"></script> 
-    <script src="{% static 'js/lightbox.js' %}"></script> 
-    <script src="{% static 'js/isotope.js' %}"></script> 
-    <script src="{% static 'js/quantity.js' %}"></script> 
-    
+    <script src="{% static 'js/imgfix.min.js' %}"></script>
+    <script src="{% static 'js/slick.js' %}"></script>
+    <script src="{% static 'js/lightbox.js' %}"></script>
+    <script src="{% static 'js/isotope.js' %}"></script>
+    <script src="{% static 'js/quantity.js' %}"></script>
+
     <!-- Global Init -->
     <script src="{% static 'js/custom.js' %}"></script>
+    <script src="{% static 'js/cart-sidebar.js' %}"></script>
 
     <script>
-
-        $(function() {
-            var selectedClass = "";
-            $("p").click(function(){
-            selectedClass = $(this).attr("data-rel");
-            $("#portfolio").fadeTo(50, 0.1);
-                $("#portfolio div").not("."+selectedClass).fadeOut();
-            setTimeout(function() {
-              $("."+selectedClass).fadeIn();
-              $("#portfolio").fadeTo(50, 1);
-            }, 500);
-                
-            });
-        });
-
+      $(function () {
+        var selectedClass = ''
+        $('p').click(function () {
+          selectedClass = $(this).attr('data-rel')
+          $('#portfolio').fadeTo(50, 0.1)
+          $('#portfolio div')
+            .not('.' + selectedClass)
+            .fadeOut()
+          setTimeout(function () {
+            $('.' + selectedClass).fadeIn()
+            $('#portfolio').fadeTo(50, 1)
+          }, 500)
+        })
+      })
     </script>
 
-    <input type="hidden" id="csrf_token" value="{{ csrf_token }}">
+    <input type="hidden" id="csrf_token" value="{{ csrf_token }}" />
     <script>
-      document.getElementById("language-list").addEventListener("click", function(event) {
-        if (event.target.hasAttribute("data-lang")) {
-            var selectedLang = event.target.getAttribute("data-lang");
-    
-            var form = document.createElement('form');
-            form.method = 'POST';
-            form.action = "{% url 'set_language' %}";
-    
-            var csrfToken = document.createElement('input');
-            csrfToken.type = 'hidden';
-            csrfToken.name = 'csrfmiddlewaretoken';
-            csrfToken.value = document.getElementById('csrf_token').value;
-            form.appendChild(csrfToken);
-    
-            var languageInput = document.createElement('input');
-            languageInput.type = 'hidden';
-            languageInput.name = 'language';
-            languageInput.value = selectedLang;
-            form.appendChild(languageInput);
-    
-            document.body.appendChild(form);
-            form.submit();
+      document.getElementById('language-list').addEventListener('click', function (event) {
+        if (event.target.hasAttribute('data-lang')) {
+          var selectedLang = event.target.getAttribute('data-lang')
+      
+          var form = document.createElement('form')
+          form.method = 'POST'
+          form.action = "{% url 'set_language' %}"
+      
+          var csrfToken = document.createElement('input')
+          csrfToken.type = 'hidden'
+          csrfToken.name = 'csrfmiddlewaretoken'
+          csrfToken.value = document.getElementById('csrf_token').value
+          form.appendChild(csrfToken)
+      
+          var languageInput = document.createElement('input')
+          languageInput.type = 'hidden'
+          languageInput.name = 'language'
+          languageInput.value = selectedLang
+          form.appendChild(languageInput)
+      
+          document.body.appendChild(form)
+          form.submit()
         }
-      });
+      })
     </script>
   </body>
 </html>
