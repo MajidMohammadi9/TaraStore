@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-22 21:41+0400\n"
+"POT-Creation-Date: 2025-01-29 20:43+0400\n"
 "PO-Revision-Date: 2025-01-22 00:14+0400\n"
 "Last-Translator:   <majid@majid.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -58,137 +58,145 @@ msgstr "كد پستى"
 msgid "Country"
 msgstr "كشور"
 
-#: .\products\models.py:9
+#: .\products\models.py:11
 msgid "Title"
 msgstr "عنوان"
 
-#: .\products\models.py:10 .\products\models.py:19 .\products\models.py:29
+#: .\products\models.py:12 .\products\models.py:21 .\products\models.py:31
 msgid "Description"
 msgstr "توضيحات"
 
-#: .\products\models.py:11
+#: .\products\models.py:13
 msgid "Top Product"
 msgstr "محصول برتر"
 
-#: .\products\models.py:18 .\products\models.py:35
+#: .\products\models.py:20 .\products\models.py:37
 msgid "Discount"
 msgstr "تخفيف"
 
-#: .\products\models.py:26
+#: .\products\models.py:28
 msgid "Product Name"
 msgstr "نام محصول"
 
-#: .\products\models.py:27
+#: .\products\models.py:29
 msgid "Category"
 msgstr "دسته بندى"
 
-#: .\products\models.py:28
+#: .\products\models.py:30
 msgid "Slug"
 msgstr "مسير URL"
 
-#: .\products\models.py:30
+#: .\products\models.py:32
 msgid "Short Description"
 msgstr "توضيحات كوتاه"
 
-#: .\products\models.py:31
+#: .\products\models.py:33
+#: .\products\templates\products\product_detail.html:17
 msgid "Price"
 msgstr "قيمت"
 
-#: .\products\models.py:32
+#: .\products\models.py:34
 msgid "Inventory"
 msgstr "موجودى"
 
-#: .\products\models.py:33 .\products\models.py:95
+#: .\products\models.py:35 .\products\models.py:97
 msgid "Date Time Created"
 msgstr "تارخ ساخت"
 
-#: .\products\models.py:34 .\products\models.py:96
+#: .\products\models.py:36 .\products\models.py:98
 msgid "Date Time Modified"
 msgstr "تاربخ ويرايش"
 
-#: .\products\models.py:36 .\products\models.py:98
+#: .\products\models.py:38 .\products\models.py:100
 msgid "Active"
 msgstr "فعال"
 
-#: .\products\models.py:78
+#: .\products\models.py:39
+msgid "Product image"
+msgstr "عكس محصول"
+
+#: .\products\models.py:80
 msgid "Waiting"
 msgstr "انتظار"
 
-#: .\products\models.py:79
+#: .\products\models.py:81
 msgid "Approved"
 msgstr "تاييد شده"
 
-#: .\products\models.py:80
+#: .\products\models.py:82
 msgid "Not Approved"
 msgstr "تاييد نشده"
 
-#: .\products\models.py:84
+#: .\products\models.py:86
 msgid "Very Bad"
 msgstr "خيلي بد"
 
-#: .\products\models.py:85
+#: .\products\models.py:87
 msgid "Bad"
 msgstr "بد"
 
-#: .\products\models.py:86
+#: .\products\models.py:88
 msgid "Normal"
 msgstr "معمولى"
 
-#: .\products\models.py:87
+#: .\products\models.py:89
 msgid "Good"
 msgstr "خوب"
 
-#: .\products\models.py:88
+#: .\products\models.py:90
 msgid "Perfect"
 msgstr "عالى"
 
-#: .\products\models.py:91
+#: .\products\models.py:93
 msgid "Product"
 msgstr "محصول"
 
-#: .\products\models.py:92
+#: .\products\models.py:94
 msgid "Author"
 msgstr "نويسنده"
 
-#: .\products\models.py:93
+#: .\products\models.py:95
 msgid "Comment Text"
 msgstr "متن ديدگاه"
 
-#: .\products\models.py:94
-#: .\products\templates\products\product_detail.html:22
+#: .\products\models.py:96
+#: .\products\templates\products\product_detail.html:29
 msgid "Product Rating"
 msgstr "امتياز محصول"
 
-#: .\products\models.py:97
+#: .\products\models.py:99
 msgid "Status"
 msgstr "وضعيت"
 
-#: .\products\templates\products\product_create.html:6
-#: .\templates\_base.html:32
+#: .\products\templates\products\product_create.html:10
 msgid "Create Product"
 msgstr "اضافه كردن محصول"
 
-#: .\products\templates\products\product_create.html:13
+#: .\products\templates\products\product_create.html:18
 msgid "Submit"
 msgstr "ارسال"
 
-#: .\products\templates\products\product_detail.html:6
+#: .\products\templates\products\product_detail.html:8
 msgid "Product detail"
 msgstr "جزئيات محصول"
 
-#: .\products\templates\products\product_detail.html:14
+#: .\products\templates\products\product_detail.html:17
+msgid "$"
+msgstr "تومان"
+
+#: .\products\templates\products\product_detail.html:21
 msgid "Comments List"
 msgstr "ديدگاه ها"
 
-#: .\products\templates\products\product_detail.html:27
+#: .\products\templates\products\product_detail.html:34
 msgid "No comments available."
 msgstr "هيج ديدگاهى موجود نيست."
 
-#: .\products\templates\products\product_detail.html:36
+#: .\products\templates\products\product_detail.html:44
 msgid "Send"
 msgstr "ارسال"
 
-#: .\products\templates\products\product_detail.html:40
+#: .\products\templates\products\product_detail.html:48
 msgid "You must be logged in to leave a comment."
 msgstr "برای گذاشتن نظر باید ثبت نام كنيد."
 
@@ -200,41 +208,83 @@ msgstr "ليست محصولات"
 msgid "Comment successfully created."
 msgstr "نظر با موفقيت ساخته شد."
 
-#: .\products\views.py:75
+#: .\products\views.py:76
 msgid "You don't have permission to access this page."
 msgstr "شما اجازه دسترسی به این صفحه را ندارید."
 
-#: .\products\views.py:80
+#: .\products\views.py:87
 msgid "Product has been created successfully!"
 msgstr "محصول با موفقيت ايجاد شده است!"
 
-#: .\templates\_base.html:20
-msgid "Tara Store"
-msgstr "تارا استور"
-
-#: .\templates\_base.html:36 .\templates\home.html:5
+#: .\templates\_base.html:61 .\templates\home.html:5
 msgid "Home"
 msgstr "خانه"
 
-#: .\templates\_base.html:45
-msgid "Select Language"
-msgstr "زبان را انتخاب كنيد"
-
-#: .\templates\_base.html:61
-msgid "Welcome"
-msgstr "خوش آمدید"
-
 #: .\templates\_base.html:64
+msgid "Men's"
+msgstr "مردانه"
+
+#: .\templates\_base.html:67
+msgid "Women's"
+msgstr "زنانه"
+
+#: .\templates\_base.html:70
+msgid "Kid's"
+msgstr "بچگانه"
+
+#: .\templates\_base.html:73
+msgid "Pages"
+msgstr "صفحات"
+
+#: .\templates\_base.html:76
+msgid "About Us"
+msgstr "درباره ما"
+
+#: .\templates\_base.html:79
+msgid "Products"
+msgstr "محصولات"
+
+#: .\templates\_base.html:82
+#, fuzzy
+#| msgid "Product"
+msgid "Product Details"
+msgstr "جزئيات محصول"
+
+#: .\templates\_base.html:85
+msgid "Contact Us"
+msgstr "تماس با ما"
+
+#: .\templates\_base.html:90
+msgid "Features"
+msgstr "ویژگی ها"
+
+#: .\templates\_base.html:104
+msgid "Explore"
+msgstr "مشاهده محصولات"
+
+#: .\templates\_base.html:107
+msgid "Languages"
+msgstr "زبان ها"
+
+#: .\templates\_base.html:133
+msgid "Profile"
+msgstr "پروفایل"
+
+#: .\templates\_base.html:136
 msgid "Logout"
 msgstr "خروج"
 
-#: .\templates\_base.html:68
+#: .\templates\_base.html:140
 msgid "Login"
 msgstr "ورود"
 
-#: .\templates\_base.html:71
-msgid "Signup"
+#: .\templates\_base.html:143
+msgid "Sign Up"
 msgstr "ثبت نام"
+
+#: .\templates\_base.html:150
+msgid "Search"
+msgstr "جستجو"
 
 #: .\templates\account\email\email_confirmation_message.txt:5
 #, python-format

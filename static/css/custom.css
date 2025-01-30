@@ -1,74 +1,176 @@
+.cart-sidebar {
+  position: fixed;
+  top: 0;
+  right: -400px; /* عرض جدید */
+  width: 400px; /* عرض جدید */
+  height: 100%;
+  background: #fff;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
+  transition: right 0.3s ease-in-out;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.cart-sidebar.active {
+  right: 0;
+}
+
 /* Wrapper for proper positioning */
 .cart-wrapper {
-    position: relative;  /* Ensures child elements are positioned relative to this */
-    display: inline-block;
+  position: relative;
+  /* Ensures child elements are positioned relative to this */
+  display: inline-block;
 }
 
 /* Cart count badge */
 .cart-count {
-    background: red;         /* Red background */
-    color: white;            /* White text */
-    font-size: 14px;         /* Text size */
-    border-radius: 50%;      /* Perfect circle */
-    width: 22px;             /* Equal width for circle */
-    height: 22px;            /* Equal height for circle */
-    line-height: 22px;       /* Center the number vertically */
-    text-align: center;      /* Center the number horizontally */
-    font-weight: bold;       /* Bold number */
-    position: absolute;
-    top: 0;
-    right: 0;
-    transform: translate(50%, -50%); /* Adjust position */
-    box-shadow: 0 0 5px rgba(0,0,0,0.3); /* Optional shadow */
+  background: red;
+  /* Red background */
+  color: white;
+  /* White text */
+  font-size: 14px;
+  /* Text size */
+  border-radius: 50%;
+  /* Perfect circle */
+  width: 22px;
+  /* Equal width for circle */
+  height: 22px;
+  /* Equal height for circle */
+  line-height: 22px;
+  /* Center the number vertically */
+  text-align: center;
+  /* Center the number horizontally */
+  font-weight: bold;
+  /* Bold number */
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translate(50%, -50%);
+  /* Adjust position */
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  /* Optional shadow */
 }
 
 /* Shopping cart icon styling */
 .scroll-to-section a .fa-shopping-cart {
-    font-size: 32px; /* Adjust the size */
-    color: #333;  /* Change color if needed */
+  font-size: 32px;
+  /* Adjust the size */
+  color: #333;
+  /* Change color if needed */
 }
 
 .submenu a i {
-    margin-right: 8px;
-    font-size: 24px;  /* تغییر اندازه آیکون */
+  margin-right: 8px;
+  font-size: 24px;
+  /* تغییر اندازه آیکون */
 }
 
 .submenu a span {
-    margin-left: 8px;
-    font-size: 16px; /* اندازه فونت */
-    color: #000; /* رنگ متن */
+  margin-left: 8px;
+  font-size: 16px;
+  /* اندازه فونت */
+  color: #000;
+  /* رنگ متن */
 }
 
+.cart-sidebar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+}
 
-.cart-sidebar {
-    position: fixed;
-    top: 0;
-    right: -300px;
-    width: 300px;
-    height: 100%;
-    background: #fff;
-    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
-    transition: right 0.3s ease-in-out;
-    z-index: 1000;
-    padding: 20px;
-  }
-  
-  .cart-sidebar.active {
-    right: 0;
-  }
-  
-  .cart-sidebar-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid #ddd;
-    padding-bottom: 10px;
-  }
-  
-  .close-btn {
-    background: none;
-    border: none;
-    font-size: 24px;
-    cursor: pointer;
-  }
-    
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.cart-item-container {
+  display: flex;
+  align-items: center; /* عناصر را عمودی مرکز‌چین کند */
+  gap: 10px; /* فاصله بین عناصر */
+  padding: 10px 0;
+}
+
+.cart-item-image {
+  width: 50px; /* اندازه تصویر */
+  height: 50px;
+  object-fit: cover; /* تصویر را بدون کشیدگی نمایش دهد */
+  border-radius: 5px; /* گرد کردن گوشه‌ها */
+}
+
+.cart-item-details {
+  flex-grow: 1; /* این بخش تمام فضای باقی‌مانده را اشغال می‌کند */
+}
+
+.cart-item-name {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.cart-item-info {
+  display: flex;
+  gap: 10px;
+  font-size: 14px;
+  color: #666;
+}
+
+.remove-btn {
+  background: none;
+  border: none;
+  font-size: 18px;
+  color: red;
+  cursor: pointer;
+}
+
+.mini-cart__buttons {
+  display: flex;
+  justify-content: space-between; /* فاصله بین دکمه‌ها */
+  align-items: center; /* مرکز‌چین کردن عمودی */
+  margin-top: 20px; /* فاصله از بالا */
+}
+
+.mini-cart__buttons button {
+  padding: 10px 20px; /* حاشیه داخلی دکمه‌ها */
+  font-size: 16px; /* اندازه فونت */
+  border: none; /* بدون حاشیه */
+  border-radius: 5px; /* گرد کردن گوشه‌ها */
+  cursor: pointer; /* تغییر مکان‌نما به دست */
+  transition: background-color 0.3s ease, transform 0.3s ease; /* افکت‌های انتقالی */
+}
+
+.mini-cart__buttons a {
+  text-decoration: none; /* حذف زیرخط لینک */
+  padding: 10px 20px; /* حاشیه داخلی لینک‌ها */
+  font-size: 16px; /* اندازه فونت */
+  border: none; /* بدون حاشیه */
+  border-radius: 5px; /* گرد کردن گوشه‌ها */
+  cursor: pointer; /* تغییر مکان‌نما به دست */
+  transition: background-color 0.3s ease, transform 0.3s ease; /* افکت‌های انتقالی */
+  text-align: center; /* متن را در وسط قرار دهد */
+  display: inline-block; /* برای استایل‌دهی بهتر */
+}
+
+.continue-shopping-btn {
+  background-color: gray; /* رنگ زمینه */
+  color: red; /* رنگ متن */
+}
+
+.continue-shopping-btn:hover {
+  background-color: red; /* تغییر رنگ هنگام حرکت ماوس */
+  transform: scale(1.05); /* بزرگ‌نمایی کمی */
+}
+
+.checkout-btn {
+  background-color: grey; /* رنگ زمینه */
+  color: red; /* رنگ متن */
+}
+
+.checkout-btn:hover {
+  background-color: red; /* تغییر رنگ هنگام حرکت ماوس */
+  transform: scale(1.05); /* بزرگ‌نمایی کمی */
+}

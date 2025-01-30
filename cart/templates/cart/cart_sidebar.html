@@ -26,12 +26,12 @@
           {% endfor %}
         </ul>
         {% if not cart.is_empty %}
-        <div class="mini-cart__total">
-          <span>{% trans 'Total' %}</span>
-          <span class="ammount">{{ cart.get_total_price|intcomma:False|translate_number }} {% trans '$' %}</span>
-        </div>
+          <div class="mini-cart__total">
+            <span>{% trans 'Total' %}</span>
+            <span class="ammount">{{ cart.get_total_price|intcomma:False|translate_number }} {% trans '$' %}</span>
+          </div>
         {% else %}
-        <p>
+          <p>
             {% trans 'Cart is Empty!, please add some products to the cart' %}
           </p>
           <a href="{% url 'product_list' %}">{% trans 'Go shopping' %}</a>
@@ -47,12 +47,34 @@
   </div>
 </aside> {% endcomment %}
 <aside id="miniCart" class="cart-sidebar">
-    <div class="cart-sidebar-header">
-      <h3>سبد خرید</h3>
-      <button class="close-btn" onclick="toggleMiniCart()">×</button>
+  <div class="cart-sidebar-header">
+    <h3>سبد خرید</h3>
+    <button class="close-btn" onclick="toggleMiniCart()">×</button>
+  </div>
+  <div class="cart-sidebar-content">
+    <p id="empty-cart-message" style="display: none;">محصولی در سبد خرید نیست.</p>
+    <ul id="cart-items-list" class="cart-items-list">
+      <li class="cart-item">
+        <div class="cart-item-container">
+          <img src="product-image-link.jpg" alt="#" class="cart-item-image" />
+          <div class="cart-item-details">
+            <span class="cart-item-name">نام محصول</span>
+            <div class="cart-item-info">
+              <span class="price">100,000 تومان</span>
+              <span class="quantity">x 2</span>
+            </div>
+          </div>
+          <button class="remove-btn">×</button>
+        </div>
+      </li>
+    </ul>
+    <div class="cart-total">
+      <strong>جمع کل:</strong>
+      <span id="cart-total-price">0 تومان</span>
     </div>
-    <div class="cart-sidebar-content">
-      <p>محصولی در سبد خرید نیست.</p>
-      <!-- محصولات خریداری‌شده در اینجا نمایش داده می‌شوند -->
+    <div class="mini-cart__buttons">
+      <a href="/shop" class="continue-shopping-btn">ادامه خرید</a>
+      <a href="/checkout" class="checkout-btn">پرداخت</a>
     </div>
-  </aside>
+  </div>
+</aside>
