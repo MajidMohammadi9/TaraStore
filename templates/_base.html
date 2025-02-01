@@ -1,6 +1,7 @@
 {% load i18n %}
 {% load static %}
 {% load translation_tags %}
+{% load checking_url_tags %}
 
 <!DOCTYPE html>
 <html lang="{{ request.LANGUAGE_CODE }}">
@@ -35,13 +36,13 @@
   </head>
   <body>
     <!-- ***** Preloader Start ***** -->
-    <div id="preloader">
+    {% comment %} <div id="preloader">
       <div class="jumper">
         <div></div>
         <div></div>
         <div></div>
       </div>
-    </div>
+    </div> {% endcomment %}
     <!-- ***** Preloader End ***** -->
 
     <!-- ***** Header Area Start ***** -->
@@ -51,43 +52,46 @@
           <nav class="main-nav d-flex align-items-center justify-content-between">
             <!-- ***** Logo Start ***** -->
             <div class="logo-wrapper">
-              <a href="{% url 'product_list' %}" class="logo"><img src="{% static 'images/TARAStore-logo.png' %}" alt="Logo" /></a>
+              <a href="{% url 'product_list' %}" class="logo"><img src="{% static 'images/TARAStore-logo1.png' %}" alt="Logo" /></a>
             </div>
             <!-- ***** Logo End ***** -->
 
             <!-- ***** Menu Start ***** -->
             <ul class="nav">
               <li class="scroll-to-section">
-                <a href="{% url 'product_list' %}" class="active">{% trans 'Home' %}</a>
+                <a href="{% url 'home' %}" class="active">{% trans 'Home' %}</a>
               </li>
               <li class="scroll-to-section">
-                <a href="#men">{% trans "Men's" %}</a>
+                {% url 'product_men' as product_men_url %}
+                <a href="{% dynamic_link 'men' product_men_url %}">{% trans "Men's" %}</a>
               </li>
               <li class="scroll-to-section">
-                <a href="#women">{% trans "Women's" %}</a>
+                {% url 'product_women' as product_women_url %}
+                <a href="{% dynamic_link 'women' product_women_url %}">{% trans "Women's" %}</a>
               </li>
               <li class="scroll-to-section">
-                <a href="#kids">{% trans "Kid's" %}</a>
+                {% url 'product_kids' as product_kids_url %}
+                <a href="{% dynamic_link 'kids' product_kids_url %}">{% trans "Kid's" %}</a>
               </li>
               <li class="submenu">
                 <a href="javascript:;">{% trans 'Pages' %}</a>
                 <ul>
                   <li>
-                    <a href="about.html">{% trans 'About Us' %}</a>
+                    <a href="{% url 'aboutus' %}">{% trans 'About Us' %}</a>
                   </li>
                   <li>
-                    <a href="products.html">{% trans 'Products' %}</a>
+                    <a href="{% url 'product_list' %}">{% trans 'Products' %}</a>
                   </li>
                   <li>
-                    <a href="single-product.html">{% trans "Product Details" %}</a>
+                    <a href="{% url 'product_create' %}">{% trans 'Add Product' %}</a>
                   </li>
                   <li>
-                    <a href="contact.html">{% trans 'Contact Us' %}</a>
+                    <a href="{% url 'contactus' %}">{% trans 'Contact Us' %}</a>
                   </li>
                 </ul>
               </li>
-              <li class="submenu">
-                <a href="javascript:;">{% trans "Features" %}</a>
+              {% comment %} <li class="submenu">
+                <a href="javascript:;">{% trans 'Features' %}</a>
                 <ul>
                   <li>
                     <a href="#">Features Page 1</a>
@@ -99,9 +103,10 @@
                     <a href="#">Features Page 3</a>
                   </li>
                 </ul>
-              </li>
+              </li> {% endcomment %}
               <li class="scroll-to-section">
-                <a href="#explore">{% trans 'Explore' %}</a>
+                {% url 'product_list' as product_list_url %}
+                <a href="{% dynamic_link 'explore' product_list_url %}">{% trans 'Explore' %}</a>
               </li>
               <li class="submenu">
                 <a href="javascript:;">{% trans 'Languages' %}</a>
@@ -117,7 +122,7 @@
               <li class="scroll-to-section cart-wrapper">
                 <a href="#miniCart">
                   <i class="fa fa-shopping-cart"></i>
-                  <span class="cart-count">1</span>
+                  <span class="cart-count">{{1|translate_number}}</span>
                 </a>
               </li>
               <li class="submenu">
@@ -159,15 +164,15 @@
     </header>
     <!-- ***** Header Area End ***** -->
 
-    {% if messages %}
-      <div class="container">
-        {% for message in messages %}
-          <div class="alert alert-{{ message.tags }}">{{ message }}</div>
-        {% endfor %}
-      </div>
-    {% endif %}
-
     <div class="content" style="padding-top: 110px;">
+      {% if messages %}
+        <div class="container">
+          {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+          {% endfor %}
+        </div>
+      {% endif %}
+
       {% block content %}
 
       {% endblock %}

@@ -1,0 +1,80 @@
+{% extends '_base.html' %}
+{% load i18n %}
+
+{% block content %}
+  <h1>{% trans 'Products list' %}</h1>
+  {% for product in products_women %}
+    <p>
+      <a class="text-decoration-none" href="{{ product.get_absolute_url }}">{{ product.name }}</a>
+    </p>
+    <p>{{ product.short_description }}</p>
+    <p>----------------</p>
+  {% endfor %}
+
+  <!-- Pagination Navigation -->
+  <div class="pagination">
+    <span class="step-links">
+      {% if page_obj.has_previous %}
+        <a class="text-decoration-none" href="?page=1">&laquo; first</a>
+        <a class="text-decoration-none" href="?page={{ page_obj.previous_page_number }}">previous</a>
+      {% endif %}
+
+      {% comment %} {% for num in page_obj.paginator.page_range %}
+        {% if num == page_obj.number %}
+          <span class="current">{{ num }}</span>
+        {% elif num > page_obj.number|add:'-2' and num < page_obj.number|add:'2' %}
+          <a class="text-decoration-none" href="?page={{ num }}">{{ num }}</a>
+        {% endif %}
+      {% endfor %} {% endcomment %}
+
+      {% comment %} {% for num in page_obj.paginator.page_range %}
+        {% if num >= page_obj.number|add:'-1' and num <= page_obj.number|add:'1' %}
+          {% if num == page_obj.number %}
+            <span class="current">{{ num }}</span>
+          {% else %}
+            <a class="text-decoration-none" href="?page={{ num }}">{{ num }}</a>
+          {% endif %}
+        {% endif %}
+      {% endfor %} {% endcomment %}
+
+      {% comment %} {% for num in page_obj.paginator.page_range %}
+        {% if num >= page_obj.number and num <= page_obj.number|add:'2' %}
+          {% if num == page_obj.number %}
+            <span class="current">{{ num }}</span>
+          {% else %}
+            <a class="text-decoration-none" href="?page={{ num }}">{{ num }}</a>
+          {% endif %}
+        {% endif %}
+      {% endfor %} {% endcomment %}
+
+      {% comment %} {% for num in page_obj.paginator.page_range %}
+        {% if num >= page_obj.number and num <= page_obj.number|add:'2' or page_obj.number >= page_obj.paginator.num_pages|add:'-1' and num >= page_obj.paginator.num_pages|add:'-2' %}
+          {% if num == page_obj.number %}
+            <span class="current">{{ num }}</span>
+          {% else %}
+            <a class="text-decoration-none" href="?page={{ num }}">{{ num }}</a>
+          {% endif %}
+        {% endif %}
+      {% endfor %} {% endcomment %}
+
+      {% for num in page_obj.paginator.page_range %}
+        {% if num >= page_obj.number|add:'-1' and num <= page_obj.number|add:'1' %}
+          {% if num == page_obj.number %}
+            <span class="current">{{ num }}</span>
+          {% else %}
+            <a class="text-decoration-none" href="?page={{ num }}">{{ num }}</a>
+          {% endif %}
+        {% elif page_obj.number == page_obj.paginator.num_pages and num >= page_obj.number|add:'-2' %}
+          <a class="text-decoration-none" href="?page={{ num }}">{{ num }}</a>
+        {% elif page_obj.number == 1 and num <= 3 %}
+          <a class="text-decoration-none" href="?page={{ num }}">{{ num }}</a>
+        {% endif %}
+      {% endfor %}
+
+      {% if page_obj.has_next %}
+        <a class="text-decoration-none" href="?page={{ page_obj.next_page_number }}">next</a>
+        <a class="text-decoration-none" href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+      {% endif %}
+    </span>
+  </div>
+{% endblock %}

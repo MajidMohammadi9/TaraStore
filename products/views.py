@@ -11,14 +11,14 @@ from django.utils.decorators import method_decorator
 
 from .models import Product,Comment
 from .forms import CommentForm,ProductForm
-from ckeditor.widgets import CKEditorWidget
+
 
 class ProductListView(ListView):
     queryset=Product.objects.filter(active=True).order_by('-datetime_created')
     paginate_by=3
     template_name='products/product_list.html'
     context_object_name='products'
-    
+
 
 class ProductDetailView(DetailView):
     model=Product
@@ -81,10 +81,28 @@ class ProductCreateView(UserPassesTestMixin,CreateView):
     #     form.fields['description'].widget = CKEditorWidget()
     #     return form
    
-
     def form_valid(self, form):
         form.instance.slug=slugify(form.instance.name)
         messages.success(self.request, _('Product has been created successfully!'))
         return super().form_valid(form)
     
         
+class ProductWomenListView(ListView):
+    queryset=Product.objects.filter(category__title="women's", active=True).order_by('-datetime_created')
+    paginate_by=3
+    template_name='products/product_women.html'
+    context_object_name='products_women'
+
+
+class ProductMenListView(ListView):
+    queryset=Product.objects.filter(category__title="men's", active=True).order_by('-datetime_created')
+    paginate_by=3
+    template_name='products/product_men.html'
+    context_object_name='products_men'
+
+
+class ProductKidsListView(ListView):
+    queryset=Product.objects.filter(category__title="kid's", active=True).order_by('-datetime_created')
+    paginate_by=3
+    template_name='products/product_kids.html'
+    context_object_name='products_kids'
