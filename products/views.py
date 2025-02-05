@@ -1,4 +1,4 @@
-from django.shortcuts import redirect
+from django.shortcuts import redirect,render
 from django.db.models import Prefetch
 from django.contrib import messages
 from django.urls import reverse
@@ -8,6 +8,8 @@ from django.utils.text import slugify
 from django.contrib.auth.mixins import LoginRequiredMixin,UserPassesTestMixin
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
+from django.core.paginator import Paginator
+from django.db.models import Q
 
 from .models import Product,Comment
 from .forms import CommentForm,ProductForm
@@ -15,7 +17,7 @@ from .forms import CommentForm,ProductForm
 
 class ProductListView(ListView):
     queryset=Product.objects.filter(active=True).order_by('-datetime_created')
-    paginate_by=3
+    paginate_by=6
     template_name='products/product_list.html'
     context_object_name='products'
 
@@ -89,20 +91,34 @@ class ProductCreateView(UserPassesTestMixin,CreateView):
         
 class ProductWomenListView(ListView):
     queryset=Product.objects.filter(category__title="women's", active=True).order_by('-datetime_created')
-    paginate_by=3
+    paginate_by=6
     template_name='products/product_women.html'
     context_object_name='products_women'
 
 
 class ProductMenListView(ListView):
     queryset=Product.objects.filter(category__title="men's", active=True).order_by('-datetime_created')
-    paginate_by=3
+    paginate_by=6
     template_name='products/product_men.html'
     context_object_name='products_men'
 
 
 class ProductKidsListView(ListView):
     queryset=Product.objects.filter(category__title="kid's", active=True).order_by('-datetime_created')
-    paginate_by=3
+    paginate_by=6
     template_name='products/product_kids.html'
     context_object_name='products_kids'
+
+
+def product_search(request):
+    query = request.GET.get('q', '')
+    products = Product.objects.filter(
+        Q(name__icontains=query) | 
+        Q(category__title__icontains=query)
+        ).distinct().order_by('-datetime_created') if query else []
+
+    paginator = Paginator(products, 6)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    return render(request, 'products/search.html', {'query': query, 'page_obj': page_obj})

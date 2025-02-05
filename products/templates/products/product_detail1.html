@@ -1,0 +1,52 @@
+{% extends '_base.html' %}
+{% load crispy_forms_tags %}
+{% load i18n %}
+{% load translation_tags %}
+{% load humanize %}
+
+{% block page_title %}
+  {% trans 'Product detail' %}
+{% endblock %}
+
+{% block content %}
+  {% if product.image %}
+    <img src="{{ product.image.url}}" alt="{{product.name}}">
+  {% endif %}
+  
+  <h3>{{ product.name }}</h3>
+  <p>{% trans "Price" %}: {{ product.unit_price|intcomma:False|translate_number}} {% trans "$" %}</p>
+
+  <p>{{ product.description|safe|linebreaks }}</p>
+
+  <h3>{% trans 'Comments List' %}({{ product.comments.count|translate_number }})</h3>
+  <ul>
+    {% for comment in product.comments.all %}
+      <li>
+        <strong>{{ comment.author.username }}:</strong> {{ comment.datetime_created|translate_datetime|translate_number }}
+        <div>
+          <p>{{ comment.body|safe|linebreaks }}</p>
+        </div>
+        <small>{% trans 'Product Rating' %}: {{ comment.stars|translate_number }}</small>
+      </li>
+      <br />
+    {% empty %}
+      <li>
+        {% trans 'No comments available.' %}
+      </li>
+    {% endfor %}
+  </ul>
+
+  {% if user.is_authenticated %}
+    <form action="" method="POST">
+      {% csrf_token %}
+      {{comment_form.media}}
+      {{ comment_form|crispy }}
+      <input type="submit" value="{% trans 'Send' %}" />
+    </form>
+  {% else %}
+    <p>
+      <strong>*{% trans 'You must be logged in to leave a comment.' %}</strong>
+    </p>
+  {% endif %}
+  {% include 'cart/cart_sidebar.html' %}
+{% endblock %}

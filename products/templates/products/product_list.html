@@ -1,80 +1,92 @@
 {% extends '_base.html' %}
 {% load i18n %}
+{% load translation_tags %}
+
+{% block page_title %}
+  {% trans "Product List" %}
+{% endblock %}
 
 {% block content %}
-  <h1>{% trans 'Products list' %}</h1>
-  {% for product in products %}
-    <p>
-      <a class="text-decoration-none" href="{{ product.get_absolute_url }}">{{ product.name }}</a>
-    </p>
-    <p>{{ product.short_description }}</p>
-    <p>----------------</p>
-  {% endfor %}
 
-  <!-- Pagination Navigation -->
-  <div class="pagination">
-    <span class="step-links">
-      {% if page_obj.has_previous %}
-        <a class="text-decoration-none" href="?page=1">&laquo; first</a>
-        <a class="text-decoration-none" href="?page={{ page_obj.previous_page_number }}">previous</a>
-      {% endif %}
+  <!-- ***** Main Banner Area Start ***** -->
+  {% comment %} <div class="page-heading" id="top">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="inner-content">
+            <h2>Check Our Products</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> {% endcomment %}
+  <!-- ***** Main Banner Area End ***** -->
 
-      {% comment %} {% for num in page_obj.paginator.page_range %}
-        {% if num == page_obj.number %}
-          <span class="current">{{ num }}</span>
-        {% elif num > page_obj.number|add:'-2' and num < page_obj.number|add:'2' %}
-          <a class="text-decoration-none" href="?page={{ num }}">{{ num }}</a>
-        {% endif %}
-      {% endfor %} {% endcomment %}
+  <!-- ***** Products Area Starts ***** -->
+  <section class="section" id="products">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="section-heading">
+            <h2>Our Latest Products</h2>
+            <span>Check out all of our products.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        {% for product in products %}
+          <div class="col-lg-4">
+            <div class="item">
+              <div class="thumb">
+                <div class="hover-content">
+                  <ul>
+                    <li>
+                      <a href="{{ product.get_absolute_url }}"><i class="fa fa-eye"></i></a>
+                    </li>
+                    <li>
+                      <a href="single-product.html"><i class="fa fa-star"></i></a>
+                    </li>
+                    <li>
+                      <a href="single-product.html"><i class="fa fa-shopping-cart"></i></a>
+                    </li>
+                  </ul>
+                </div>
+                {% if product.image %}
+                  <img src="{{ product.image.url }}" alt="{{ product.name }}" />
+                {% endif %}
+              </div>
+              <div class="down-content">
+                <h4>{{ product.name }}</h4>
+                <span>{{ product.unit_price }} {% trans '$' %}</span>
+                <ul class="stars">
+                  <li>
+                    <i class="fa fa-star"></i>
+                  </li>
+                  <li>
+                    <i class="fa fa-star"></i>
+                  </li>
+                  <li>
+                    <i class="fa fa-star"></i>
+                  </li>
+                  <li>
+                    <i class="fa fa-star"></i>
+                  </li>
+                  <li>
+                    <i class="fa fa-star"></i>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
 
-      {% comment %} {% for num in page_obj.paginator.page_range %}
-        {% if num >= page_obj.number|add:'-1' and num <= page_obj.number|add:'1' %}
-          {% if num == page_obj.number %}
-            <span class="current">{{ num }}</span>
-          {% else %}
-            <a class="text-decoration-none" href="?page={{ num }}">{{ num }}</a>
-          {% endif %}
-        {% endif %}
-      {% endfor %} {% endcomment %}
-
-      {% comment %} {% for num in page_obj.paginator.page_range %}
-        {% if num >= page_obj.number and num <= page_obj.number|add:'2' %}
-          {% if num == page_obj.number %}
-            <span class="current">{{ num }}</span>
-          {% else %}
-            <a class="text-decoration-none" href="?page={{ num }}">{{ num }}</a>
-          {% endif %}
-        {% endif %}
-      {% endfor %} {% endcomment %}
-
-      {% comment %} {% for num in page_obj.paginator.page_range %}
-        {% if num >= page_obj.number and num <= page_obj.number|add:'2' or page_obj.number >= page_obj.paginator.num_pages|add:'-1' and num >= page_obj.paginator.num_pages|add:'-2' %}
-          {% if num == page_obj.number %}
-            <span class="current">{{ num }}</span>
-          {% else %}
-            <a class="text-decoration-none" href="?page={{ num }}">{{ num }}</a>
-          {% endif %}
-        {% endif %}
-      {% endfor %} {% endcomment %}
-
-      {% for num in page_obj.paginator.page_range %}
-        {% if num >= page_obj.number|add:'-1' and num <= page_obj.number|add:'1' %}
-          {% if num == page_obj.number %}
-            <span class="current">{{ num }}</span>
-          {% else %}
-            <a class="text-decoration-none" href="?page={{ num }}">{{ num }}</a>
-          {% endif %}
-        {% elif page_obj.number == page_obj.paginator.num_pages and num >= page_obj.number|add:'-2' %}
-          <a class="text-decoration-none" href="?page={{ num }}">{{ num }}</a>
-        {% elif page_obj.number == 1 and num <= 3 %}
-          <a class="text-decoration-none" href="?page={{ num }}">{{ num }}</a>
-        {% endif %}
-      {% endfor %}
-
-      {% if page_obj.has_next %}
-        <a class="text-decoration-none" href="?page={{ page_obj.next_page_number }}">next</a>
-        <a class="text-decoration-none" href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
-      {% endif %}
-    </span>
-  </div>
+        <!-- ***** Main Banner Area Start ***** -->
+        {% include "pages/pagination.html" %}
+        <!-- ***** Main Banner Area End ***** -->
+      </div>
+    </div>
+  </section>
+  <!-- ***** Products Area Ends ***** -->
 {% endblock %}
