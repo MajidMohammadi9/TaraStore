@@ -10,7 +10,6 @@
 {% endblock %}
 
 {% block content %}
-
   <!-- ***** Main Banner Area Start ***** -->
   {% comment %} <div class="page-heading" id="top">
     <div class="container">
@@ -32,36 +31,25 @@
       <div class="row">
         <div class="col-lg-8">
           <div class="left-images">
-            {% if product.image %}
-              <img src="{{ product.image.url }}" alt="{{product.name}}" />
-              {% comment %} <img src="assets/images/single-product-02.jpg" alt="" /> {% endcomment %}
+            {% if product.images %}
+              {% for img in product.images.all %}
+                <img src="{{ img.image.url }}" style="width: 690px; height: 700px;" alt="{{ product.name }}" />
+              {% empty %}
+                <img src="{% static 'images/default.jpg' %}" class="d-block w-100" style="width: 370px; height: 390px;" alt="No Image" />  
+              {% endfor %}
             {% endif %}
           </div>
         </div>
         <div class="col-lg-4">
           <div class="right-content">
-            <h4>New Green Jacket</h4>
-            <span class="price">$75.00</span>
-            <ul class="stars">
-              <li>
-                <i class="fa fa-star"></i>
-              </li>
-              <li>
-                <i class="fa fa-star"></i>
-              </li>
-              <li>
-                <i class="fa fa-star"></i>
-              </li>
-              <li>
-                <i class="fa fa-star"></i>
-              </li>
-              <li>
-                <i class="fa fa-star"></i>
-              </li>
-            </ul>
-            <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod kon tempor incididunt ut labore.</span>
+            <h6>{{ product.name }}</h6>
+            <span class="price">{{ product.unit_price|translate_number }} {% trans '$' %}</span>
+            {% include "products/stars.html" %}
+            {% if product.short_description %}
+              <span>{{ product.short_description|safe }}</span>
+            {% endif %}
             <div class="quote">
-              <i class="fa fa-quote-left"></i><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiuski smod.</p>
+              <i class="fa fa-quote-left"></i><p>{{ product.description|safe }}</p>
             </div>
             <div class="quantity-content">
               <div class="left-content">
@@ -87,4 +75,64 @@
     </div>
   </section>
   <!-- ***** Product Area Ends ***** -->
+
+  <!-- ***** Comments Section Starts ***** -->
+  <section class="section" id="comments">
+    <div class="container">
+      <h3>{% trans 'Comments List' %}({{ product.comments.count|translate_number }})</h3>
+      <ul>
+        {% for comment in product.comments.all %}
+          <li>
+            <strong>{{ comment.author.username }}:</strong> {{ comment.datetime_created|translate_datetime|translate_number }}
+            <div>
+              <p>{{ comment.body|safe|linebreaks }}</p>
+            </div>
+            <ul class="stars">
+              <div class="star-rating">
+                {% for star in "54321"|make_list %}
+                  {% if star|add:0 <= comment.stars %}
+                    <span style="color: gold;">&#9733;</span>
+                  {% else %}
+                    <span style="color: grey;">&#9734;</span>
+                  {% endif %}
+                {% endfor %}
+                <span>({{ comment.stars|translate_number }})</span>
+              </div>
+            </ul>
+          </li>
+          <br />
+        {% empty %}
+          <li>
+            {% trans 'No comments available.' %}
+          </li>
+        {% endfor %}
+      </ul>
+      {% if user.is_authenticated %}
+        <form action="" method="POST">
+          {% csrf_token %}
+          {{ comment_form.media }}
+          {{ comment_form.body|as_crispy_field }}
+
+          <div>
+            <span>Product Rating:</span>
+            <div class="star-rating">
+              {% for star in "54321" %}
+                <input type="radio" id="star{{ star }}" name="stars" value="{{ star }}" />
+                <label for="star{{ star }}">&#9733;</label>
+              {% endfor %}
+            </div>
+          </div>
+
+          <input type="submit" value="{% trans 'Send' %}" />
+        </form>
+      {% else %}
+        <p>
+          <strong>*{% trans 'You must be logged in to leave a comment.' %}</strong>
+        </p>
+      {% endif %}
+    </div>
+  </section>
+  <!-- ***** Comments Section Ends ***** -->
+
+  {% include 'cart/cart_sidebar.html' %}
 {% endblock %}

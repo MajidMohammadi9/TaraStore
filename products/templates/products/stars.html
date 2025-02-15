@@ -1,0 +1,16 @@
+{% load static %}
+{% load translation_tags %}
+
+<ul class="stars">
+  <div class="star-rating">
+    {% for star in '54321'|make_list %}
+      {% if star|add:0 <= product.average_rating %}
+        <span style="color: gold;">&#9733;</span>
+      {% else %}
+        <span style="color: grey;">&#9734;</span>
+      {% endif %}
+    {% endfor %}
+    <span>({{ product.product_stars_count|translate_number }})</span>
+  </div>
+</ul>
+

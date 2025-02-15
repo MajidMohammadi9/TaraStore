@@ -1,6 +1,7 @@
 {% extends '_base.html' %}
 {% load i18n %}
 {% load static %}
+{% load translation_tags %}
 
 {% block page_title %}
   {% trans 'Home' %}
@@ -34,16 +35,7 @@
                       <h4>Women</h4>
                       <span>Best Clothes For Women</span>
                     </div>
-                    {% comment %} <div class="hover-content">
-                      <div class="inner">
-                        <h4>Women</h4>
-                        <p>Lorem ipsum dolor sit amet, conservisii ctetur adipiscing elit incid.</p>
-                        <div class="main-border-button">
-                          <a href="#">Discover More</a>
-                        </div>
-                      </div>
-                    </div> {% endcomment %}
-                    <a href="#"><img src="{% static 'images/baner-left-image-02.jpg' %}" /></a>
+                    <a href="{% url 'product_women' %}"><img src="{% static 'images/baner-left-image-02.jpg' %}" style="width: 360px; height: 330px;" /></a>
                   </div>
                 </div>
               </div>
@@ -54,16 +46,7 @@
                       <h4>Men</h4>
                       <span>Best Clothes For Men</span>
                     </div>
-                    {% comment %} <div class="hover-content">
-                      <div class="inner">
-                        <h4>Men</h4>
-                        <p>Lorem ipsum dolor sit amet, conservisii ctetur adipiscing elit incid.</p>
-                        <div class="main-border-button">
-                          <a href="#">Discover More</a>
-                        </div>
-                      </div>
-                    </div> {% endcomment %}
-                    <a href="#"><img src="{% static 'images/baner-right-image-02.jpg' %}" /></a>
+                    <a href="{% url 'product_men' %}"><img src="{% static 'images/baner-right-image-02.jpg' %}" style="width: 360px; height: 330px;" /></a>
                   </div>
                 </div>
               </div>
@@ -74,16 +57,7 @@
                       <h4>Kids</h4>
                       <span>Best Clothes For Kids</span>
                     </div>
-                    {% comment %} <div class="hover-content">
-                      <div class="inner">
-                        <h4>Kids</h4>
-                        <p>Lorem ipsum dolor sit amet, conservisii ctetur adipiscing elit incid.</p>
-                        <div class="main-border-button">
-                          <a href="#">Discover More</a>
-                        </div>
-                      </div>
-                    </div> {% endcomment %}
-                    <a href=""><img src="{% static 'images/baner-right-image-03.jpg' %}" /></a>
+                    <a href="{% url 'product_kids' %}"><img src="{% static 'images/baner-right-image-03.jpg' %}" style="width: 360px; height: 330px;" /></a>
                   </div>
                 </div>
               </div>
@@ -94,16 +68,7 @@
                       <h4>Accessories</h4>
                       <span>Best Trend Accessories</span>
                     </div>
-                    {% comment %} <div class="hover-content">
-                      <div class="inner">
-                        <h4>Accessories</h4>
-                        <p>Lorem ipsum dolor sit amet, conservisii ctetur adipiscing elit incid.</p>
-                        <div class="main-border-button">
-                          <a href="#">Discover More</a>
-                        </div>
-                      </div>
-                    </div> {% endcomment %}
-                    <a href=""><img src="{% static 'images/baner-right-image-04.jpg' %}" /></a>
+                    <a href="#"><img src="{% static 'images/baner-right-image-04.jpg' %}" style="width: 360px; height: 330px;" /></a>
                   </div>
                 </div>
               </div>
@@ -114,209 +79,93 @@
     </div>
   </div>
   <!-- ***** Main Banner Area End ***** -->
-
-  <!-- ***** Men Area Starts ***** -->
-  <section class="section" id="men">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-6">
-          <div class="section-heading">
-            <h2>Men's Latest</h2>
-            <span>Details to details is what makes Tara Store different from the other themes.</span>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12">
-          <div class="men-item-carousel">
-            <div class="owl-men-item owl-carousel">
-              {% for product in products_men %}
-                <div class="item">
-                  <div class="thumb">
-                    <div class="hover-content">
-                      <ul>
-                        <li>
-                          <a href="{{product.get_absolute_url}}"><i class="fa fa-eye"></i></a>
-                        </li>
-                        <li>
-                          <a href="single-product.html"><i class="fa fa-star"></i></a>
-                        </li>
-                        <li>
-                          <a href="single-product.html"><i class="fa fa-shopping-cart"></i></a>
-                        </li>
-                      </ul>
-                    </div>
-                    {% if product.image %}
-                      <img src="{{ product.image.url }}" alt="{{ product.name }}" />
-                    {% endif %}
-                  </div>
-                  <div class="down-content">
-                    <h4>{{ product.name }}</h4>
-                    <span>{{ product.unit_price }} {% trans '$' %}</span>
-                    <ul class="stars">
-                      <li>
-                        <i class="fa fa-star"></i>
-                      </li>
-                      <li>
-                        <i class="fa fa-star"></i>
-                      </li>
-                      <li>
-                        <i class="fa fa-star"></i>
-                      </li>
-                      <li>
-                        <i class="fa fa-star"></i>
-                      </li>
-                      <li>
-                        <i class="fa fa-star"></i>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              {% endfor %}
+  {% for category in categories %}
+    {% if category.title == 'mens' %}
+      <!-- ***** Men Area Starts ***** -->
+      <section class="section" id="men">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="section-heading">
+                <h2>Men's Latest</h2>
+                <span>Details to details is what makes Tara Store different from the other themes.</span>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
-  </section>
-  <!-- ***** Men Area Ends ***** -->
-
-  <!-- ***** Women Area Starts ***** -->
-  <section class="section" id="women">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-6">
-          <div class="section-heading">
-            <h2>Women's Latest</h2>
-            <span>Details to details is what makes Tara Store different from the other themes.</span>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12">
-          <div class="women-item-carousel">
-            <div class="owl-women-item owl-carousel">
-              {% for product in products_women %}
-                <div class="item">
-                  <div class="thumb">
-                    <div class="hover-content">
-                      <ul>
-                        <li>
-                          <a href="{{product.get_absolute_url}}"><i class="fa fa-eye"></i></a>
-                        </li>
-                        <li>
-                          <a href="single-product.html"><i class="fa fa-star"></i></a>
-                        </li>
-                        <li>
-                          <a href="single-product.html"><i class="fa fa-shopping-cart"></i></a>
-                        </li>
-                      </ul>
-                    </div>
-                    {% if product.image %}
-                      <img src="{{ product.image.url }}" alt="product.name" />
-                    {% endif %}
-                  </div>
-                  <div class="down-content">
-                    <h4>{{ product.name }}</h4>
-                    <span>{{ product.unit_price }} {% trans '$' %}</span>
-                    <ul class="stars">
-                      <li>
-                        <i class="fa fa-star"></i>
-                      </li>
-                      <li>
-                        <i class="fa fa-star"></i>
-                      </li>
-                      <li>
-                        <i class="fa fa-star"></i>
-                      </li>
-                      <li>
-                        <i class="fa fa-star"></i>
-                      </li>
-                      <li>
-                        <i class="fa fa-star"></i>
-                      </li>
-                    </ul>
-                  </div>
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="men-item-carousel">
+                <div class="owl-men-item owl-carousel">
+                  {% for product in category.products.all %}
+                    {% include 'products/products_home.html' %}
+                  {% endfor %}
                 </div>
-              {% endfor %}
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
-  </section>
-  <!-- ***** Women Area Ends ***** -->
-
-  <!-- ***** Kids Area Starts ***** -->
-  <section class="section" id="kids">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-6">
-          <div class="section-heading">
-            <h2>Kid's Latest</h2>
-            <span>Details to details is what makes Tara Store different from the other themes.</span>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12">
-          <div class="kid-item-carousel">
-            <div class="owl-kid-item owl-carousel">
-              {% for product in products_kids %}
-                <div class="item">
-                  <div class="thumb">
-                    <div class="hover-content">
-                      <ul>
-                        <li>
-                          <a href="{{product.get_absolute_url}}"><i class="fa fa-eye"></i></a>
-                        </li>
-                        <li>
-                          <a href="single-product.html"><i class="fa fa-star"></i></a>
-                        </li>
-                        <li>
-                          <a href="single-product.html"><i class="fa fa-shopping-cart"></i></a>
-                        </li>
-                      </ul>
-                    </div>
-                    <img src="{{product.image.url}}" alt="{{product.name}}" />
-                  </div>
-                  <div class="down-content">
-                    <h4>{{product.name}}</h4>
-                    <span>{{product.unit_price}} {% trans "$" %}</span>
-                    <ul class="stars">
-                      <li>
-                        <i class="fa fa-star"></i>
-                      </li>
-                      <li>
-                        <i class="fa fa-star"></i>
-                      </li>
-                      <li>
-                        <i class="fa fa-star"></i>
-                      </li>
-                      <li>
-                        <i class="fa fa-star"></i>
-                      </li>
-                      <li>
-                        <i class="fa fa-star"></i>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              {% endfor %}
+      </section>
+      <!-- ***** Men Area Ends ***** -->
+    {% elif category.title == 'womens' %}
+      <!-- ***** Women Area Starts ***** -->
+      <section class="section" id="women">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="section-heading">
+                <h2>Women's Latest</h2>
+                <span>Details to details is what makes Tara Store different from the other themes.</span>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
-  </section>
-  <!-- ***** Kids Area Ends ***** -->
-
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="women-item-carousel">
+                <div class="owl-women-item owl-carousel">
+                  {% for product in category.products.all %}
+                    {% include 'products/products_home.html' %}
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- ***** Women Area Ends ***** -->
+    {% elif category.title == 'kids' %}
+      <!-- ***** Kids Area Starts ***** -->
+      <section class="section" id="kids">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="section-heading">
+                <h2>Kid's Latest</h2>
+                <span>Details to details is what makes Tara Store different from the other themes.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="kid-item-carousel">
+                <div class="owl-kid-item owl-carousel">
+                  {% for product in category.products.all %}
+                    {% include 'products/products_home.html' %}
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- ***** Kids Area Ends ***** -->
+    {% endif %}
+  {% endfor %}
   <!-- ***** Explore Area Starts ***** -->
   <section class="section" id="explore">
     <div class="container">
@@ -324,15 +173,9 @@
         <div class="col-lg-6">
           <div class="left-content">
             <h2>Explore Our Products</h2>
-            <span>
-              Discover a wide range of high-quality products tailored to your needs.
-              From the latest trends to timeless classics, we have something for everyone.
-              Browse through our collections and find the perfect match for your style.
-              Enjoy seamless shopping with secure payments and fast delivery.
-              Start exploring today and experience excellence!
-            </span>
+            <span>Discover a wide range of high-quality products tailored to your needs. From the latest trends to timeless classics, we have something for everyone. Browse through our collections and find the perfect match for your style. Enjoy seamless shopping with secure payments and fast delivery. Start exploring today and experience excellence!</span>
             <div class="main-border-button">
-              <a href="{% url "product_list" %}">Discover More</a>
+              <a href="{% url 'product_list' %}">Discover More</a>
             </div>
           </div>
         </div>
@@ -347,12 +190,12 @@
               </div>
               <div class="col-lg-6">
                 <div class="first-image">
-                  <img src="assets/images/explore-image-01.jpg" alt="" />
+                  <img src="{% static 'images/explore-image-01.jpg' %}" alt="" />
                 </div>
               </div>
               <div class="col-lg-6">
                 <div class="second-image">
-                  <img src="assets/images/explore-image-02.jpg" alt="" />
+                  <img src="{% static 'images/explore-image-02.jpg' %}" alt="" />
                 </div>
               </div>
               <div class="col-lg-6">
@@ -391,7 +234,7 @@
                 <i class="fa fa-instagram"></i>
               </a>
             </div>
-            <img src="assets/images/instagram-01.jpg" alt="" />
+            <img src="{% static 'images/instagram-01.jpg' %}" alt="" />
           </div>
         </div>
         <div class="col-2">
@@ -402,7 +245,7 @@
                 <i class="fa fa-instagram"></i>
               </a>
             </div>
-            <img src="assets/images/instagram-02.jpg" alt="" />
+            <img src="{% static 'images/instagram-02.jpg' %}" alt="" />
           </div>
         </div>
         <div class="col-2">
@@ -413,7 +256,7 @@
                 <i class="fa fa-instagram"></i>
               </a>
             </div>
-            <img src="assets/images/instagram-03.jpg" alt="" />
+            <img src="{% static 'images/instagram-03.jpg' %}" alt="" />
           </div>
         </div>
         <div class="col-2">
@@ -424,7 +267,7 @@
                 <i class="fa fa-instagram"></i>
               </a>
             </div>
-            <img src="assets/images/instagram-04.jpg" alt="" />
+            <img src="{% static 'images/instagram-04.jpg' %}" alt="" />
           </div>
         </div>
         <div class="col-2">
@@ -435,7 +278,7 @@
                 <i class="fa fa-instagram"></i>
               </a>
             </div>
-            <img src="assets/images/instagram-05.jpg" alt="" />
+            <img src="{% static 'images/instagram-05.jpg' %}" alt="" />
           </div>
         </div>
         <div class="col-2">
@@ -446,7 +289,7 @@
                 <i class="fa fa-instagram"></i>
               </a>
             </div>
-            <img src="assets/images/instagram-06.jpg" alt="" />
+            <img src="{% static 'images/instagram-06.jpg' %}" alt="" />
           </div>
         </div>
       </div>
@@ -488,26 +331,26 @@
             <div class="col-6">
               <ul>
                 <li>
-                  Store Location:<br /><span>Sunny Isles Beach, FL 33160, United States</span>
+                  {% trans 'Store Location' %}:<br /><span>{% trans 'Muscat, Oman' %}</span>
                 </li>
                 <li>
-                  Phone:<br /><span>010-020-0340</span>
+                  {% trans 'Phone' %}:<br /><span>{{ 97098010|translate_number }}</span>
                 </li>
                 <li>
-                  Office Location:<br /><span>North Miami Beach</span>
+                  {% trans 'Office Location' %}:<br /><span>{% trans 'Muscat, Oman' %}</span>
                 </li>
               </ul>
             </div>
             <div class="col-6">
               <ul>
                 <li>
-                  Work Hours:<br /><span>07:30 AM - 9:30 PM Daily</span>
+                  {% trans 'Work Hours' %}:<br /><span>{{ 9|translate_number }}:{{ 30|translate_number }} {% trans 'AM' %}- {{ 10|translate_number }}:{{ 30|translate_number }} {% trans 'PM' %} {% trans 'Daily' %}</span>
                 </li>
                 <li>
-                  Email:<br /><span>info@company.com</span>
+                  {% trans 'Email' %}:<br /><span>TaraStore@gmail.com</span>
                 </li>
                 <li>
-                  Social Media:<br /><span><a href="#">Facebook</a>, <a href="#">Instagram</a>, <a href="#">Behance</a>, <a href="#">Linkedin</a></span>
+                  {% trans 'Social Media' %}:<br /><span><a href="#">{% trans 'Facebook' %}</a>, <a href="#">{% trans 'Instagram' %}</a></span>
                 </li>
               </ul>
             </div>

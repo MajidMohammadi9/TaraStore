@@ -3,6 +3,7 @@ from django.core.validators import MinValueValidator
 from django.conf import settings
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
+from django.db.models import Avg
 
 from ckeditor.fields import RichTextField
 
@@ -10,11 +11,10 @@ from ckeditor.fields import RichTextField
 class Category(models.Model):
     title = models.CharField(max_length=255, verbose_name=_('Title'))
     description = models.CharField(max_length=500, blank=True, verbose_name=_('Description'))
-    top_product = models.ForeignKey('Product', on_delete=models.SET_NULL, blank=True, null=True, related_name='+', verbose_name=_('Top Product'))
 
     def __str__(self):
         return self.title
-
+    
 
 class Discount(models.Model):
     discount = models.FloatField(verbose_name=_('Discount'))
@@ -23,6 +23,11 @@ class Discount(models.Model):
     def __str__(self):
         return f'{str(self.discount)} | {self.description}'
 
+
+# class ProductStarCount(models.Manager):
+#     def get_product_stars_count(self):
+#         return self.get_queryset().filter('comments__stars__isnull=False').count()
+    
 
 class Product(models.Model):
     name = models.CharField(max_length=255, verbose_name=_('Product Name'))
@@ -36,13 +41,24 @@ class Product(models.Model):
     datetime_modified = models.DateTimeField(auto_now=True, verbose_name=_('Date Time Modified'))
     discounts = models.ManyToManyField(Discount, blank=True, verbose_name=_('Discount'))
     active=models.BooleanField(default=True, verbose_name=_('Active'))
-    image=models.ImageField(upload_to='product/product_cover/',blank=True, verbose_name=_('Product image'))
+
+    # def product_stars_count(self):
+    #     return self.comments.filter(stars__isnull=False).count()
+    # objects=ProductStarCount()
 
     def __str__(self):
         return self.name
     
     def get_absolute_url(self):
         return reverse("product_detail", kwargs={"pk": self.pk})
+    
+
+class ProductImage(models.Model):
+    product=models.ForeignKey(Product, on_delete=models.CASCADE, related_name='images', verbose_name=_('Product'))
+    image=models.ImageField(upload_to='product/product_cover/',blank=True, verbose_name=_('Product image'))
+
+    def __str__(self):
+        return f'image of {self.product.name}'
     
 
 class CommentManager(models.Manager):
@@ -83,17 +99,17 @@ class Comment(models.Model):
     ]
 
     PRODUCT_STARS=[
-        ('1', _('Very Bad')),
-        ('2', _('Bad')),
-        ('3', _('Normal')),
-        ('4', _('Good')),
-        ('5', _('Perfect')),
+        (1, _('Very Bad')),
+        (2, _('Bad')),
+        (3, _('Normal')),
+        (4, _('Good')),
+        (5, _('Perfect')),
     ]
 
     product=models.ForeignKey(Product, on_delete=models.CASCADE, related_name='comments', verbose_name=_('Product'))
     author=models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='comments', verbose_name=_('Author'))
     body=RichTextField(verbose_name=_('Comment Text'))
-    stars=models.CharField(max_length=10, choices=PRODUCT_STARS, verbose_name=_('Product Rating'))
+    stars=models.IntegerField(max_length=10, choices=PRODUCT_STARS, verbose_name=_('Product Rating'))
     datetime_created=models.DateTimeField(auto_now_add=True, verbose_name=_('Date Time Created'))
     datetime_modified=models.DateTimeField(auto_now=True, verbose_name=_('Date Time Modified'))
     status=models.CharField(max_length=2, choices=COMMENT_STATUS, default=COMMENT_STATUS_APPROVED, verbose_name=_('Status'))

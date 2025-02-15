@@ -1,36 +1,32 @@
 from django.views.generic import TemplateView
 from django.utils.translation import gettext as _
 from django.views.generic import ListView
-from django.db.models import Q
+from django.db.models import Prefetch,Q,Avg,Value,FloatField,Count
+from django.db.models.functions import Coalesce
 
-from products.models import Product
+from products.models import Product, Category
+
 
 
 class HomePageView(ListView):
-        model=Product
-        template_name='pages/home.html'
+    
+    queryset = Category.objects.prefetch_related(
+            Prefetch(
+                'products',
+                queryset=Product.objects.annotate(
+                    average_rating=Coalesce(Avg('comments__stars'), Value(0, output_field=FloatField())),
+                    product_stars_count=Count('comments', filter=Q(comments__stars__isnull=False))
+                ).prefetch_related('images').order_by('-datetime_created')
+            )
+        )
+    
+    template_name = 'pages/home.html'
+    context_object_name = 'categories'
 
-        def get_queryset(self):
-            # queryset=Product.objects.filter(category__title__in=["women's", "men's"], active=True).order_by('-datetime_created')
-            queryset=Product.objects.select_related('category').filter(
-                 Q(category__title="women's")|Q(category__title="men's")|Q(category__title="kid's"),
-                   active=True).order_by('-datetime_created')
-            return queryset
-        
-
-        def get_context_data(self, **kwargs):
-            context = super().get_context_data(**kwargs)
-            queryset=self.get_queryset()
-            context["products_women"] = [product for product in queryset if product.category.title=="women's"]
-            context["products_men"] = [product for product in queryset if product.category.title=="men's"]
-            context["products_kids"] = [product for product in queryset if product.category.title=="kid's"]
-            return context
-        
 
 class AboutUsPageView(TemplateView):
-    template_name='pages/aboutus.html'
+    template_name = 'pages/aboutus.html'
 
 
 class ContactUsPageView(TemplateView):
-     template_name='pages/contact_us.html'
-
+    template_name = 'pages/contact_us.html'

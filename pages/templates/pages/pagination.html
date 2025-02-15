@@ -1,3 +1,7 @@
+{% load i18n %}
+{% load translation_tags %}
+
+
 <div class="col-lg-12">
     {% if page_obj.has_other_pages %}
       <div class="pagination">
@@ -15,20 +19,20 @@
             {% if num >= page_obj.number|add:'-1' and num <= page_obj.number|add:'1' %}
               {% if num == page_obj.number %}
                 <li class="active">
-                  <a href="?{% if request.GET.q %}q={{ request.GET.q }}&{% endif %}page={{ num }}">{{ num }}</a>
+                  <a href="?{% if request.GET.q %}q={{ request.GET.q }}&{% endif %}page={{ num }}">{{ num|translate_number }}</a>
                 </li>
               {% else %}
                 <li>
-                  <a href="?{% if request.GET.q %}q={{ request.GET.q }}&{% endif %}page={{ num }}">{{ num }}</a>
+                  <a href="?{% if request.GET.q %}q={{ request.GET.q }}&{% endif %}page={{ num }}">{{ num|translate_number }}</a>
                 </li>
               {% endif %}
             {% elif page_obj.number == page_obj.paginator.num_pages and num >= page_obj.number|add:'-2' %}
               <li>
-                <a href="?{% if request.GET.q %}q={{ request.GET.q }}&{% endif %}page={{ num }}">{{ num }}</a>
+                <a href="?{% if request.GET.q %}q={{ request.GET.q }}&{% endif %}page={{ num }}">{{ num|translate_number }}</a>
               </li>
             {% elif page_obj.number == 1 and num <= 3 %}
               <li>
-                <a href="?{% if request.GET.q %}q={{ request.GET.q }}&{% endif %}page={{ num }}">{{ num }}</a>
+                <a href="?{% if request.GET.q %}q={{ request.GET.q }}&{% endif %}page={{ num }}">{{ num|translate_number }}</a>
               </li>
             {% endif %}
           {% endfor %}

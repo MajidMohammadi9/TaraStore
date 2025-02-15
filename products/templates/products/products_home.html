@@ -1,0 +1,45 @@
+{% load static %}
+{% load i18n %}
+{% load translation_tags %}
+
+<div class="item">
+  <div class="thumb">
+    <div class="hover-content">
+      <ul>
+        <li>
+          <a href="{{ product.get_absolute_url }}"><i class="fa fa-eye"></i></a>
+        </li>
+        <li>
+          <a href="single-product.html"><i class="fa fa-star"></i></a>
+        </li>
+        <li>
+          <a href="single-product.html"><i class="fa fa-shopping-cart"></i></a>
+        </li>
+      </ul>
+    </div>
+    {% if product.images %}
+      <div id="carousel{{ product.id }}" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          {% for img in product.images.all %}
+            <div class="carousel-item {% if forloop.first %}active{% endif %}">
+              <img src="{{ img.image.url }}" class="d-block w-100" style="width: 370px; height: 390px;" alt="{{ product.name }}" />
+            </div>
+          {% empty %}
+            <div class="carousel-item active">
+              <img src="{% static 'images/default.jpg' %}" class="d-block w-100" style="width: 370px; height: 390px;" alt="No Image" />
+            </div>
+          {% endfor %}
+        </div>
+
+        <!-- Left and right buttons -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#carousel{{ product.id }}" data-bs-slide="prev"><span class="carousel-control-prev-icon" aria-hidden="true"></span></button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carousel{{ product.id }}" data-bs-slide="next"><span class="carousel-control-next-icon" aria-hidden="true"></span></button>
+      </div>
+    {% endif %}
+  </div>
+  <div class="down-content">
+    <a href="{{ product.get_absolute_url }}" style="color: black;"><h6>{{ product.name }}</h6></a>
+    <span>{{ product.unit_price|translate_number }} {% trans '$' %}</span>
+    {% include 'products/stars.html' %}
+  </div>
+</div>

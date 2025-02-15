@@ -1,0 +1,100 @@
+{% load i18n %}
+{% load static %}
+{% load translation_tags %}
+
+<!-- ***** Footer Start ***** -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-3">
+        <div class="first-item">
+          <div class="logo-wrapper">
+            <a href="{% url 'product_list' %}" class="logo"><img src="{% static 'images/TARAStore-logo2.png' %}" alt="Logo" /></a>
+          </div>
+          <ul>
+            <li>
+              <a href="#">Muscat, Oman</a>
+            </li>
+            <li>
+              <a href="https://www.instagram.com/tara.store.9">TaraStore@gmail.com</a>
+            </li>
+            <li>
+              <a href="https://wa.me/+96897098010?text=May%20I%20help%20you?">+{{96897098010|translate_number}}</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-lg-3">
+        <h4>Shopping &amp; Categories</h4>
+        <ul>
+          <li>
+            <a href="{% url 'product_men' %}">Men’s Shopping</a>
+          </li>
+          <li>
+            <a href="{% url 'product_women' %}">Women’s Shopping</a>
+          </li>
+          <li>
+            <a href="{% url 'product_kids' %}">Kid's Shopping</a>
+          </li>
+        </ul>
+      </div>
+      <div class="col-lg-3">
+        <h4>Useful Links</h4>
+        <ul>
+          <li>
+            <a href="{% url 'home' %}">Homepage</a>
+          </li>
+          <li>
+            <a href="{% url 'aboutus' %}">About Us</a>
+          </li>
+          <li>
+            <a href="https://www.google.com">Help</a>
+          </li>
+          <li>
+            <a href="{% url 'contactus' %}">Contact Us</a>
+          </li>
+        </ul>
+      </div>
+      <div class="col-lg-3">
+        <h4>Help &amp; Information</h4>
+        <ul>
+          <li>
+            <a href="#">Help</a>
+          </li>
+          <li>
+            <a href="#">FAQ's</a>
+          </li>
+          <li>
+            <a href="#">Shipping</a>
+          </li>
+          <li>
+            <a href="#">Tracking ID</a>
+          </li>
+        </ul>
+      </div>
+      <div class="col-lg-12">
+        <div class="under-footer">
+          <p>
+            Copyright © {{2025|translate_number}} Tara Store Co. All Rights Reserved.
+
+            <br />Design: <a href="#" target="_parent" title="free css templates">Majid Mohammadi</a>
+          </p>
+          <ul>
+            <li>
+              <a href="https://wa.me/+96897098010?text=May%20I%20help%20you?"><i class="fa fa-whatsapp"></i></a>
+            </li>
+            <li>
+              <a href="https://www.instagram.com/tara.store.9"><i class="fa fa-instagram"></i></a>
+            </li>
+            <li>
+              <a href="https://www.facebook.com/tarastore9"><i class="fa fa-facebook"></i></a>
+            </li>
+            <li>
+              <a href="https://www.linkedin.com/tarastore"><i class="fa fa-linkedin"></i></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>

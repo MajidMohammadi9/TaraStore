@@ -1,20 +1,26 @@
-{% extends "_base.html" %}
+{% extends '_base.html' %}
 {% load i18n %}
 {% load crispy_forms_tags %}
 {% load static %}
 
-<script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>
-<script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>
+<script type="text/javascript" src="{% static 'ckeditor/ckeditor-init.js' %}"></script>
+<script type="text/javascript" src="{% static 'ckeditor/ckeditor/ckeditor.js' %}"></script>
 
 {% block page_title %}
-  {% trans "Create Product" %}
+  {% trans 'Create Product' %}
 {% endblock %}
 
 {% block content %}
-  <form action="" method="post">
+  <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
-    {{form.media}}
-    {{form|crispy}}
-    <input type="submit" value="{% trans "Submit" %}">
+    {{ form.media }}
+    {{ form|crispy }}
+    <div>
+      <p><label for="id_images">Product Images</label><p>
+      <input label="Product Images" type="file" name="images" id="id_images" multiple />
+    </div>
+    <div class="content" style="padding-top: 20px;">
+      <input type="submit" value="{% trans 'Submit' %}" />
+    </div>
   </form>
-{% endblock content %}
+{% endblock %}

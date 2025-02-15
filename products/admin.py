@@ -1,6 +1,6 @@
 from django.contrib import admin,messages
-
-from .models import Product, Category, Comment
+from django.utils.html import mark_safe
+from .models import Product, Category, Comment, ProductImage
 
 
 class CommentInline(admin.TabularInline):
@@ -11,6 +11,24 @@ class CommentInline(admin.TabularInline):
     def get_queryset(self, request):
         queryset = super().get_queryset(request)
         return queryset.select_related('author','product')
+    
+
+class ProductImageInline(admin.TabularInline):
+    model=ProductImage
+    fields=['id','image']
+    extra=0
+
+    def get_queryset(self, request):
+        querset = super().get_queryset(request)
+        return querset.select_related('product')
+
+    def get_image_preview(self, obj):
+        if obj.image:
+            return mark_safe(f'<img src="{obj.image.url}" width="100" height="100" />')
+        return ""
+    get_image_preview.short_description = "Preview"
+
+    readonly_fields = ("get_image_preview",)
 
 
 class InventoryFilter(admin.SimpleListFilter):
@@ -46,7 +64,7 @@ class ProductAdmin(admin.ModelAdmin):
     list_filter=['datetime_created', InventoryFilter]
     search_fields=['name',]
     actions=['clear_inventory']
-    inlines=[CommentInline]
+    inlines=[ProductImageInline, CommentInline]
     list_display_links=['id', 'name']
 
     def inventory_status(self, product):
@@ -71,3 +89,7 @@ class CommentAdmin(admin.ModelAdmin):
     list_editable=['status', 'active']
     list_per_page=10
     autocomplete_fields=['product']
+
+@admin.register(ProductImage)
+class ProductImageAdmin(admin.ModelAdmin):
+    list_display=['id', 'product', 'image']
