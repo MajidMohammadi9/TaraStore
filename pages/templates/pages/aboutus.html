@@ -1,9 +1,70 @@
 {% extends '_base.html' %}
+{% load static %}
+{% load i18n %}
+{% load translation_tags %}
 
 {% block page_title %}
-  About us
+  {% trans 'About us' %}
 {% endblock %}
 
 {% block content %}
-  <h1>About us</h1>
+  <!-- ***** Main Banner Area Start ***** -->
+  <div class="page-heading about-page-heading" id="top">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="inner-content">
+            <h2>{% trans 'About Tara Store' %}</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ***** Main Banner Area End ***** -->
+
+  <!-- ***** About Area Starts ***** -->
+  <div class="about-us">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="left-image">
+            <img src="{% static 'images/about-left-image.jpg' %}" alt="" />
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="right-content">
+            <h4>{% trans 'About Us &amp; Our Products' %}</h4>
+            <span>{% trans 'We provide stylish and comfortable fashion for men, women, and kids, ensuring the best quality and latest designs.' %}</span>
+            <div class="quote">
+              <i class="fa fa-quote-left"></i><p>
+                {% trans 'Tara Store is your go-to destination for trendy fashion, offering high-quality clothing, shoes, and accessories for the whole family.' %}
+              </p>
+            </div>
+            <p>
+              {% trans 'From casual to formal wear, shoes, and trendy accessories, Tara Store has everything you need to express your unique style.' %}
+            </p>
+            <ul>
+              <li>
+                <a href="https://wa.me/+96897098010?text=May%20I%20help%20you?"><i class="fa fa-whatsapp"></i></a>
+              </li>
+              <li>
+                <a href="https://www.instagram.com/tara.store.9"><i class="fa fa-instagram"></i></a>
+              </li>
+              <li>
+                <a href="https://www.facebook.com/tarastore9"><i class="fa fa-facebook"></i></a>
+              </li>
+              <li>
+                <a href="https://www.linkedin.com/tarastore"><i class="fa fa-linkedin"></i></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ***** About Area Ends ***** -->
+
+  <!-- ***** Subscribe Area Starts ***** -->
+  {% include 'pages/subscribe.html' %}
+  <!-- ***** Subscribe Area Ends ***** -->
 {% endblock %}
