@@ -121,8 +121,7 @@ class ProductCreateView(UserPassesTestMixin, CreateView):
             for image in images:
                 ProductImage.objects.create(product=self.object, image=image)
 
-        messages.success(self.request, _(
-            'Product has been created successfully!'))
+        messages.success(self.request, _('Product has been created successfully!'))
         return response
 
 

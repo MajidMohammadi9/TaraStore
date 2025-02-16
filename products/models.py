@@ -24,11 +24,6 @@ class Discount(models.Model):
         return f'{str(self.discount)} | {self.description}'
 
 
-# class ProductStarCount(models.Manager):
-#     def get_product_stars_count(self):
-#         return self.get_queryset().filter('comments__stars__isnull=False').count()
-    
-
 class Product(models.Model):
     name = models.CharField(max_length=255, verbose_name=_('Product Name'))
     category = models.ForeignKey(Category, on_delete=models.PROTECT, related_name='products', verbose_name=_('Category'))
