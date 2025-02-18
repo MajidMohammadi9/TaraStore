@@ -175,15 +175,33 @@ class ProductDeleteView(UserPassesTestMixin, DeleteView):
 
     
 
-def product_search(request):
-    query = request.GET.get('q', '')
-    products = Product.objects.filter(
-        Q(name__icontains=query) |
-        Q(category__title__icontains=query)
-    ).distinct().order_by('-datetime_created') if query else []
+# def product_search(request):
+#     query = request.GET.get('q', '')
+#     products = Product.objects.filter(
+#         Q(name__icontains=query) |
+#         Q(category__title__icontains=query)
+#     ).distinct().order_by('-datetime_created') if query else []
 
-    paginator = Paginator(products, 6)
-    page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
+#     paginator = Paginator(products, 6)
+#     page_number = request.GET.get('page')
+#     page_obj = paginator.get_page(page_number)
 
-    return render(request, 'products/search.html', {'query': query, 'page_obj': page_obj})
+#     return render(request, 'products/search.html', {'query': query, 'page_obj': page_obj})
+
+
+class ProductSearchView(BaseProductListView):
+    template_name='products/search.html'
+
+    def get_queryset(self):
+        queryset=super().get_queryset() # Get queryset from BaseProductListView
+        
+        query=self.request.GET.get('q', '')
+        if query:
+            queryset=queryset.filter(Q(name__icontains=query) | Q(category__title__icontains=query)).distinct()
+        return queryset
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['query']=self.request.GET.get('q', '')
+        return context
+    

@@ -104,7 +104,7 @@ class Comment(models.Model):
     product=models.ForeignKey(Product, on_delete=models.CASCADE, related_name='comments', verbose_name=_('Product'))
     author=models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='comments', verbose_name=_('Author'))
     body=RichTextField(verbose_name=_('Comment Text'))
-    stars=models.IntegerField(max_length=10, choices=PRODUCT_STARS, verbose_name=_('Product Rating'))
+    stars=models.IntegerField(choices=PRODUCT_STARS, verbose_name=_('Product Rating'))
     datetime_created=models.DateTimeField(auto_now_add=True, verbose_name=_('Date Time Created'))
     datetime_modified=models.DateTimeField(auto_now=True, verbose_name=_('Date Time Modified'))
     status=models.CharField(max_length=2, choices=COMMENT_STATUS, default=COMMENT_STATUS_APPROVED, verbose_name=_('Status'))

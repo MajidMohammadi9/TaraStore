@@ -4,9 +4,8 @@ from .views import (
     ProductListView,ProductDetailView,    
     ProductCreateView, ProductUpdateView, ProductDeleteView,
     ProductWomenListView, ProductMenListView, ProductKidsListView,
-    # product_image_delete,
-    # delete_product_image,
-    product_search, 
+    ProductSearchView,
+    # product_search, 
 )
 
 urlpatterns = [
@@ -18,5 +17,6 @@ urlpatterns = [
     path('womens/', ProductWomenListView.as_view(), name='product_women'),
     path('mens/', ProductMenListView.as_view(), name='product_men'),
     path('kids/', ProductKidsListView.as_view(), name='product_kids'),
-    path('search/', product_search, name='product_search'),
+    path('search/', ProductSearchView.as_view(), name='product_search'),
+    # path('search/', product_search, name='product_search'),
 ]

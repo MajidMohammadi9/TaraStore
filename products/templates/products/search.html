@@ -1,4 +1,5 @@
 {% extends '_base.html' %}
+{% load static %}
 {% load i18n %}
 {% load translation_tags %}
 
@@ -7,93 +8,9 @@
 {% endblock %}
 
 {% block content %}
-  <!-- ***** Main Banner Area Start ***** -->
-  {% comment %} <div class="page-heading" id="top">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12">
-          <div class="inner-content">
-            <h2>Check Our Products</h2>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div> {% endcomment %}
-  <!-- ***** Main Banner Area End ***** -->
-
-  <!-- ***** Products Area Starts ***** -->
-  <section class="section" id="products">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12">
-          <div class="section-heading">
-            <h3>{{page_obj.paginator.count|translate_number}} Result for &laquo;{{ query }}&raquo;</h3>
-            {% comment %} <span>Check out all of our products.</span> {% endcomment %}
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="container">
-      <div class="row">
-        {% if query %}
-          {% if page_obj %}
-            {% for product in page_obj %}
-              <div class="col-lg-4">
-                <div class="item">
-                  <div class="thumb">
-                    <div class="hover-content">
-                      <ul>
-                        <li>
-                          <a href="{{ product.get_absolute_url }}"><i class="fa fa-eye"></i></a>
-                        </li>
-                        <li>
-                          <a href="single-product.html"><i class="fa fa-star"></i></a>
-                        </li>
-                        <li>
-                          <a href="single-product.html"><i class="fa fa-shopping-cart"></i></a>
-                        </li>
-                      </ul>
-                    </div>
-                    {% if product.image %}
-                      <img src="{{ product.image.url }}" alt="{{ product.name }}" />
-                    {% endif %}
-                  </div>
-                  <div class="down-content">
-                    <h4>{{ product.name }}</h4>
-                    <span>{{ product.unit_price }} {% trans '$' %}</span>
-                    <ul class="stars">
-                      <li>
-                        <i class="fa fa-star"></i>
-                      </li>
-                      <li>
-                        <i class="fa fa-star"></i>
-                      </li>
-                      <li>
-                        <i class="fa fa-star"></i>
-                      </li>
-                      <li>
-                        <i class="fa fa-star"></i>
-                      </li>
-                      <li>
-                        <i class="fa fa-star"></i>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            {% endfor %}
-
-            <!-- ***** Main Banner Area Start ***** -->
-            {% include 'pages/pagination.html' with page_obj=page_obj %}
-            <!-- ***** Main Banner Area End ***** -->
-          {% else %}
-            <h3>No result found for search.</h3>
-          {% endif %}
-        {% else %}
-          <h3>Please enter your product to search.</h3>
-        {% endif %}
-      </div>
-    </div>
-  </section>
-  <!-- ***** Products Area Ends ***** -->
+  {% if query %}
+    {% include 'products/product_display.html' with query=query found_products_count=page_obj.paginator.count %}
+  {% else %}
+    <h3>{% trans 'Please enter your product to search.' %}</h3>
+  {% endif %}
 {% endblock %}

@@ -1,13 +1,14 @@
-{% extends '_base.html' %}
+{% comment %} {% extends '_base.html' %} {% endcomment %}
 {% load static %}
 {% load i18n %}
 {% load translation_tags %}
 
-{% block page_title %}
+{% comment %} {% block page_title %}
   {{ page_title }}
-{% endblock %}
+{% endblock %} {% endcomment %}
 
-{% block content %}
+{% comment %} {% block content %}
+  {% endcomment %}
   <!-- ***** Main Banner Area Start ***** -->
   {% comment %} <div class="page-heading" id="top">
     <div class="container">
@@ -28,8 +29,12 @@
       <div class="row">
         <div class="col-lg-12">
           <div class="section-heading">
-            <h2>Our Latest Products</h2>
-            <span>Check out all of our products.</span>
+            {% if query %}
+              <h2>{{ found_products_count|translate_number }} {% trans "Result for" %} &laquo;{{ query }}&raquo;</h2>
+            {% else %}
+              <h2>{% trans "Our Latest Products" %}</h2>
+              <span>{% trans "Check out all of our products." %}</span>
+            {% endif %}
           </div>
         </div>
       </div>
@@ -80,6 +85,8 @@
               </div>
             </div>
           </div>
+        {% empty %}
+          <h3>{% trans "No products found." %}</h3>
         {% endfor %}
 
         <!-- ***** Main Banner Area Start ***** -->
@@ -91,4 +98,5 @@
   <!-- ***** Products Area Ends ***** -->
 
   {% include 'cart/cart_sidebar.html' %}
-{% endblock %}
+  {% comment %}
+{% endblock %} {% endcomment %}

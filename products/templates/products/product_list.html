@@ -1,7 +1,11 @@
+{% extends '_base.html' %}
 {% load i18n %}
 {% load translation_tags %}
 
+{% block page_title %}
+  {% trans 'Product List' %}
+{% endblock %}
 
-{% trans "Product List" as page_title %}
-{% include "products/product_display.html" with products=products page_title=page_title %}
-
+{% block content %}
+  {% include 'products/product_display.html' with products=products %}
+{% endblock %}
