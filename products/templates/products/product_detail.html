@@ -5,6 +5,7 @@
 {% load translation_tags %}
 {% load humanize %}
 
+
 {% block page_title %}
   {% trans 'Product detail' %}
 {% endblock %}
@@ -30,6 +31,7 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-8">
+          <a href="{% url 'product_update' product.id %}">{% trans "Edit" %}</a> | <a href="{% url 'product_delete' product.id %}">{% trans "Delete" %}</a>
           <div class="left-images">
             {% if product.images %}
               {% for img in product.images.all %}

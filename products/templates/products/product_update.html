@@ -1,0 +1,58 @@
+{% extends '_base.html' %}
+{% load static %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+{% load translation_tags %}
+
+{% comment %} <script type="text/javascript" src="{% static 'ckeditor/ckeditor-init.js' %}"></script>
+<script type="text/javascript" src="{% static 'ckeditor/ckeditor/ckeditor.js' %}"></script> {% endcomment %}
+
+{% block page_title %}
+  {% trans 'Produc Update' %}
+{% endblock %}
+
+{% block content %}
+  <div class="container">
+    <h2 style="padding-bottom: 50px;">{% trans 'Update' %} {{ product.name }}</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.media }}
+      
+      {% comment %} {% if form.errors %}
+        {% for field in form %}
+          {% for error in field.errors %}
+            <p class="error-message" style="color: red;">{{ field.label }}:{{ error }}</p>
+          {% endfor %}
+        {% endfor %}
+        {% for error in form.non_field_errors %}
+        <p class="error-message" style="color: red;">{{error}}</p>
+        {% endfor %}
+      {% endif %} {% endcomment %}
+
+      {{ form|crispy }}
+
+      <h2>Product Images</h2>
+      <div class="images">
+        {% for image in product.images.all %}
+          <div class="image">
+            <img src="{{ image.image.url }}" alt="{{ product.name }}" width="100" style="width: 100px; height: 100px;" />
+            <label><input type="checkbox" name="delete_images" value="{{ image.id }}" />Delete this image</label>
+          </div>
+        {% endfor %}
+      </div>
+
+      <div>
+        <p style="padding-top: 20px;">
+          <label for="images">Upload new images:</label>
+        </p>
+        <input type="file" name="images" id="images" multiple />
+      </div>
+
+      <div class="content" style="padding-top: 20px;">
+        <button type="submit" class="btn btn-primary">Update Product</button>
+      </div>
+    </form>
+  </div>
+
+  {% include 'cart/cart_sidebar.html' %}
+{% endblock %}

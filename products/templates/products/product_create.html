@@ -3,24 +3,30 @@
 {% load crispy_forms_tags %}
 {% load static %}
 
-<script type="text/javascript" src="{% static 'ckeditor/ckeditor-init.js' %}"></script>
-<script type="text/javascript" src="{% static 'ckeditor/ckeditor/ckeditor.js' %}"></script>
+{% comment %} <script type="text/javascript" src="{% static 'ckeditor/ckeditor-init.js' %}"></script>
+<script type="text/javascript" src="{% static 'ckeditor/ckeditor/ckeditor.js' %}"></script> {% endcomment %}
 
 {% block page_title %}
   {% trans 'Create Product' %}
 {% endblock %}
 
 {% block content %}
-  <form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.media }}
-    {{ form|crispy }}
-    <div>
-      <p><label for="id_images">Product Images</label><p>
-      <input label="Product Images" type="file" name="images" id="id_images" multiple />
-    </div>
-    <div class="content" style="padding-top: 20px;">
-      <input type="submit" value="{% trans 'Submit' %}" />
-    </div>
-  </form>
+  <div class="container">
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      {{ form.media }}
+      {{ form|crispy }}
+      <div>
+        <p>
+          <label for="id_images">Product Images</label>
+        </p>
+        <input label="Product Images" type="file" name="images" id="id_images" multiple />
+      </div>
+      <div class="content" style="padding-top: 20px;">
+        <input type="submit" value="{% trans 'Submit' %}" />
+      </div>
+    </form>
+  </div>
+
+  {% include 'cart/cart_sidebar.html' %}
 {% endblock %}

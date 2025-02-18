@@ -46,10 +46,10 @@
                       <a href="{{ product.get_absolute_url }}"><i class="fa fa-eye"></i></a>
                     </li>
                     <li>
-                      <a href="single-product.html"><i class="fa fa-star"></i></a>
+                      <a href="{{ product.get_absolute_url }}"><i class="fa fa-star"></i></a>
                     </li>
                     <li>
-                      <a href="single-product.html"><i class="fa fa-shopping-cart"></i></a>
+                      <a href="{{ product.get_absolute_url }}"><i class="fa fa-shopping-cart"></i></a>
                     </li>
                   </ul>
                 </div>
@@ -89,4 +89,6 @@
     </div>
   </section>
   <!-- ***** Products Area Ends ***** -->
+
+  {% include 'cart/cart_sidebar.html' %}
 {% endblock %}

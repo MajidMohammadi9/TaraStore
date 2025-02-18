@@ -1,9 +1,9 @@
 from django.shortcuts import redirect, render, get_object_or_404
 from django.db.models import Prefetch, Q, Avg, Value, FloatField,Count
 from django.contrib import messages
-from django.urls import reverse
+from django.urls import reverse,reverse_lazy
 from django.utils.translation import gettext as _
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.utils.text import slugify
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.decorators import login_required
@@ -106,8 +106,7 @@ class ProductCreateView(UserPassesTestMixin, CreateView):
         return self.request.user.is_staff
 
     def handle_no_permission(self):
-        messages.error(self.request, _(
-            "You don't have permission to access this page."))
+        messages.error(self.request, _("You don't have permission to add products.(Only admin)"))
         return redirect('product_list')
 
     def form_valid(self, form):
@@ -123,7 +122,58 @@ class ProductCreateView(UserPassesTestMixin, CreateView):
 
         messages.success(self.request, _('Product has been created successfully!'))
         return response
+    
 
+class ProductUpdateView(UserPassesTestMixin, UpdateView):
+    model = Product
+    form_class = ProductForm
+    template_name = 'products/product_update.html'
+    context_object_name = 'product'
+
+    def test_func(self):
+        return self.request.user.is_staff
+
+    def handle_no_permission(self):
+        messages.error(self.request, _("You don't have permission to Edit products.(Only admin)"))
+        return redirect(reverse('product_detail', kwargs={'pk': self.get_object().pk})) 
+    
+    def form_valid(self, form):        
+        # Delete selected images
+        delete_images = self.request.POST.getlist('delete_images')
+        ProductImage.objects.filter(id__in=delete_images).delete()
+        
+        # Upload new images
+        images = self.request.FILES.getlist('images')
+        if images:
+            for image in images:
+                ProductImage.objects.create(product=self.object, image=image)
+                
+        messages.success(self.request, _('Product has been updated successfully!'))
+        return super().form_valid(form)
+    
+    def form_invalid(self, form):
+        print(f"Form errors: {form.errors}")
+        messages.error(self.request, _("There are errors in the form. Please fix them."))
+        return self.render_to_response(self.get_context_data(form=form))
+    
+
+class ProductDeleteView(UserPassesTestMixin, DeleteView):
+    model=Product
+    template_name='products/product_delete.html'
+    success_url=reverse_lazy('product_list')
+
+    def test_func(self):
+        return self.request.user.is_staff
+    
+    def handle_no_permission(self):
+        messages.error(self.request, _("You don't have permission to delete products.(Only admin)"))
+        return redirect('product_list')
+    
+    def delete(self, request, *args, **kwargs):
+        messages.success(self.request, _(f"{self.name} was deleted successfully!"))
+        return super().delete(request, *args, **kwargs)
+
+    
 
 def product_search(request):
     query = request.GET.get('q', '')
