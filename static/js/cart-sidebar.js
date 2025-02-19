@@ -64,3 +64,5 @@ function toggleMiniCart() {
   if(miniCart)
     miniCart.classList.toggle("active");
 }
+
+

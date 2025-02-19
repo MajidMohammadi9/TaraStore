@@ -31,25 +31,25 @@
 
       {{ form|crispy }}
 
-      <h2>Product Images</h2>
+      <h2>{% trans "Product Images" %}</h2>
       <div class="images">
         {% for image in product.images.all %}
           <div class="image">
             <img src="{{ image.image.url }}" alt="{{ product.name }}" width="100" style="width: 100px; height: 100px;" />
-            <label><input type="checkbox" name="delete_images" value="{{ image.id }}" />Delete this image</label>
+            <label><input type="checkbox" name="delete_images" value="{{ image.id }}" />{% trans "Delete this image" %}</label>
           </div>
         {% endfor %}
       </div>
 
       <div>
         <p style="padding-top: 20px;">
-          <label for="images">Upload new images:</label>
+          <label for="images">{% trans "Upload new images" %}:</label>
         </p>
         <input type="file" name="images" id="images" multiple />
       </div>
 
       <div class="content" style="padding-top: 20px;">
-        <button type="submit" class="btn btn-primary">Update Product</button>
+        <button type="submit" class="btn btn-primary">{% trans "Update Product" %}</button>
       </div>
     </form>
   </div>

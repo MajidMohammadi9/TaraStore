@@ -8,7 +8,7 @@
         <ul>
           {% if page_obj.has_previous %}
             <li>
-              <a class="text-decoration-none" href="?{% if request.GET.q %}q={{ request.GET.q }}&{% endif %}page=1">&laquo; First</a>
+              <a class="text-decoration-none" href="?{% if request.GET.q %}q={{ request.GET.q }}&{% endif %}page=1">&laquo; {% trans "First" %}</a>
             </li>
             <li>
               <a class="text-decoration-none" href="?{% if request.GET.q %}q={{ request.GET.q }}&{% endif %}page={{ page_obj.previous_page_number }}"><</a>
@@ -42,7 +42,7 @@
               <a href="?{% if request.GET.q %}q={{ request.GET.q }}&{% endif %}page={{ page_obj.next_page_number }}">></a>
             </li>
             <li>
-              <a href="?{% if request.GET.q %}q={{ request.GET.q }}&{% endif %}page={{ page_obj.paginator.num_pages }}">Last &raquo;</a>
+              <a href="?{% if request.GET.q %}q={{ request.GET.q }}&{% endif %}page={{ page_obj.paginator.num_pages }}">{% trans "Last" %} &raquo;</a>
             </li>
           {% endif %}
         </ul>

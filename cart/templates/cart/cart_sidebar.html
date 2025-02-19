@@ -3,64 +3,23 @@
 {% load humanize %}
 {% load translation_tags %}
 
-{% comment %} <aside class="mini-cart" id="miniCart">
-  <div class="mini-cart-wrapper">
-    <a href="" class="btn-close"><i class="flaticon flaticon-cross"></i></a>
-    <div class="mini-cart-inner">
-      <h3 class="mini-cart__heading mb--40 mb-lg--30 text-right">{% trans 'Cart' %}</h3>
-      <div class="mini-cart__content">
-        <ul class="mini-cart__list text-right">
-          {% for item in cart %}
-            <li class="mini-cart__product d-flex justify-content-between">
-              <div class="mini-cart__product__image">
-                <a href="#"><img src="{{ item.product_obj.image.url }}" alt="products" /></a>
-              </div>
-              <div class="mini-cart__product__content pt-2">
-                <span class="mini-cart__product__title d-flex flex-row justify-content-between">
-                  <a href="{{ item.product_obj.get_absolute_url }}">{{ item.product_obj.title }}</a>
-                  <a href="{% url 'cart:cart_remove' item.product_obj.id %}" class="">&#10060;</a>
-                </span>
-                <span class="mini-cart__product__quantity"><span>{{ item.product_obj.price|intcomma:False|translate_number }} {% trans '$' %}</span> &#215; <span>{{ item.quantity|translate_number }}</span></span>
-              </div>
-            </li>
-          {% endfor %}
-        </ul>
-        {% if not cart.is_empty %}
-          <div class="mini-cart__total">
-            <span>{% trans 'Total' %}</span>
-            <span class="ammount">{{ cart.get_total_price|intcomma:False|translate_number }} {% trans '$' %}</span>
-          </div>
-        {% else %}
-          <p>
-            {% trans 'Cart is Empty!, please add some products to the cart' %}
-          </p>
-          <a href="{% url 'product_list' %}">{% trans 'Go shopping' %}</a>
-        {% endif %}
-        <div class="mini-cart__buttons">
-          <a href="#cart:cart_detail" class="btn btn-fullwidth btn-bg-sand mb--20">{% trans 'Go to cart' %}</a>
-          {% if not cart.is_empty %}
-            <a href="#order_create" class="btn btn-fullwidth btn-bg-sand">{% trans 'Order' %}</a>
-          {% endif %}
-        </div>
-      </div>
-    </div>
-  </div>
-</aside> {% endcomment %}
 <aside id="miniCart" class="cart-sidebar">
   <div class="cart-sidebar-header">
-    <h3>سبد خرید</h3>
+    <h3>{% trans 'Cart' %}</h3>
     <button class="close-btn" onclick="toggleMiniCart()">×</button>
   </div>
   <div class="cart-sidebar-content">
-    <p id="empty-cart-message" style="display: none;">محصولی در سبد خرید نیست.</p>
+    <p id="empty-cart-message" style="display: none;">
+      {% trans 'Cart is empty' %}
+    </p>
     <ul id="cart-items-list" class="cart-items-list">
       <li class="cart-item">
         <div class="cart-item-container">
           <img src="" alt="#" class="cart-item-image" />
           <div class="cart-item-details">
-            <span class="cart-item-name">نام محصول</span>
+            <span class="cart-item-name">product name</span>
             <div class="cart-item-info">
-              <span class="price">100,000 تومان</span>
+              <span class="price">100 &</span>
               <span class="quantity">x 2</span>
             </div>
           </div>
@@ -70,7 +29,7 @@
     </ul>
     <div class="cart-total">
       <strong>جمع کل:</strong>
-      <span id="cart-total-price">0 تومان</span>
+      <span id="cart-total-price">0 $</span>
     </div>
     <div class="mini-cart__buttons">
       <a href="/shop" class="continue-shopping-btn">ادامه خرید</a>
