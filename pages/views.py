@@ -27,6 +27,12 @@ class HomePageView(ListView):
     template_name = 'pages/home.html'
     context_object_name = 'categories'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["total_products"] = sum(category.products.count() for category in context['categories'])
+        return context
+    
+
 
 class AboutUsPageView(TemplateView):
     template_name = 'pages/aboutus.html'

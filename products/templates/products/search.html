@@ -10,7 +10,8 @@
 {% block content %}
   {% if query %}
     {% include 'products/product_display.html' with query=query found_products_count=page_obj.paginator.count %}
+    {% comment %} {% include 'products/product_display.html' with query=query found_products_count=total_products %} {% endcomment %}
   {% else %}
-    <h3>{% trans 'Please enter your product to search.' %}</h3>
+    <h3>{% trans 'Please enter your product to search' %}.</h3>
   {% endif %}
 {% endblock %}

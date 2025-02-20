@@ -39,7 +39,7 @@
   </div>
   <div class="down-content">
     <a href="{{ product.get_absolute_url }}" style="color: black;"><h6>{{ product.name }}</h6></a>
-    <span>{{ product.unit_price|translate_number }} {% trans '$' %}</span>
+    <span>{{ product.unit_price|convert_currency|translate_number }}</span>
     {% include 'products/stars.html' %}
   </div>
 </div>

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-29 20:43+0400\n"
+"POT-Creation-Date: 2025-02-20 09:39+0400\n"
 "PO-Revision-Date: 2025-01-22 00:14+0400\n"
 "Last-Translator:   <majid@majid.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,7 +18,8 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Translated-Using: django-rosetta 0.10.1\n"
 
-#: .\accounts\models.py:10
+#: .\accounts\models.py:10 .\pages\models.py:7
+#: .\pages\templates\pages\subscribe.html:54
 msgid "Email"
 msgstr "ايميل"
 
@@ -58,17 +59,348 @@ msgstr "كد پستى"
 msgid "Country"
 msgstr "كشور"
 
-#: .\products\models.py:11
+#: .\cart\templates\cart\cart_sidebar.html:8
+msgid "Cart"
+msgstr "سبد خرید"
+
+#: .\cart\templates\cart\cart_sidebar.html:13
+msgid "Cart is empty"
+msgstr "سبد خرید خالی است"
+
+#: .\pages\models.py:6
+msgid "Name"
+msgstr "نام "
+
+#: .\pages\models.py:8
+msgid "message"
+msgstr "پیام"
+
+#: .\pages\models.py:9 .\products\models.py:35 .\products\models.py:108
+msgid "Date Time Created"
+msgstr "تارخ ساخت"
+
+#: .\pages\templates\pages\aboutus.html:7
+#: .\pages\templates\pages\footer.html:48 .\templates\_base.html:85
+msgid "About Us"
+msgstr "درباره ما"
+
+#: .\pages\templates\pages\aboutus.html:17
+msgid "About Tara Store"
+msgstr "درباره فروشگاه تارا"
+
+#: .\pages\templates\pages\aboutus.html:36
+msgid "About Us &amp; Our Products"
+msgstr "درباره ما و محصولاتمان"
+
+#: .\pages\templates\pages\aboutus.html:37
+msgid ""
+"We provide stylish and comfortable fashion for men, women, and kids, "
+"ensuring the best quality and latest designs"
+msgstr ""
+"ما پوشاک شیک و راحت را برای آقایان، بانوان و کودکان ارائه می‌دهیم و بهترین "
+"کیفیت و جدیدترین طراحی‌ها را تضمین می‌کنیم"
+
+#: .\pages\templates\pages\aboutus.html:40
+msgid ""
+"Tara Store is your go-to destination for trendy fashion, offering high-"
+"quality clothing, shoes, and accessories for the whole family"
+msgstr ""
+"فروشگاه تارا مقصد ایده‌آل شما برای مد روز است و لباس، کفش و اکسسوری‌های "
+"باکیفیت را برای تمام اعضای خانواده ارائه می‌دهد"
+
+#: .\pages\templates\pages\aboutus.html:44
+msgid ""
+"From casual to formal wear, shoes, and trendy accessories, Tara Store has "
+"everything you need to express your unique style"
+msgstr ""
+"از پوشاک روزمره تا لباس‌های رسمی، کفش و اکسسوری‌های مدرن، فروشگاه تارا هر آنچه "
+"را که برای بیان استایل منحصربه‌فرد خود نیاز دارید، فراهم کرده است"
+
+#: .\pages\templates\pages\contact_us.html:7
+#: .\pages\templates\pages\contact_us.html:17
+#: .\pages\templates\pages\footer.html:54 .\templates\_base.html:94
+msgid "Contact Us"
+msgstr "تماس با ما"
+
+#: .\pages\templates\pages\contact_us.html:36
+msgid "Say Hello. Don't Be Shy"
+msgstr "سلام كن. خجالت نکش"
+
+#: .\pages\templates\pages\contact_us.html:37
+#: .\pages\templates\pages\home.html:91 .\pages\templates\pages\home.html:119
+#: .\pages\templates\pages\home.html:147 .\pages\templates\pages\home.html:222
+msgid ""
+"Details to details is what makes Tara Store different from the other themes"
+msgstr "توجه به جزئیات چیزی است که فروشگاه تارا را از دیگر تم‌ها متمایز می‌کند"
+
+#: .\pages\templates\pages\footer.html:16
+msgid "Muscat"
+msgstr "مسقط "
+
+#: .\pages\templates\pages\footer.html:16
+msgid "Oman"
+msgstr "عمان"
+
+#: .\pages\templates\pages\footer.html:28
+msgid "Shopping"
+msgstr "خرید"
+
+#: .\pages\templates\pages\footer.html:28
+msgid "Categories"
+msgstr "دسته‌بندی‌ها"
+
+#: .\pages\templates\pages\footer.html:31
+msgid "Men’s Shopping"
+msgstr "خرید مردانه"
+
+#: .\pages\templates\pages\footer.html:34
+msgid "Women’s Shopping"
+msgstr "خرید زنانه"
+
+#: .\pages\templates\pages\footer.html:37
+msgid "Kid's Shopping"
+msgstr "خرید بچگانه"
+
+#: .\pages\templates\pages\footer.html:42
+msgid "Useful Links"
+msgstr "لینک‌های مفید"
+
+#: .\pages\templates\pages\footer.html:45
+msgid "Homepage"
+msgstr "خانه"
+
+#: .\pages\templates\pages\footer.html:51
+#: .\pages\templates\pages\footer.html:59
+#: .\pages\templates\pages\footer.html:62
+msgid "Help"
+msgstr "کمک"
+
+#: .\pages\templates\pages\footer.html:59
+msgid "Information"
+msgstr "اطلاعات"
+
+#: .\pages\templates\pages\footer.html:65
+msgid "FAQ's"
+msgstr "سؤالات متداول"
+
+#: .\pages\templates\pages\footer.html:68
+msgid "Shipping"
+msgstr "ارسال"
+
+#: .\pages\templates\pages\footer.html:71
+msgid "Tracking ID"
+msgstr "شناسه رهگیری"
+
+#: .\pages\templates\pages\footer.html:80
+msgid "Design"
+msgstr "طراحى"
+
+#: .\pages\templates\pages\home.html:7 .\templates\_base.html:65
+msgid "Home"
+msgstr "خانه"
+
+#: .\pages\templates\pages\home.html:19
+msgid "We Are Tara Store"
+msgstr "ما فروشگاه تارا هستیم"
+
+#: .\pages\templates\pages\home.html:21
+msgid "Purchase Now"
+msgstr "الان خرید کنید"
+
+#: .\pages\templates\pages\home.html:35
+msgid "Women"
+msgstr "زنانه"
+
+#: .\pages\templates\pages\home.html:36
+msgid "Best Clothes For Women"
+msgstr "بهترین لباس‌ها برای بانوان"
+
+#: .\pages\templates\pages\home.html:46
+msgid "Men"
+msgstr "مردانه"
+
+#: .\pages\templates\pages\home.html:47
+msgid "Best Clothes For Men"
+msgstr "بهترین لباس‌ها برای آقایان"
+
+#: .\pages\templates\pages\home.html:57
+msgid "Kids"
+msgstr "بچگانه"
+
+#: .\pages\templates\pages\home.html:58
+msgid "Best Clothes For Kids"
+msgstr "بهترین لباس‌ها برای کودکان"
+
+#: .\pages\templates\pages\home.html:68
+msgid "Accessories"
+msgstr "اکسسوری‌ها"
+
+#: .\pages\templates\pages\home.html:69
+msgid "Best Trend Accessories"
+msgstr "بهترین اکسسوری‌های مد روز"
+
+#: .\pages\templates\pages\home.html:90
+msgid "Men's Latest"
+msgstr "جدیدترین مردانه"
+
+#: .\pages\templates\pages\home.html:118
+msgid "Women's Latest"
+msgstr "جدیدترین زنانه"
+
+#: .\pages\templates\pages\home.html:146
+msgid "Kid's Latest"
+msgstr "جدیدترین بچگانه"
+
+#: .\pages\templates\pages\home.html:175
+msgid "Explore Our Products"
+msgstr "كشف محصولات ما"
+
+#: .\pages\templates\pages\home.html:176
+msgid ""
+"Discover a wide range of high-quality products tailored to your needs. From "
+"the latest trends to timeless classics, we have something for everyone. "
+"Browse through our collections and find the perfect match for your style. "
+"Enjoy seamless shopping with secure payments and fast delivery. Start "
+"exploring today and experience excellence"
+msgstr ""
+"یک مجموعه گسترده از محصولات باکیفیت را کشف کنید که متناسب با نیازهای شما "
+"طراحی شده‌اند. از جدیدترین ترندها تا کلاسیک‌های جاودانه، ما برای همه سلیقه‌ها "
+"چیزی داریم. در مجموعه‌های ما جستجو کنید و گزینه‌ی مناسب برای سبک خود را پیدا "
+"کنید. با پرداخت امن و ارسال سریع، خریدی بی‌دغدغه را تجربه کنید. همین امروز "
+"جستجو را آغاز کنید و کیفیت برتر را تجربه کنید."
+
+#: .\pages\templates\pages\home.html:178
+msgid "Discover More"
+msgstr "بیشتر کشف کنید"
+
+#: .\pages\templates\pages\home.html:187
+msgid "Leather Bags"
+msgstr "کیف‌های چرمى"
+
+#: .\pages\templates\pages\home.html:188
+msgid "Latest Collection"
+msgstr "جدیدترین مجموعه"
+
+#: .\pages\templates\pages\home.html:203
+msgid "Different Types"
+msgstr "انواع مختلف"
+
+#: .\pages\templates\pages\home.html:204
+msgid "Over"
+msgstr "بيش از"
+
+#: .\pages\templates\pages\home.html:204 .\templates\_base.html:88
+msgid "Products"
+msgstr "محصولات"
+
+#: .\pages\templates\pages\home.html:221
+#: .\pages\templates\pages\subscribe.html:57
+msgid "Social Media"
+msgstr "شبکه‌های اجتماعی"
+
+#: .\pages\templates\pages\home.html:233
+msgid "Fashion"
+msgstr "مد و فشن"
+
+#: .\pages\templates\pages\home.html:244
+msgid "New"
+msgstr "جديد"
+
+#: .\pages\templates\pages\home.html:255
+msgid "Brand"
+msgstr "برند"
+
+#: .\pages\templates\pages\home.html:266
+msgid "Makeup"
+msgstr "لوازم آرایشى"
+
+#: .\pages\templates\pages\home.html:277
+msgid "Leather"
+msgstr "چرمى"
+
+#: .\pages\templates\pages\home.html:288
+msgid "Bag"
+msgstr "كيف"
+
+#: .\pages\templates\pages\pagination.html:11
+msgid "First"
+msgstr "اول"
+
+#: .\pages\templates\pages\pagination.html:45
+msgid "Last"
+msgstr "آخر"
+
+#: .\pages\templates\pages\subscribe.html:10
+#, python-format
+msgid "By Subscribing To Our Newsletter You Can Get 30%% Off"
+msgstr "با عضویت در خبرنامه ما، می‌توانید ۳۰٪ تخفیف دریافت کنید"
+
+#: .\pages\templates\pages\subscribe.html:11
+msgid ""
+"Details to details is what makes Tara Tara Store different from the other "
+"themes."
+msgstr "توجه به جزئیات چیزی است که فروشگاه تارا را از دیگر تم‌ها متمایز می‌کند"
+
+#: .\pages\templates\pages\subscribe.html:17
+msgid "Your Name"
+msgstr "نام "
+
+#: .\pages\templates\pages\subscribe.html:22
+msgid "Your Email Address"
+msgstr "آدرس ایمیل"
+
+#: .\pages\templates\pages\subscribe.html:38
+msgid "Store Location"
+msgstr "آدرس فروشگاه"
+
+#: .\pages\templates\pages\subscribe.html:38
+#: .\pages\templates\pages\subscribe.html:44
+msgid "Muscat, Oman"
+msgstr "مسقط، عمان"
+
+#: .\pages\templates\pages\subscribe.html:41
+msgid "Phone"
+msgstr "تلفن"
+
+#: .\pages\templates\pages\subscribe.html:44
+msgid "Office Location"
+msgstr "آدرس دفتر"
+
+#: .\pages\templates\pages\subscribe.html:51
+msgid "Work Hours"
+msgstr "ساعت كارى"
+
+#: .\pages\templates\pages\subscribe.html:51
+msgid "AM"
+msgstr "صبح "
+
+#: .\pages\templates\pages\subscribe.html:51
+msgid "PM"
+msgstr "عصر "
+
+#: .\pages\templates\pages\subscribe.html:51
+msgid "Daily"
+msgstr "روزانه"
+
+#: .\pages\templates\pages\subscribe.html:57
+msgid "Facebook"
+msgstr "فیسبوک"
+
+#: .\pages\templates\pages\subscribe.html:57
+msgid "Instagram"
+msgstr "اینستاگرام"
+
+#: .\pages\views.py:53
+msgid "Your message sent successfully"
+msgstr "پیام شما با موفقیت ارسال شد!"
+
+#: .\products\models.py:12
 msgid "Title"
 msgstr "عنوان"
 
-#: .\products\models.py:12 .\products\models.py:21 .\products\models.py:31
+#: .\products\models.py:13 .\products\models.py:21 .\products\models.py:31
 msgid "Description"
 msgstr "توضيحات"
-
-#: .\products\models.py:13
-msgid "Top Product"
-msgstr "محصول برتر"
 
 #: .\products\models.py:20 .\products\models.py:37
 msgid "Discount"
@@ -91,7 +423,6 @@ msgid "Short Description"
 msgstr "توضيحات كوتاه"
 
 #: .\products\models.py:33
-#: .\products\templates\products\product_detail.html:17
 msgid "Price"
 msgstr "قيمت"
 
@@ -99,192 +430,279 @@ msgstr "قيمت"
 msgid "Inventory"
 msgstr "موجودى"
 
-#: .\products\models.py:35 .\products\models.py:97
-msgid "Date Time Created"
-msgstr "تارخ ساخت"
-
-#: .\products\models.py:36 .\products\models.py:98
+#: .\products\models.py:36 .\products\models.py:109
 msgid "Date Time Modified"
 msgstr "تاربخ ويرايش"
 
-#: .\products\models.py:38 .\products\models.py:100
+#: .\products\models.py:38 .\products\models.py:111
 msgid "Active"
 msgstr "فعال"
 
-#: .\products\models.py:39
-msgid "Product image"
-msgstr "عكس محصول"
-
-#: .\products\models.py:80
-msgid "Waiting"
-msgstr "انتظار"
-
-#: .\products\models.py:81
-msgid "Approved"
-msgstr "تاييد شده"
-
-#: .\products\models.py:82
-msgid "Not Approved"
-msgstr "تاييد نشده"
-
-#: .\products\models.py:86
-msgid "Very Bad"
-msgstr "خيلي بد"
-
-#: .\products\models.py:87
-msgid "Bad"
-msgstr "بد"
-
-#: .\products\models.py:88
-msgid "Normal"
-msgstr "معمولى"
-
-#: .\products\models.py:89
-msgid "Good"
-msgstr "خوب"
-
-#: .\products\models.py:90
-msgid "Perfect"
-msgstr "عالى"
-
-#: .\products\models.py:93
+#: .\products\models.py:52 .\products\models.py:104
 msgid "Product"
 msgstr "محصول"
 
-#: .\products\models.py:94
+#: .\products\models.py:53
+msgid "Product image"
+msgstr "عكس محصول"
+
+#: .\products\models.py:91
+msgid "Waiting"
+msgstr "انتظار"
+
+#: .\products\models.py:92
+msgid "Approved"
+msgstr "تاييد شده"
+
+#: .\products\models.py:93
+msgid "Not Approved"
+msgstr "تاييد نشده"
+
+#: .\products\models.py:97
+msgid "Very Bad"
+msgstr "خيلي بد"
+
+#: .\products\models.py:98
+msgid "Bad"
+msgstr "بد"
+
+#: .\products\models.py:99
+msgid "Normal"
+msgstr "معمولى"
+
+#: .\products\models.py:100
+msgid "Good"
+msgstr "خوب"
+
+#: .\products\models.py:101
+msgid "Perfect"
+msgstr "عالى"
+
+#: .\products\models.py:105
 msgid "Author"
 msgstr "نويسنده"
 
-#: .\products\models.py:95
+#: .\products\models.py:106
 msgid "Comment Text"
 msgstr "متن ديدگاه"
 
-#: .\products\models.py:96
-#: .\products\templates\products\product_detail.html:29
+#: .\products\models.py:107
+#: .\products\templates\products\product_detail.html:123
 msgid "Product Rating"
 msgstr "امتياز محصول"
 
-#: .\products\models.py:99
+#: .\products\models.py:110
 msgid "Status"
 msgstr "وضعيت"
 
-#: .\products\templates\products\product_create.html:10
+#: .\products\templates\products\product_create.html:11
 msgid "Create Product"
 msgstr "اضافه كردن محصول"
 
-#: .\products\templates\products\product_create.html:18
+#: .\products\templates\products\product_create.html:22
+#: .\products\templates\products\product_update.html:36
+msgid "Product Images"
+msgstr "عكس محصول"
+
+#: .\products\templates\products\product_create.html:27
 msgid "Submit"
 msgstr "ارسال"
 
-#: .\products\templates\products\product_detail.html:8
+#: .\products\templates\products\product_delete.html:7
+#: .\products\templates\products\product_delete.html:13
+#: .\products\templates\products\product_detail.html:49
+msgid "Delete"
+msgstr "حذف"
+
+#: .\products\templates\products\product_delete.html:15
+#, python-format
+msgid "Are you sure to delete %(product_name)s?"
+msgstr "آیا مطمئن هستید که %(product_name)s را حذف کنید؟"
+
+#: .\products\templates\products\product_delete.html:17
+msgid "Yes, I'm Sure"
+msgstr "بله، مطمئن هستم"
+
+#: .\products\templates\products\product_detail.html:10
 msgid "Product detail"
 msgstr "جزئيات محصول"
 
-#: .\products\templates\products\product_detail.html:17
+#: .\products\templates\products\product_detail.html:48
+msgid "Edit"
+msgstr "ويرايش"
+
+#: .\products\templates\products\product_detail.html:52
+#: .\products\templates\products\product_display.html:87
+#: .\products\templates\products\products_home.html:42
 msgid "$"
 msgstr "تومان"
 
-#: .\products\templates\products\product_detail.html:21
+#: .\products\templates\products\product_detail.html:62
+msgid "No. of Orders"
+msgstr "تعداد سفارشات"
+
+#: .\products\templates\products\product_detail.html:73
+msgid "Total"
+msgstr "مجموع"
+
+#: .\products\templates\products\product_detail.html:75
+msgid "Add To Cart"
+msgstr "افزودن به سبد خرید"
+
+#: .\products\templates\products\product_detail.html:88
 msgid "Comments List"
 msgstr "ديدگاه ها"
 
-#: .\products\templates\products\product_detail.html:34
-msgid "No comments available."
-msgstr "هيج ديدگاهى موجود نيست."
+#: .\products\templates\products\product_detail.html:112
+msgid "No comments available"
+msgstr "هيج ديدگاهى موجود نيست"
 
-#: .\products\templates\products\product_detail.html:44
+#: .\products\templates\products\product_detail.html:132
 msgid "Send"
 msgstr "ارسال"
 
-#: .\products\templates\products\product_detail.html:48
-msgid "You must be logged in to leave a comment."
-msgstr "برای گذاشتن نظر باید ثبت نام كنيد."
+#: .\products\templates\products\product_detail.html:136
+msgid "You must be logged in to leave a comment"
+msgstr "برای گذاشتن نظر باید ثبت نام كنيد"
 
-#: .\products\templates\products\product_list.html:5
-msgid "Products list"
+#: .\products\templates\products\product_display.html:37
+msgid "Result for"
+msgstr "نتیجه برای"
+
+#: .\products\templates\products\product_display.html:39
+msgid "Our Latest Products"
+msgstr "جدیدترین محصولات ما"
+
+#: .\products\templates\products\product_display.html:40
+msgid "Check out all of our products"
+msgstr "مشاهده همه محصولات"
+
+#: .\products\templates\products\product_display.html:93
+msgid "No products found"
+msgstr "هیچ محصولی یافت نشد"
+
+#: .\products\templates\products\product_kids.html:6
+msgid "Kid's Product"
+msgstr "محصولات بچگانه"
+
+#: .\products\templates\products\product_list.html:6
+msgid "Product List"
 msgstr "ليست محصولات"
 
-#: .\products\views.py:55
+#: .\products\templates\products\product_men.html:6
+msgid "Men's Product"
+msgstr "محصولات مردانه"
+
+#: .\products\templates\products\product_update.html:12
+msgid "Produc Update"
+msgstr "بروزرسانی محصول"
+
+#: .\products\templates\products\product_update.html:17
+msgid "Update"
+msgstr "بروزرسانی"
+
+#: .\products\templates\products\product_update.html:41
+msgid "Delete this image"
+msgstr "حذف اين عكس"
+
+#: .\products\templates\products\product_update.html:48
+msgid "Upload new images"
+msgstr "آپلود عكس هاى جديد"
+
+#: .\products\templates\products\product_update.html:54
+msgid "Update Product"
+msgstr "بروزرسانی محصول"
+
+#: .\products\templates\products\product_women.html:6
+msgid "Women's Product"
+msgstr "محصولات زنانه"
+
+#: .\products\templates\products\search.html:7 .\templates\_base.html:161
+#: .\templates\_base.html:162
+msgid "Search"
+msgstr "جستجو"
+
+#: .\products\templates\products\search.html:14
+msgid "Please enter your product to search"
+msgstr "لطفاً محصول خود را برای جستجو وارد کنید"
+
+#: .\products\views.py:89
 msgid "Comment successfully created."
 msgstr "نظر با موفقيت ساخته شد."
 
-#: .\products\views.py:76
-msgid "You don't have permission to access this page."
-msgstr "شما اجازه دسترسی به این صفحه را ندارید."
+#: .\products\views.py:109
+msgid "You don't have permission to add products.(Only admin)"
+msgstr "شما مجوز افزودن محصولات را ندارید. (فقط مدیر)"
 
-#: .\products\views.py:87
+#: .\products\views.py:123
 msgid "Product has been created successfully!"
 msgstr "محصول با موفقيت ايجاد شده است!"
 
-#: .\templates\_base.html:61 .\templates\home.html:5
-msgid "Home"
-msgstr "خانه"
+#: .\products\views.py:137
+msgid "You don't have permission to Edit products.(Only admin)"
+msgstr "شما مجوز ویرایش محصولات را ندارید. (فقط مدیر)"
 
-#: .\templates\_base.html:64
+#: .\products\views.py:151
+msgid "Product has been updated successfully!"
+msgstr "محصول با موفقیت به‌روزرسانی شد!"
+
+#: .\products\views.py:156
+msgid "There are errors in the form. Please fix them."
+msgstr "در فرم خطاهایی وجود دارد. لطفاً آن‌ها را اصلاح کنید."
+
+#: .\products\views.py:169
+msgid "You don't have permission to delete products.(Only admin)"
+msgstr "شما مجوز حذف محصولات را ندارید. (فقط مدیر)"
+
+#: .\products\views.py:175
+#, python-format
+msgid "%(name)s was deleted successfully!"
+msgstr "%(name)s با موفقیت حذف شد!"
+
+#: .\templates\_base.html:70
 msgid "Men's"
 msgstr "مردانه"
 
-#: .\templates\_base.html:67
+#: .\templates\_base.html:75
 msgid "Women's"
 msgstr "زنانه"
 
-#: .\templates\_base.html:70
+#: .\templates\_base.html:79
 msgid "Kid's"
 msgstr "بچگانه"
 
-#: .\templates\_base.html:73
+#: .\templates\_base.html:82
 msgid "Pages"
 msgstr "صفحات"
 
-#: .\templates\_base.html:76
-msgid "About Us"
-msgstr "درباره ما"
+#: .\templates\_base.html:91
+msgid "Add Product"
+msgstr "اضافه كردن محصول"
 
-#: .\templates\_base.html:79
-msgid "Products"
-msgstr "محصولات"
-
-#: .\templates\_base.html:82
-#, fuzzy
-#| msgid "Product"
-msgid "Product Details"
-msgstr "جزئيات محصول"
-
-#: .\templates\_base.html:85
-msgid "Contact Us"
-msgstr "تماس با ما"
-
-#: .\templates\_base.html:90
-msgid "Features"
-msgstr "ویژگی ها"
-
-#: .\templates\_base.html:104
+#: .\templates\_base.html:115
 msgid "Explore"
 msgstr "مشاهده محصولات"
 
-#: .\templates\_base.html:107
+#: .\templates\_base.html:118
 msgid "Languages"
 msgstr "زبان ها"
 
-#: .\templates\_base.html:133
+#: .\templates\_base.html:144
 msgid "Profile"
 msgstr "پروفایل"
 
-#: .\templates\_base.html:136
+#: .\templates\_base.html:147 .\templates\account\logout.html:5
 msgid "Logout"
 msgstr "خروج"
 
-#: .\templates\_base.html:140
+#: .\templates\_base.html:151 .\templates\account\login.html:6
+#: .\templates\account\login.html:14
 msgid "Login"
 msgstr "ورود"
 
-#: .\templates\_base.html:143
+#: .\templates\_base.html:154 .\templates\account\signup.html:6
 msgid "Sign Up"
 msgstr "ثبت نام"
-
-#: .\templates\_base.html:150
-msgid "Search"
-msgstr "جستجو"
 
 #: .\templates\account\email\email_confirmation_message.txt:5
 #, python-format
@@ -323,6 +741,20 @@ msgid ""
 "(email_url)s\">issue a new email confirmation request</a>."
 msgstr ""
 
-#: .\templates\home.html:9
-msgid "Home Page"
-msgstr "صفحه خانه"
+#: .\templates\account\logout.html:10
+msgid "Are you sure you want to logout?"
+msgstr "آیا مطمئن هستید که می‌خواهید از حساب کاربری خود خارج شوید؟"
+
+#: .\templates\account\logout.html:13
+msgid "Yes, I'm sure"
+msgstr "بله، مطمئن هستم"
+
+#: .\templates\account\signup.html:14
+msgid "Signup"
+msgstr "ثبت نام"
+
+#~ msgid "Product Details"
+#~ msgstr "جزئيات محصول"
+
+#~ msgid "Features"
+#~ msgstr "ویژگی ها"

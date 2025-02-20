@@ -8,12 +8,12 @@
 {% endblock %}
 
 {% block content %}
-  <form action="" method="post">
+  <form action="{% url "product_delete" product.pk %}" method="post">
     {% csrf_token %}
-    <h1>{% trans 'Delete' %} {{ product.name }}</h1>
-    <p>
-      {% trans 'Are you sure to delete' %} {{ product.name }}?
+    <h2>{% trans 'Delete' %} {{ product.name }}</h2>
+    <p style="padding-top: 20px;">
+      {% blocktrans with product_name=product.name %}Are you sure to delete {{ product_name }}?{% endblocktrans %}
     </p>
-    <input class="btn btn-danger" type="submit" value="{% trans "Yes, I'm Sure." %}" />
+    <input class="btn btn-danger" type="submit" value="{% trans "Yes, I'm Sure" %}." />
   </form>
 {% endblock %}

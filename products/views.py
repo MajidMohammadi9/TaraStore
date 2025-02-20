@@ -169,10 +169,30 @@ class ProductDeleteView(UserPassesTestMixin, DeleteView):
         messages.error(self.request, _("You don't have permission to delete products.(Only admin)"))
         return redirect('product_list')
     
-    def delete(self, request, *args, **kwargs):
-        messages.success(self.request, _(f"{self.name} was deleted successfully!"))
-        return super().delete(request, *args, **kwargs)
+    def post(self, request, *args, **kwargs):
+        product=self.get_object()
+        # messages.success(self.request, _("Product was deleted successfully"))
+        messages.success(self.request, _("%(name)s was deleted successfully!") % {"name": product.name})
+        return super().post(request, *args, **kwargs)
 
+    
+class ProductSearchView(BaseProductListView):
+    template_name='products/search.html'
+
+    def get_queryset(self):
+        queryset=super().get_queryset() # Get queryset from BaseProductListView
+        
+        query=self.request.GET.get('q', '')
+        if query:
+            queryset=queryset.filter(Q(name__icontains=query) | Q(category__title__icontains=query)).distinct()
+            
+        return queryset
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['query']=self.request.GET.get('q', '')
+        # context['total_products']=self.get_queryset().count()
+        return context
     
 
 # def product_search(request):
@@ -188,20 +208,4 @@ class ProductDeleteView(UserPassesTestMixin, DeleteView):
 
 #     return render(request, 'products/search.html', {'query': query, 'page_obj': page_obj})
 
-
-class ProductSearchView(BaseProductListView):
-    template_name='products/search.html'
-
-    def get_queryset(self):
-        queryset=super().get_queryset() # Get queryset from BaseProductListView
-        
-        query=self.request.GET.get('q', '')
-        if query:
-            queryset=queryset.filter(Q(name__icontains=query) | Q(category__title__icontains=query)).distinct()
-        return queryset
-    
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['query']=self.request.GET.get('q', '')
-        return context
     

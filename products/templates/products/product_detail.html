@@ -48,7 +48,7 @@
               <a href="{% url 'product_delete' product.id %}" class="btn btn-success">{% trans "Delete" %}</a>
             </div>
             <h6 style="padding-top: 10px;">{{ product.name }}</h6>
-            <span class="price">{{ product.unit_price|translate_number }} {% trans '$' %}</span>
+            <span class="price">{{ product.unit_price|convert_currency|translate_number }} {% trans '$' %}</span>
             {% include "products/stars.html" %}
             {% if product.short_description %}
               <span>{{ product.short_description|safe }}</span>
@@ -108,7 +108,7 @@
           <br />
         {% empty %}
           <li>
-            {% trans 'No comments available.' %}
+            {% trans 'No comments available' %}.
           </li>
         {% endfor %}
       </ul>
@@ -132,7 +132,7 @@
         </form>
       {% else %}
         <p>
-          <strong>*{% trans 'You must be logged in to leave a comment.' %}</strong>
+          <strong>*{% trans 'You must be logged in to leave a comment' %}.</strong>
         </p>
       {% endif %}
     </div>
