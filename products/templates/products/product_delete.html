@@ -8,7 +8,12 @@
 {% endblock %}
 
 {% block content %}
-  <form action="{% url "product_delete" product.pk %}" method="post">
+  <!-- ***** Main Banner Area Start ***** -->
+  {% trans 'Product Delete' as product_delete %}
+  {% include 'pages/banner.html' with banner_title=product_delete %}
+  <!-- ***** Main Banner Area End ***** -->
+
+  <form action="{% url 'product_delete' product.pk %}" method="post">
     {% csrf_token %}
     <h2>{% trans 'Delete' %} {{ product.name }}</h2>
     <p style="padding-top: 20px;">

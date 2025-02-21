@@ -6,7 +6,7 @@
   {% trans "Kid's Product" %}
 {% endblock %}
 
-{% comment %} {% trans "Kid's Product" as page_title %} {% endcomment %}
 {% block content %}
-  {% include 'products/product_display.html' with products=products_kids %}
+  {% trans "Kids Products" as kids_products %}
+  {% include 'products/product_display.html' with products=products_kids banner_title=kids_products %}
 {% endblock %}

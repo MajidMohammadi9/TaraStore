@@ -7,5 +7,6 @@
 {% endblock %}
 
 {% block content %}
-  {% include 'products/product_display.html' with products=products_women %}
+  {% trans "Womens Products" as womens_products %}
+  {% include 'products/product_display.html' with products=products_women banner_title=womens_products %}
 {% endblock %}

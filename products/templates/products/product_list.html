@@ -7,5 +7,6 @@
 {% endblock %}
 
 {% block content %}
-  {% include 'products/product_display.html' with products=products %}
+  {% trans "Products List" as product_list %}
+  {% include 'products/product_display.html' with products=products banner_title=product_list %}
 {% endblock %}

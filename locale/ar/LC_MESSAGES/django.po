@@ -8,15 +8,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-20 17:05+0400\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2025-02-21 20:51+0400\n"
+"PO-Revision-Date: 2025-02-21 20:57+0400\n"
+"Last-Translator:   <majid@majid.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
-"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+"X-Translated-Using: django-rosetta 0.10.1\n"
 
 #: .\accounts\models.py:10 .\pages\models.py:7
 #: .\pages\templates\pages\subscribe.html:54
@@ -84,52 +84,54 @@ msgstr "تاريخ ووقت الإنشاء"
 msgid "About Us"
 msgstr "معلومات عنا"
 
-#: .\pages\templates\pages\aboutus.html:17
+#: .\pages\templates\pages\aboutus.html:12
 msgid "About Tara Store"
 msgstr "عن متجر تارا"
 
-#: .\pages\templates\pages\aboutus.html:36
+#: .\pages\templates\pages\aboutus.html:27
 msgid "About Us &amp; Our Products"
 msgstr "معلومات عنا ومنتجاتنا"
 
-#: .\pages\templates\pages\aboutus.html:37
+#: .\pages\templates\pages\aboutus.html:28
 msgid ""
 "We provide stylish and comfortable fashion for men, women, and kids, "
 "ensuring the best quality and latest designs"
 msgstr ""
-"نحن نقدم أزياء أنيقة ومريحة للرجال والنساء والأطفال، مع ضمان أعلى جودة وأحدث التصاميم."
+"نحن نقدم أزياء أنيقة ومريحة للرجال والنساء والأطفال، مع ضمان أعلى جودة وأحدث"
+" التصاميم."
 
-#: .\pages\templates\pages\aboutus.html:40
+#: .\pages\templates\pages\aboutus.html:31
 msgid ""
 "Tara Store is your go-to destination for trendy fashion, offering high-"
 "quality clothing, shoes, and accessories for the whole family"
 msgstr ""
-"متجر تارا هو وجهتك المثالية للأزياء العصرية، حيث يقدم ملابس، أحذية، وإكسسوارات عالية الجودة لجميع أفراد العائلة."
+"متجر تارا هو وجهتك المثالية للأزياء العصرية، حيث يقدم ملابس، أحذية، "
+"وإكسسوارات عالية الجودة لجميع أفراد العائلة."
 
-#: .\pages\templates\pages\aboutus.html:44
+#: .\pages\templates\pages\aboutus.html:35
 msgid ""
 "From casual to formal wear, shoes, and trendy accessories, Tara Store has "
 "everything you need to express your unique style"
 msgstr ""
-"من الملابس اليومية إلى الرسمية، الأحذية، والإكسسوارات العصرية، يقدم لك متجر تارا كل ما تحتاجه للتعبير عن أسلوبك الفريد."
+"من الملابس اليومية إلى الرسمية، الأحذية، والإكسسوارات العصرية، يقدم لك متجر "
+"تارا كل ما تحتاجه للتعبير عن أسلوبك الفريد."
 
 #: .\pages\templates\pages\contact_us.html:7
-#: .\pages\templates\pages\contact_us.html:17
+#: .\pages\templates\pages\contact_us.html:12
 #: .\pages\templates\pages\footer.html:54 .\templates\_base.html:94
 msgid "Contact Us"
 msgstr "اتصل بنا"
 
-#: .\pages\templates\pages\contact_us.html:36
+#: .\pages\templates\pages\contact_us.html:27
 msgid "Say Hello. Don't Be Shy"
 msgstr "قل مرحبًا. لا تكن خجولًا"
 
-#: .\pages\templates\pages\contact_us.html:37
+#: .\pages\templates\pages\contact_us.html:28
 #: .\pages\templates\pages\home.html:91 .\pages\templates\pages\home.html:119
 #: .\pages\templates\pages\home.html:147 .\pages\templates\pages\home.html:222
 msgid ""
 "Details to details is what makes Tara Store different from the other themes"
-msgstr ""
-"التفاصيل هي ما يجعل متجر تارا مختلفًا عن غيره من المواقع."
+msgstr "التفاصيل هي ما يجعل متجر تارا مختلفًا عن غيره من المواقع."
 
 #: .\pages\templates\pages\footer.html:16
 msgid "Muscat"
@@ -261,7 +263,10 @@ msgid ""
 "Enjoy seamless shopping with secure payments and fast delivery. Start "
 "exploring today and experience excellence"
 msgstr ""
-"اكتشف مجموعة واسعة من المنتجات عالية الجودة المصممة لتلبية احتياجاتك. من أحدث الصيحات إلى الكلاسيكيات الخالدة، لدينا شيء يناسب الجميع. تصفح مجموعاتنا وابحث عن الأنسب لأسلوبك. استمتع بتسوق سلس مع مدفوعات آمنة وتوصيل سريع. ابدأ الاستكشاف اليوم وجرّب التميز."
+"اكتشف مجموعة واسعة من المنتجات عالية الجودة المصممة لتلبية احتياجاتك. من "
+"أحدث الصيحات إلى الكلاسيكيات الخالدة، لدينا شيء يناسب الجميع. تصفح مجموعاتنا"
+" وابحث عن الأنسب لأسلوبك. استمتع بتسوق سلس مع مدفوعات آمنة وتوصيل سريع. ابدأ"
+" الاستكشاف اليوم وجرّب التميز."
 
 #: .\pages\templates\pages\home.html:178
 msgid "Discover More"
@@ -331,8 +336,7 @@ msgstr "بالاشتراك في نشرتنا الإخبارية، يمكنك ا�
 
 #: .\pages\templates\pages\subscribe.html:11
 msgid ""
-"Details to details is what makes Tara Store different from the other "
-"themes."
+"Details to details is what makes Tara Store different from the other themes."
 msgstr "التفاصيل هي ما يجعل متجر تارا مختلفًا عن باقي القوالب"
 
 #: .\pages\templates\pages\subscribe.html:17
@@ -481,7 +485,7 @@ msgid "Comment Text"
 msgstr "نص التعليق"
 
 #: .\products\models.py:107
-#: .\products\templates\products\product_detail.html:123
+#: .\products\templates\products\product_detail.html:111
 msgid "Product Rating"
 msgstr "تقييم المنتج"
 
@@ -493,83 +497,98 @@ msgstr "الحالة"
 msgid "Create Product"
 msgstr "إنشاء منتج"
 
-#: .\products\templates\products\product_create.html:22
-#: .\products\templates\products\product_update.html:36
+#: .\products\templates\products\product_create.html:16
+#: .\templates\_base.html:88
+msgid "Add Product"
+msgstr "إضافة منتج"
+
+#: .\products\templates\products\product_create.html:27
+#: .\products\templates\products\product_update.html:41
 msgid "Product Images"
 msgstr " صور المنتج"
 
-#: .\products\templates\products\product_create.html:27
+#: .\products\templates\products\product_create.html:32
 msgid "Submit"
 msgstr "إرسال"
 
 #: .\products\templates\products\product_delete.html:7
-#: .\products\templates\products\product_delete.html:13
-#: .\products\templates\products\product_detail.html:49
+#: .\products\templates\products\product_delete.html:18
+#: .\products\templates\products\product_detail.html:37
 msgid "Delete"
 msgstr "حذف"
 
-#: .\products\templates\products\product_delete.html:15
+#: .\products\templates\products\product_delete.html:12
+#| msgid "Product detail"
+msgid "Product Delete"
+msgstr "حذف المنتج"
+
+#: .\products\templates\products\product_delete.html:20
 #, python-format
 msgid "Are you sure to delete %(product_name)s?"
 msgstr "هل أنت متأكد أنك تريد حذف %(product_name)s؟"
 
-#: .\products\templates\products\product_delete.html:17
+#: .\products\templates\products\product_delete.html:22
 msgid "Yes, I'm Sure"
 msgstr "نعم، أنا متأكد"
 
-#: .\products\templates\products\product_detail.html:10
+#: .\products\templates\products\product_detail.html:9
 msgid "Product detail"
 msgstr "تفاصيل المنتج"
 
-#: .\products\templates\products\product_detail.html:48
+#: .\products\templates\products\product_detail.html:14
+#| msgid "Product detail"
+msgid "Product Details"
+msgstr "تفاصيل المنتج"
+
+#: .\products\templates\products\product_detail.html:36
 msgid "Edit"
 msgstr "تعديل"
 
-#: .\products\templates\products\product_detail.html:52
+#: .\products\templates\products\product_detail.html:40
 msgid "$"
 msgstr "ريال عماني"
 
-#: .\products\templates\products\product_detail.html:62
+#: .\products\templates\products\product_detail.html:50
 msgid "No. of Orders"
 msgstr "عدد الطلبات"
 
-#: .\products\templates\products\product_detail.html:73
+#: .\products\templates\products\product_detail.html:61
 msgid "Total"
 msgstr "المجموع"
 
-#: .\products\templates\products\product_detail.html:75
+#: .\products\templates\products\product_detail.html:63
 msgid "Add To Cart"
 msgstr "إضافة إلى السلة"
 
-#: .\products\templates\products\product_detail.html:88
+#: .\products\templates\products\product_detail.html:76
 msgid "Comments List"
 msgstr "قائمة التعليقات"
 
-#: .\products\templates\products\product_detail.html:112
+#: .\products\templates\products\product_detail.html:100
 msgid "No comments available"
 msgstr "لا توجد تعليقات متاحة"
 
-#: .\products\templates\products\product_detail.html:132
+#: .\products\templates\products\product_detail.html:120
 msgid "Send"
 msgstr "إرسال"
 
-#: .\products\templates\products\product_detail.html:136
+#: .\products\templates\products\product_detail.html:124
 msgid "You must be logged in to leave a comment"
 msgstr "يجب أن تكون مسجلاً للدخول لترك تعليق"
 
-#: .\products\templates\products\product_display.html:37
+#: .\products\templates\products\product_display.html:16
 msgid "Result for"
 msgstr "النتيجة لـ"
 
-#: .\products\templates\products\product_display.html:39
+#: .\products\templates\products\product_display.html:18
 msgid "Our Latest Products"
 msgstr " أحدث منتجاتنا"
 
-#: .\products\templates\products\product_display.html:40
+#: .\products\templates\products\product_display.html:19
 msgid "Check out all of our products"
 msgstr "تصفح جميع منتجاتنا"
 
-#: .\products\templates\products\product_display.html:93
+#: .\products\templates\products\product_display.html:72
 msgid "No products found"
 msgstr "لم يتم العثور على منتجات"
 
@@ -577,12 +596,27 @@ msgstr "لم يتم العثور على منتجات"
 msgid "Kid's Product"
 msgstr "منتج للأطفال"
 
+#: .\products\templates\products\product_kids.html:10
+#| msgid "Kid's Product"
+msgid "Kids Products"
+msgstr "منتج للأطفال"
+
 #: .\products\templates\products\product_list.html:6
 msgid "Product List"
 msgstr " قائمة المنتجات"
 
+#: .\products\templates\products\product_list.html:10
+#| msgid "Product List"
+msgid "Products List"
+msgstr " قائمة المنتجات"
+
 #: .\products\templates\products\product_men.html:6
 msgid "Men's Product"
+msgstr "منتج رجالي"
+
+#: .\products\templates\products\product_men.html:10
+#| msgid "Men's Product"
+msgid "Mens Products"
 msgstr "منتج رجالي"
 
 #: .\products\templates\products\product_update.html:12
@@ -590,23 +624,33 @@ msgid "Produc Update"
 msgstr "تحديث المنتج"
 
 #: .\products\templates\products\product_update.html:17
+#| msgid "Produc Update"
+msgid "Product Update"
+msgstr "تحديث المنتج"
+
+#: .\products\templates\products\product_update.html:22
 msgid "Update"
 msgstr "تحديث"
 
-#: .\products\templates\products\product_update.html:41
+#: .\products\templates\products\product_update.html:48
 msgid "Delete this image"
 msgstr " حذف هذه الصورة"
 
-#: .\products\templates\products\product_update.html:48
+#: .\products\templates\products\product_update.html:56
 msgid "Upload new images"
 msgstr "رفع صور جديدة"
 
-#: .\products\templates\products\product_update.html:54
+#: .\products\templates\products\product_update.html:62
 msgid "Update Product"
 msgstr "تحديث المنتج"
 
 #: .\products\templates\products\product_women.html:6
 msgid "Women's Product"
+msgstr "منتج نسائي"
+
+#: .\products\templates\products\product_women.html:10
+#| msgid "Women's Product"
+msgid "Womens Products"
 msgstr "منتج نسائي"
 
 #: .\products\templates\products\search.html:7 .\templates\_base.html:161
@@ -667,10 +711,6 @@ msgstr "الأطفال"
 msgid "Pages"
 msgstr "الصفحات"
 
-#: .\templates\_base.html:88
-msgid "Add Product"
-msgstr "إضافة منتج"
-
 #: .\templates\_base.html:115
 msgid "Explore"
 msgstr "استكشاف"
@@ -729,8 +769,8 @@ msgstr "تأكيد"
 #: .\templates\account\email_confirm.html:23
 #, python-format
 msgid ""
-"This email confirmation link expired or is invalid. Please <a href=\"%"
-"(email_url)s\">issue a new email confirmation request</a>."
+"This email confirmation link expired or is invalid. Please <a "
+"href=\"%(email_url)s\">issue a new email confirmation request</a>."
 msgstr ""
 
 #: .\templates\account\logout.html:10

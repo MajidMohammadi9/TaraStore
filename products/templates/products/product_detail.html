@@ -5,25 +5,14 @@
 {% load translation_tags %}
 {% load humanize %}
 
-
 {% block page_title %}
   {% trans 'Product detail' %}
 {% endblock %}
 
 {% block content %}
   <!-- ***** Main Banner Area Start ***** -->
-  {% comment %} <div class="page-heading" id="top">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12">
-          <div class="inner-content">
-            <h2>Single Product Page</h2>
-            <span>Awesome &amp; Creative HTML CSS layout by TemplateMo</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div> {% endcomment %}
+  {% trans 'Product Details' as product_details %}
+  {% include 'pages/banner.html' with banner_title=product_details %}
   <!-- ***** Main Banner Area End ***** -->
 
   <!-- ***** Product Area Starts ***** -->
@@ -36,7 +25,7 @@
               {% for img in product.images.all %}
                 <img src="{{ img.image.url }}" style="width: 690px; height: 700px;" alt="{{ product.name }}" />
               {% empty %}
-                <img src="{% static 'images/default.jpg' %}" class="d-block w-100" style="width: 370px; height: 390px;" alt="No Image" />  
+                <img src="{% static 'images/default.jpg' %}" class="d-block w-100" style="width: 370px; height: 390px;" alt="No Image" />
               {% endfor %}
             {% endif %}
           </div>
@@ -44,12 +33,12 @@
         <div class="col-lg-4">
           <div class="right-content">
             <div>
-              <a href="{% url 'product_update' product.id %}" class="btn btn-success">{% trans "Edit" %}</a>
-              <a href="{% url 'product_delete' product.id %}" class="btn btn-success">{% trans "Delete" %}</a>
+              <a href="{% url 'product_update' product.id %}" class="btn btn-success">{% trans 'Edit' %}</a>
+              <a href="{% url 'product_delete' product.id %}" class="btn btn-success">{% trans 'Delete' %}</a>
             </div>
             <h6 style="padding-top: 10px;">{{ product.name }}</h6>
             <span class="price">{{ product.unit_price|convert_currency|translate_number }} {% trans '$' %}</span>
-            {% include "products/stars.html" %}
+            {% include 'products/stars.html' %}
             {% if product.short_description %}
               <span>{{ product.short_description|safe }}</span>
             {% endif %}
@@ -58,7 +47,7 @@
             </div>
             <div class="quantity-content">
               <div class="left-content">
-                <h6>{% trans "No. of Orders" %}</h6>
+                <h6>{% trans 'No. of Orders' %}</h6>
               </div>
               <div class="right-content">
                 <div class="quantity buttons_added">
@@ -69,9 +58,9 @@
               </div>
             </div>
             <div class="total">
-              <h4>{% trans "Total" %}: $210.00</h4>
+              <h4>{% trans 'Total' %}: $210.00</h4>
               <div class="main-border-button">
-                <a href="#">{% trans "Add To Cart" %}</a>
+                <a href="#">{% trans 'Add To Cart' %}</a>
               </div>
             </div>
           </div>
@@ -94,7 +83,7 @@
             </div>
             <ul class="stars">
               <div class="star-rating">
-                {% for star in "54321"|make_list %}
+                {% for star in '54321'|make_list %}
                   {% if star|add:0 <= comment.stars %}
                     <span style="color: gold;">&#9733;</span>
                   {% else %}
@@ -119,7 +108,7 @@
           {{ comment_form.body|as_crispy_field }}
 
           <div>
-            <span>{% trans "Product Rating" %}:</span>
+            <span>{% trans 'Product Rating' %}:</span>
             <div class="star-rating">
               {% for star in "54321" %}
                 <input type="radio" id="star{{ star }}" name="stars" value="{{ star }}" />

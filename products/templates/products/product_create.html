@@ -11,6 +11,11 @@
 {% endblock %}
 
 {% block content %}
+  <!-- ***** Main Banner Area Start ***** -->
+  {% trans 'Add Product' as add_product %}
+  {% include 'pages/banner.html' with banner_title=add_product %}
+  <!-- ***** Main Banner Area End ***** -->
+
   <div class="container">
     <form method="post" enctype="multipart/form-data">
       {% csrf_token %}
@@ -18,7 +23,7 @@
       {{ form|crispy }}
       <div>
         <p>
-          <label for="id_images">{% trans "Product Images" %}</label>
+          <label for="id_images">{% trans 'Product Images' %}</label>
         </p>
         <input label="Product Images" type="file" name="images" id="id_images" multiple />
       </div>

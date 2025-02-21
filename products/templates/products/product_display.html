@@ -1,26 +1,9 @@
-{% comment %} {% extends '_base.html' %} {% endcomment %}
 {% load static %}
 {% load i18n %}
 {% load translation_tags %}
 
-{% comment %} {% block page_title %}
-  {{ page_title }}
-{% endblock %} {% endcomment %}
-
-{% comment %} {% block content %}
-  {% endcomment %}
   <!-- ***** Main Banner Area Start ***** -->
-  {% comment %} <div class="page-heading" id="top">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12">
-          <div class="inner-content">
-            <h2>Check Our Products</h2>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div> {% endcomment %}
+  {% include "pages/banner.html" with banner_title=banner_title %}
   <!-- ***** Main Banner Area End ***** -->
 
   <!-- ***** Products Area Starts ***** -->
@@ -98,5 +81,3 @@
   <!-- ***** Products Area Ends ***** -->
 
   {% include 'cart/cart_sidebar.html' %}
-  {% comment %}
-{% endblock %} {% endcomment %}

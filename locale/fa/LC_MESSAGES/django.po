@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-20 09:39+0400\n"
-"PO-Revision-Date: 2025-01-22 00:14+0400\n"
+"POT-Creation-Date: 2025-02-21 20:51+0400\n"
+"PO-Revision-Date: 2025-02-21 20:45+0400\n"
 "Last-Translator:   <majid@majid.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -80,19 +80,19 @@ msgid "Date Time Created"
 msgstr "تارخ ساخت"
 
 #: .\pages\templates\pages\aboutus.html:7
-#: .\pages\templates\pages\footer.html:48 .\templates\_base.html:85
+#: .\pages\templates\pages\footer.html:48 .\templates\_base.html:91
 msgid "About Us"
 msgstr "درباره ما"
 
-#: .\pages\templates\pages\aboutus.html:17
+#: .\pages\templates\pages\aboutus.html:12
 msgid "About Tara Store"
 msgstr "درباره فروشگاه تارا"
 
-#: .\pages\templates\pages\aboutus.html:36
+#: .\pages\templates\pages\aboutus.html:27
 msgid "About Us &amp; Our Products"
 msgstr "درباره ما و محصولاتمان"
 
-#: .\pages\templates\pages\aboutus.html:37
+#: .\pages\templates\pages\aboutus.html:28
 msgid ""
 "We provide stylish and comfortable fashion for men, women, and kids, "
 "ensuring the best quality and latest designs"
@@ -100,7 +100,7 @@ msgstr ""
 "ما پوشاک شیک و راحت را برای آقایان، بانوان و کودکان ارائه می‌دهیم و بهترین "
 "کیفیت و جدیدترین طراحی‌ها را تضمین می‌کنیم"
 
-#: .\pages\templates\pages\aboutus.html:40
+#: .\pages\templates\pages\aboutus.html:31
 msgid ""
 "Tara Store is your go-to destination for trendy fashion, offering high-"
 "quality clothing, shoes, and accessories for the whole family"
@@ -108,7 +108,7 @@ msgstr ""
 "فروشگاه تارا مقصد ایده‌آل شما برای مد روز است و لباس، کفش و اکسسوری‌های "
 "باکیفیت را برای تمام اعضای خانواده ارائه می‌دهد"
 
-#: .\pages\templates\pages\aboutus.html:44
+#: .\pages\templates\pages\aboutus.html:35
 msgid ""
 "From casual to formal wear, shoes, and trendy accessories, Tara Store has "
 "everything you need to express your unique style"
@@ -117,16 +117,16 @@ msgstr ""
 "را که برای بیان استایل منحصربه‌فرد خود نیاز دارید، فراهم کرده است"
 
 #: .\pages\templates\pages\contact_us.html:7
-#: .\pages\templates\pages\contact_us.html:17
+#: .\pages\templates\pages\contact_us.html:12
 #: .\pages\templates\pages\footer.html:54 .\templates\_base.html:94
 msgid "Contact Us"
 msgstr "تماس با ما"
 
-#: .\pages\templates\pages\contact_us.html:36
+#: .\pages\templates\pages\contact_us.html:27
 msgid "Say Hello. Don't Be Shy"
 msgstr "سلام كن. خجالت نکش"
 
-#: .\pages\templates\pages\contact_us.html:37
+#: .\pages\templates\pages\contact_us.html:28
 #: .\pages\templates\pages\home.html:91 .\pages\templates\pages\home.html:119
 #: .\pages\templates\pages\home.html:147 .\pages\templates\pages\home.html:222
 msgid ""
@@ -289,7 +289,7 @@ msgstr "انواع مختلف"
 msgid "Over"
 msgstr "بيش از"
 
-#: .\pages\templates\pages\home.html:204 .\templates\_base.html:88
+#: .\pages\templates\pages\home.html:204 .\templates\_base.html:85
 msgid "Products"
 msgstr "محصولات"
 
@@ -337,8 +337,7 @@ msgstr "با عضویت در خبرنامه ما، می‌توانید ۳۰٪ ت
 
 #: .\pages\templates\pages\subscribe.html:11
 msgid ""
-"Details to details is what makes Tara Tara Store different from the other "
-"themes."
+"Details to details is what makes Tara Store different from the other themes."
 msgstr "توجه به جزئیات چیزی است که فروشگاه تارا را از دیگر تم‌ها متمایز می‌کند"
 
 #: .\pages\templates\pages\subscribe.html:17
@@ -487,7 +486,7 @@ msgid "Comment Text"
 msgstr "متن ديدگاه"
 
 #: .\products\models.py:107
-#: .\products\templates\products\product_detail.html:123
+#: .\products\templates\products\product_detail.html:111
 msgid "Product Rating"
 msgstr "امتياز محصول"
 
@@ -499,85 +498,96 @@ msgstr "وضعيت"
 msgid "Create Product"
 msgstr "اضافه كردن محصول"
 
-#: .\products\templates\products\product_create.html:22
-#: .\products\templates\products\product_update.html:36
+#: .\products\templates\products\product_create.html:16
+#: .\templates\_base.html:88
+msgid "Add Product"
+msgstr "اضافه كردن محصول"
+
+#: .\products\templates\products\product_create.html:27
+#: .\products\templates\products\product_update.html:41
 msgid "Product Images"
 msgstr "عكس محصول"
 
-#: .\products\templates\products\product_create.html:27
+#: .\products\templates\products\product_create.html:32
 msgid "Submit"
 msgstr "ارسال"
 
 #: .\products\templates\products\product_delete.html:7
-#: .\products\templates\products\product_delete.html:13
-#: .\products\templates\products\product_detail.html:49
+#: .\products\templates\products\product_delete.html:18
+#: .\products\templates\products\product_detail.html:37
 msgid "Delete"
 msgstr "حذف"
 
-#: .\products\templates\products\product_delete.html:15
+#: .\products\templates\products\product_delete.html:12
+msgid "Product Delete"
+msgstr "حذف محصول"
+
+#: .\products\templates\products\product_delete.html:20
 #, python-format
 msgid "Are you sure to delete %(product_name)s?"
 msgstr "آیا مطمئن هستید که %(product_name)s را حذف کنید؟"
 
-#: .\products\templates\products\product_delete.html:17
+#: .\products\templates\products\product_delete.html:22
 msgid "Yes, I'm Sure"
 msgstr "بله، مطمئن هستم"
 
-#: .\products\templates\products\product_detail.html:10
+#: .\products\templates\products\product_detail.html:9
 msgid "Product detail"
 msgstr "جزئيات محصول"
 
-#: .\products\templates\products\product_detail.html:48
+#: .\products\templates\products\product_detail.html:14
+msgid "Product Details"
+msgstr "جزئيات محصول"
+
+#: .\products\templates\products\product_detail.html:36
 msgid "Edit"
 msgstr "ويرايش"
 
-#: .\products\templates\products\product_detail.html:52
-#: .\products\templates\products\product_display.html:87
-#: .\products\templates\products\products_home.html:42
+#: .\products\templates\products\product_detail.html:40
 msgid "$"
 msgstr "تومان"
 
-#: .\products\templates\products\product_detail.html:62
+#: .\products\templates\products\product_detail.html:50
 msgid "No. of Orders"
 msgstr "تعداد سفارشات"
 
-#: .\products\templates\products\product_detail.html:73
+#: .\products\templates\products\product_detail.html:61
 msgid "Total"
 msgstr "مجموع"
 
-#: .\products\templates\products\product_detail.html:75
+#: .\products\templates\products\product_detail.html:63
 msgid "Add To Cart"
 msgstr "افزودن به سبد خرید"
 
-#: .\products\templates\products\product_detail.html:88
+#: .\products\templates\products\product_detail.html:76
 msgid "Comments List"
 msgstr "ديدگاه ها"
 
-#: .\products\templates\products\product_detail.html:112
+#: .\products\templates\products\product_detail.html:100
 msgid "No comments available"
 msgstr "هيج ديدگاهى موجود نيست"
 
-#: .\products\templates\products\product_detail.html:132
+#: .\products\templates\products\product_detail.html:120
 msgid "Send"
 msgstr "ارسال"
 
-#: .\products\templates\products\product_detail.html:136
+#: .\products\templates\products\product_detail.html:124
 msgid "You must be logged in to leave a comment"
 msgstr "برای گذاشتن نظر باید ثبت نام كنيد"
 
-#: .\products\templates\products\product_display.html:37
+#: .\products\templates\products\product_display.html:16
 msgid "Result for"
 msgstr "نتیجه برای"
 
-#: .\products\templates\products\product_display.html:39
+#: .\products\templates\products\product_display.html:18
 msgid "Our Latest Products"
 msgstr "جدیدترین محصولات ما"
 
-#: .\products\templates\products\product_display.html:40
+#: .\products\templates\products\product_display.html:19
 msgid "Check out all of our products"
 msgstr "مشاهده همه محصولات"
 
-#: .\products\templates\products\product_display.html:93
+#: .\products\templates\products\product_display.html:72
 msgid "No products found"
 msgstr "هیچ محصولی یافت نشد"
 
@@ -585,36 +595,56 @@ msgstr "هیچ محصولی یافت نشد"
 msgid "Kid's Product"
 msgstr "محصولات بچگانه"
 
+#: .\products\templates\products\product_kids.html:10
+msgid "Kids Products"
+msgstr "محصولات بچگانه"
+
 #: .\products\templates\products\product_list.html:6
 msgid "Product List"
+msgstr "ليست محصولات"
+
+#: .\products\templates\products\product_list.html:10
+msgid "Products List"
 msgstr "ليست محصولات"
 
 #: .\products\templates\products\product_men.html:6
 msgid "Men's Product"
 msgstr "محصولات مردانه"
 
+#: .\products\templates\products\product_men.html:10
+msgid "Mens Products"
+msgstr "محصولات مردانه"
+
 #: .\products\templates\products\product_update.html:12
 msgid "Produc Update"
-msgstr "بروزرسانی محصول"
+msgstr "بروز رسانی محصول"
 
 #: .\products\templates\products\product_update.html:17
-msgid "Update"
-msgstr "بروزرسانی"
+msgid "Product Update"
+msgstr "بروز رسانی محصول"
 
-#: .\products\templates\products\product_update.html:41
+#: .\products\templates\products\product_update.html:22
+msgid "Update"
+msgstr "بروز رسانی"
+
+#: .\products\templates\products\product_update.html:48
 msgid "Delete this image"
 msgstr "حذف اين عكس"
 
-#: .\products\templates\products\product_update.html:48
+#: .\products\templates\products\product_update.html:56
 msgid "Upload new images"
 msgstr "آپلود عكس هاى جديد"
 
-#: .\products\templates\products\product_update.html:54
+#: .\products\templates\products\product_update.html:62
 msgid "Update Product"
-msgstr "بروزرسانی محصول"
+msgstr "بروز رسانی محصول"
 
 #: .\products\templates\products\product_women.html:6
 msgid "Women's Product"
+msgstr "محصولات زنانه"
+
+#: .\products\templates\products\product_women.html:10
+msgid "Womens Products"
 msgstr "محصولات زنانه"
 
 #: .\products\templates\products\search.html:7 .\templates\_base.html:161
@@ -622,7 +652,7 @@ msgstr "محصولات زنانه"
 msgid "Search"
 msgstr "جستجو"
 
-#: .\products\templates\products\search.html:14
+#: .\products\templates\products\search.html:16
 msgid "Please enter your product to search"
 msgstr "لطفاً محصول خود را برای جستجو وارد کنید"
 
@@ -674,10 +704,6 @@ msgstr "بچگانه"
 #: .\templates\_base.html:82
 msgid "Pages"
 msgstr "صفحات"
-
-#: .\templates\_base.html:91
-msgid "Add Product"
-msgstr "اضافه كردن محصول"
 
 #: .\templates\_base.html:115
 msgid "Explore"
@@ -753,8 +779,11 @@ msgstr "بله، مطمئن هستم"
 msgid "Signup"
 msgstr "ثبت نام"
 
-#~ msgid "Product Details"
-#~ msgstr "جزئيات محصول"
+#~ msgid ""
+#~ "Details to details is what makes Tara Tara Store different from the other "
+#~ "themes."
+#~ msgstr ""
+#~ "توجه به جزئیات چیزی است که فروشگاه تارا را از دیگر تم‌ها متمایز می‌کند"
 
 #~ msgid "Features"
 #~ msgstr "ویژگی ها"
