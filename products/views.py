@@ -13,6 +13,7 @@ from django.db.models.functions import Coalesce
 
 from .models import Product, Comment, ProductImage, Category
 from .forms import CommentForm, ProductForm
+from cart.forms import AddToCartProductForm
 
 
 class ProductQuerysetMixin:
@@ -74,6 +75,7 @@ class ProductDetailView(ProductQuerysetMixin, DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['add_to_cart_form'] = AddToCartProductForm()
         context['comment_form'] = CommentForm()
         return context
 

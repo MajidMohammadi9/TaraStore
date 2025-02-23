@@ -175,3 +175,18 @@
   transform: scale(1.05); /* بزرگ‌نمایی کمی */
 }
 
+.cart-btn {
+  display: inline-block;
+  padding: 10px 20px;
+  border: 2px solid black;
+  background-color: white;
+  color: black;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.cart-btn:hover {
+  background-color: black;
+  color: white;
+}

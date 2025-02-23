@@ -37,7 +37,7 @@
               <a href="{% url 'product_delete' product.id %}" class="btn btn-success">{% trans 'Delete' %}</a>
             </div>
             <h6 style="padding-top: 10px;">{{ product.name }}</h6>
-            <span class="price">{{ product.unit_price|convert_currency|translate_number }} {% trans '$' %}</span>
+            <span class="price">{{ product.unit_price|convert_currency|translate_number }}</span>
             {% include 'products/stars.html' %}
             {% if product.short_description %}
               <span>{{ product.short_description|safe }}</span>
@@ -45,7 +45,31 @@
             <div class="quote">
               <i class="fa fa-quote-left"></i><p>{{ product.description|safe }}</p>
             </div>
-            <div class="quantity-content">
+            <form method="post" action="{% url 'cart:cart_add' product.id %}">
+              {% csrf_token %}
+
+              <div class="quantity-content">
+                <div class="left-content">
+                  <h6>{% trans 'No. of Orders' %}</h6>
+                </div>
+                <div class="right-content">
+                  <div class="quantity buttons_added">
+                    <input type="button" value="-" class="minus" />
+                    {{ add_to_cart_form.quantity }}
+                    <input type="button" value="+" class="plus" />
+                  </div>
+                </div>
+              </div>
+
+              <div class="total">
+                <h4>{% trans 'Total' %}: $210.00</h4>
+                <div class="main-border-button">
+                  <button type="submit" class="cart-btn">{% trans 'Add To Cart' %}</button>
+                </div>
+              </div>
+            </form>
+
+            {% comment %} <div class="quantity-content">
               <div class="left-content">
                 <h6>{% trans 'No. of Orders' %}</h6>
               </div>
@@ -62,7 +86,7 @@
               <div class="main-border-button">
                 <a href="#">{% trans 'Add To Cart' %}</a>
               </div>
-            </div>
+            </div> {% endcomment %}
           </div>
         </div>
       </div>
@@ -110,7 +134,7 @@
           <div>
             <span>{% trans 'Product Rating' %}:</span>
             <div class="star-rating">
-              {% for star in "54321" %}
+              {% for star in '54321' %}
                 <input type="radio" id="star{{ star }}" name="stars" value="{{ star }}" />
                 <label for="star{{ star }}">&#9733;</label>
               {% endfor %}

@@ -57,10 +57,10 @@ class Cart:
         cart=self.cart.copy()
 
         for product in products:
-            cart[product.id]['product_obj']=product
+            cart[str(product.id)]['product_obj']=product
 
         for item in cart.values():
-            item['total_price']=item['quantity']*item['product_obj'].price
+            item['total_price']=item['quantity']*item['product_obj'].unit_price
             yield item
 
     def __len__(self):
@@ -76,7 +76,7 @@ class Cart:
         return True
     
     # def get_total_price(self):
-    #     return sum(item['quantity']*item['product_obj'].price for item in self.cart.values())
+    #     return sum(item['quantity']*item['product_obj'].unit_price for item in self.cart.values())
     
     def get_total_price(self):
         return sum(item['total_price'] for item in self)  # Using the generated value in __iter__

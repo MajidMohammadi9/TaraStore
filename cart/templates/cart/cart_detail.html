@@ -18,38 +18,52 @@
           <table class="table table-bordered text-center">
             <thead>
               <tr>
-                <th>حذف</th>
-                <th>عکس محصول</th>
-                <th>نام محصول</th>
-                <th>قیمت</th>
-                <th>مقدار</th>
-                <th>مجموع</th>
+                <th>
+                  {% trans 'Delete' %}
+                </th>
+                <th>
+                  {% trans 'Product Image' %}
+                </th>
+                <th>
+                  {% trans 'Product Name' %}
+                </th>
+                <th>
+                  {% trans 'Price' %}
+                </th>
+                <th>
+                  {% trans 'Quantity' %}
+                </th>
+                <th>
+                  {% trans 'Total' %}
+                </th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>
-                  <button class="btn btn-danger">X</button>
-                </td>
-                <td>
-                  <img src="assets/images/men-01.jpg" width="70" height="88" />
-                </td>
-                <td>محصول شماره یک</td>
-                <td>۱۴۸,۰۰۰ تومان</td>
-                <td>
-                  <input type="number" class="form-control" value="2" />
-                </td>
-                <td>۲۹۶,۰۰۰ تومان</td>
-              </tr>
+              {% for item in cart %}
+                <tr>
+                  <td>
+                    <button class="btn btn-danger">X</button>
+                  </td>
+                  <td>
+                    <img src="{{item.product_obj.images.first.image.url}}" width="70" height="88" />
+                  </td>
+                  <td>{{item.product_obj.name}}</td>
+                  <td>{{item.product_obj.unit_price|convert_currency|translate_number}}</td>
+                  <td>
+                    <input type="number" class="form-control" value="{{item.quantity}}" />
+                  </td>
+                  <td>{{item.total_price|convert_currency|translate_number}}</td>
+                </tr>
+              {% endfor %}
             </tbody>
           </table>
-          <button class="btn btn-primary">خالی کردن سبد خرید</button>
+          <button class="btn btn-primary">{% trans "Empty Cart" %}</button>
         </div>
         <div class="col-lg-4">
           <div class="border p-3 rounded">
-            <h4 class="text-left">جمع کل</h4>
-            <p class="text-left" style="padding-top: 10px; padding-bottom: 10px;">۳۴۶,۰۰۰ تومان</p>
-            <a href="checkout.html" class="btn btn-success btn-block">ثبت سفارش</a>
+            <h4 class="text-left">{% trans "Overall Total" %}</h4>
+            <p class="text-left" style="padding-top: 10px; padding-bottom: 10px;">{{cart.get_total_price|convert_currency|translate_number}}</p>
+            <a href="checkout.html" class="btn btn-success btn-block">{% trans "Order" %}</a>
           </div>
         </div>
       </div>
