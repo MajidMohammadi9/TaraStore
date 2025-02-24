@@ -37,10 +37,6 @@ class Product(models.Model):
     discounts = models.ManyToManyField(Discount, blank=True, verbose_name=_('Discount'))
     active=models.BooleanField(default=True, verbose_name=_('Active'))
 
-    # def product_stars_count(self):
-    #     return self.comments.filter(stars__isnull=False).count()
-    # objects=ProductStarCount()
-
     def __str__(self):
         return self.name
     

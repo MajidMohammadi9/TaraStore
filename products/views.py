@@ -139,7 +139,11 @@ class ProductUpdateView(UserPassesTestMixin, UpdateView):
         messages.error(self.request, _("You don't have permission to Edit products.(Only admin)"))
         return redirect(reverse('product_detail', kwargs={'pk': self.get_object().pk})) 
     
-    def form_valid(self, form):        
+    def form_valid(self, form):
+        form.instance.slug = slugify(form.instance.name)
+
+        response = super().form_valid(form)
+
         # Delete selected images
         delete_images = self.request.POST.getlist('delete_images')
         ProductImage.objects.filter(id__in=delete_images).delete()
@@ -151,7 +155,7 @@ class ProductUpdateView(UserPassesTestMixin, UpdateView):
                 ProductImage.objects.create(product=self.object, image=image)
                 
         messages.success(self.request, _('Product has been updated successfully!'))
-        return super().form_valid(form)
+        return response
     
     def form_invalid(self, form):
         print(f"Form errors: {form.errors}")

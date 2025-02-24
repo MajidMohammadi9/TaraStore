@@ -1,7 +1,10 @@
 from django.contrib import messages
 from django.utils.translation import gettext as _
+from django.db.models import Prefetch
+from django.db.models import OuterRef, Subquery
 
-from products.models import Product
+from products.models import Product,ProductImage
+from .forms import AddToCartProductForm
 
 
 class Cart:
@@ -19,13 +22,16 @@ class Cart:
         # self.cart=cart
         self.cart = self.session.setdefault('cart', {})
 
-    def add(self, product, quantity=1):
+    def add(self, product, quantity=1, replace_current_quantity=False):
         """
          Add the specified product to the cart if it exists.
         """
         product_id = str(product.id)
         if product_id not in self.cart:
-            self.cart[product_id] = {'quantity': quantity}
+            self.cart[product_id] = {'quantity': 0}
+
+        if replace_current_quantity:
+            self.cart[product_id]['quantity'] = quantity
         else:
             self.cart[product_id]['quantity'] += quantity
 
@@ -50,18 +56,43 @@ class Cart:
         messages.success(self.request, _('product removed from the cart successfully.'))
         self.save()
 
-    def __iter__(self):
-        product_ids=self.cart.keys()
-        products=Product.objects.filter(id__in=product_ids)
+    # def __iter__(self):
+    #     product_ids=self.cart.keys()
+    #     products=Product.objects.filter(id__in=product_ids).prefetch_related('images')
 
-        cart=self.cart.copy()
+    #     cart=self.cart.copy()
+
+    #     for product in products:
+    #         cart[str(product.id)]['product_obj']=product
+    #         cart[str(product.id)]['first_image']=product.images.first()
+
+    #     for item in cart.values():
+    #         item['total_price']=item['quantity']*item['product_obj'].unit_price
+    #         item['product_update_quantity_form']=AddToCartProductForm(initial={'quantity': item['quantity'], 'inplace' :True})
+    #         yield item
+
+    def __iter__(self):
+        product_ids = self.cart.keys()
+
+        first_image_subquery = ProductImage.objects.filter(
+            product=OuterRef('pk')
+        ).order_by('id').values('image')[:1]
+
+        products = Product.objects.filter(id__in=product_ids).annotate(
+            first_image=Subquery(first_image_subquery)
+        )
+
+        cart = self.cart.copy()
 
         for product in products:
-            cart[str(product.id)]['product_obj']=product
+            cart[str(product.id)]['product_obj'] = product
 
         for item in cart.values():
-            item['total_price']=item['quantity']*item['product_obj'].unit_price
+            item['total_price'] = item['quantity'] * item['product_obj'].unit_price
+            item['product_update_quantity_form']=AddToCartProductForm(initial={'quantity': item['quantity'], 'inplace' :True})
             yield item
+
+
 
     def __len__(self):
         return sum(item['quantity'] for item in self.cart.values())
@@ -79,6 +110,6 @@ class Cart:
     #     return sum(item['quantity']*item['product_obj'].unit_price for item in self.cart.values())
     
     def get_total_price(self):
-        return sum(item['total_price'] for item in self)  # Using the generated value in __iter__
+        return sum(item['total_price'] for item in self.cart.values())  # Using the generated value in __iter__
 
         

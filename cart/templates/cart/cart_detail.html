@@ -12,61 +12,96 @@
   {% include 'pages/banner.html' with banner_title=cart_detail %}
 
   <section class="section" id="cart">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-8">
-          <table class="table table-bordered text-center">
-            <thead>
-              <tr>
-                <th>
-                  {% trans 'Delete' %}
-                </th>
-                <th>
-                  {% trans 'Product Image' %}
-                </th>
-                <th>
-                  {% trans 'Product Name' %}
-                </th>
-                <th>
-                  {% trans 'Price' %}
-                </th>
-                <th>
-                  {% trans 'Quantity' %}
-                </th>
-                <th>
-                  {% trans 'Total' %}
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {% for item in cart %}
+    {% if cart %}
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8">
+            <table class="table table-bordered text-center">
+              <thead>
                 <tr>
-                  <td>
-                    <button class="btn btn-danger">X</button>
-                  </td>
-                  <td>
-                    <img src="{{item.product_obj.images.first.image.url}}" width="70" height="88" />
-                  </td>
-                  <td>{{item.product_obj.name}}</td>
-                  <td>{{item.product_obj.unit_price|convert_currency|translate_number}}</td>
-                  <td>
-                    <input type="number" class="form-control" value="{{item.quantity}}" />
-                  </td>
-                  <td>{{item.total_price|convert_currency|translate_number}}</td>
+                  <th>
+                    {% trans 'Delete' %}
+                  </th>
+                  <th>
+                    {% trans 'Product Image' %}
+                  </th>
+                  <th>
+                    {% trans 'Product Name' %}
+                  </th>
+                  <th>
+                    {% trans 'Price' %}
+                  </th>
+                  <th>
+                    {% trans 'Quantity' %}
+                  </th>
+                  <th>
+                    {% trans 'Total' %}
+                  </th>
                 </tr>
-              {% endfor %}
-            </tbody>
-          </table>
-          <button class="btn btn-primary">{% trans "Empty Cart" %}</button>
-        </div>
-        <div class="col-lg-4">
-          <div class="border p-3 rounded">
-            <h4 class="text-left">{% trans "Overall Total" %}</h4>
-            <p class="text-left" style="padding-top: 10px; padding-bottom: 10px;">{{cart.get_total_price|convert_currency|translate_number}}</p>
-            <a href="checkout.html" class="btn btn-success btn-block">{% trans "Order" %}</a>
+              </thead>
+              <tbody>
+                {% for item in cart %}
+                  <tr>
+                    <td>
+                      <form action="{% url 'cart:cart_remove' item.product_obj.id %}" method="post">
+                        {% csrf_token %}
+                        <button class="btn btn-danger">X</button>
+                      </form>
+                    </td>
+                    <td>
+                      {% comment %} {% if item.product_obj.images.all %}
+                        <a href="{{ item.product_obj.get_absolute_url }}"><img src="{{ item.product_obj.images.first.image.url }}" width="70" height="88" /></a>
+                      {% else %}
+                        <a href="{{ item.product_obj.get_absolute_url }}"><img src="{% static 'images/default.jpg' %}" class="d-block w-100" width="70" height="88" alt="No Image" /></a>
+                      {% endif %} {% endcomment %}
+                      {% if item.product_obj.first_image %}
+                        <a href="{{ item.product_obj.get_absolute_url }}"><img src="{% get_media_prefix %}{{ item.product_obj.first_image }}" width="70" height="88" /></a>
+                      {% else %}
+                        <a href="{{ item.product_obj.get_absolute_url }}"><img src="{% static 'images/default.jpg' %}" class="d-block w-100" width="70" height="88" alt="No Image" /></a>
+                      {% endif %}
+                    </td>
+                    <td>
+                      <a href="{{ item.product_obj.get_absolute_url }}">{{ item.product_obj.name }}</a>
+                    </td>
+                    <td>{{ item.product_obj.unit_price|convert_currency|translate_number }}</td>
+                    <td>
+                      <form action="{% url 'cart:cart_add' item.product_obj.id %}" method="post">
+                        {% csrf_token %}
+                        {% comment %} <input type="number" class="form-control" value="{{ item.quantity }}" min="1" /> {% endcomment %}
+                        <div class="right-content">
+                          <div class="quantity buttons_added">
+                            <input type="button" value="-" class="minus" />
+                            {{ item.product_update_quantity_form.quantity }}
+                            <input type="button" value="+" class="plus" />
+                          </div>
+                        </div>
+                        {{ item.product_update_quantity_form.inplace }}
+                        <button type="submit" class="small cart-btn" style="padding: 2px 5px; font-size: 10px;"><i class="fa fa-refresh"></i></button>
+                      </form>
+                    </td>
+                    <td>{{ item.total_price|convert_currency|translate_number }}</td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+            <button class="btn btn-primary">{% trans 'Empty Cart' %}</button>
+          </div>
+          <div class="col-lg-4">
+            <div class="border p-3 rounded">
+              <h4 class="text-left">{% trans 'Overall Total' %}</h4>
+              <p class="text-left" style="padding-top: 10px; padding-bottom: 10px;">{{ cart.get_total_price|convert_currency|translate_number }}</p>
+              <a href="checkout.html" class="btn btn-success btn-block">{% trans 'Order' %}</a>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    {% else %}
+      <h3>
+        {% url 'product_list' as product_list_url %}
+        {% blocktrans %}
+        Cart is Empty, Please <a href="{{ product_list_url }}">add some items</a> to the cart.
+        {% endblocktrans %}
+      </h3>
+    {% endif %}
   </section>
 {% endblock %}

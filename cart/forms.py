@@ -11,3 +11,6 @@ class AddToCartProductForm(forms.Form):
             'title': 'Qty'
         })
     )
+
+    inplace = forms.BooleanField(required=False, widget=forms.HiddenInput)
+    
