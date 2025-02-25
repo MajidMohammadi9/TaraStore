@@ -156,22 +156,24 @@
 }
 
 .continue-shopping-btn {
-  background-color: gray; /* رنگ زمینه */
-  color: red; /* رنگ متن */
+  background-color: rgb(224, 217, 217); /* رنگ زمینه */
+  color: black; /* رنگ متن */
 }
 
 .continue-shopping-btn:hover {
-  background-color: red; /* تغییر رنگ هنگام حرکت ماوس */
+  background-color: black; /* تغییر رنگ هنگام حرکت ماوس */
+  color: rgb(224, 217, 217);
   transform: scale(1.05); /* بزرگ‌نمایی کمی */
 }
 
 .checkout-btn {
-  background-color: grey; /* رنگ زمینه */
-  color: red; /* رنگ متن */
+  background-color: rgb(224, 217, 217); /* رنگ زمینه */
+  color: black; /* رنگ متن */
 }
 
 .checkout-btn:hover {
-  background-color: red; /* تغییر رنگ هنگام حرکت ماوس */
+  background-color: black; /* تغییر رنگ هنگام حرکت ماوس */
+  color: rgb(224, 217, 217);
   transform: scale(1.05); /* بزرگ‌نمایی کمی */
 }
 

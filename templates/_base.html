@@ -127,7 +127,7 @@
               <li class="scroll-to-section cart-wrapper">
                 <a href="#miniCart">
                   <i class="fa fa-shopping-cart"></i>
-                  <span class="cart-count">{{ 1|translate_number }}</span>
+                  <span class="cart-count">{{ cart|length|translate_number }}</span>
                 </a>
               </li>
               <li class="submenu">
@@ -181,6 +181,8 @@
       {% block content %}
       
       {% endblock %}
+
+      {% include 'cart/cart_sidebar.html' %}
     </div>
 
     <!-- ***** Footer Start ***** -->
