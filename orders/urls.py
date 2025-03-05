@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .views import order_create_view
+from .views import order_create_view 
 
 
 urlpatterns = [

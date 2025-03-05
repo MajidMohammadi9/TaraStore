@@ -11,7 +11,7 @@
     <form action="" method="post">
       {% csrf_token %}
       {{ form|crispy }}
-      <input type="submit" value="{% trans 'Signup' %}" />
+      <input type="submit" class="cart-btn" value="{% trans 'Signup' %}" />
     </form>
   </div>
 {% endblock %}

@@ -90,7 +90,7 @@
             <div class="border p-3 rounded">
               <h4 class="text-left">{% trans 'Overall Total' %}</h4>
               <p class="text-left" style="padding-top: 10px; padding-bottom: 10px;">{{ cart.get_total_price|convert_currency|translate_number }}</p>
-              <a href="checkout.html" class="btn btn-success btn-block">{% trans 'Order' %}</a>
+              <a href="{% url 'order_create' %}" class="btn btn-success btn-block">{% trans 'Order' %}</a>
             </div>
           </div>
         </div>

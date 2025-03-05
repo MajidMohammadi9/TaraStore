@@ -1,6 +1,7 @@
 {% extends '_base.html' %}
 {% load static %}
 {% load i18n %}
+{% load crispy_forms_tags %}
 {% load translation_tags %}
 
 {% block page_title %}
@@ -18,65 +19,54 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-8">
-          <div class="section-heading">
-            <h2>اطلاعات سفارش</h2>
+          <div class="section-heading" style="padding-bottom: 20px;">
+            <h2>{% trans "Order Details" %}</h2>
           </div>
-          <form class="form">
-            <div class="row">
-              <div class="col-md-6">
-                <label>نام</label>
-                <input type="text" class="form-control" required />
-              </div>
-              <div class="col-md-6">
-                <label>نام خانوادگی</label>
-                <input type="text" class="form-control" required />
-              </div>
-              <div class="col-md-12">
-                <label>آدرس</label>
-                <input type="text" class="form-control" required />
-              </div>
-              <div class="col-md-6">
-                <label>ایمیل</label>
-                <input type="email" class="form-control" required />
-              </div>
-              <div class="col-md-6">
-                <label>شماره همراه</label>
-                <input type="text" class="form-control" required />
-              </div>
-            </div>
+          <form action="" method='post'>
+            {% csrf_token %}
+            {{form|crispy}}
+            <button type="submit" class="cart-btn">{% trans "Payment" %}</button>
           </form>
         </div>
         <div class="col-lg-4">
+          <h2 style="padding-bottom: 20px;">{% trans "Your Order" %}</h2>
           <div class="border p-3 rounded">
-            <h4>جمع کل</h4>
             <table class="table">
               <thead>
                 <tr>
-                  <th>محصول</th>
-                  <th>تعداد</th>
-                  <th>قیمت نهایی</th>
+                  <th>{% trans "Product" %}</th>
+                  <th>{% trans "Quantity" %}</th>
+                  <th>{% trans "Final Price" %}</th>
                 </tr>
               </thead>
               <tbody>
+                {% for item in cart %}
                 <tr>
-                  <td>محصول شماره یک</td>
-                  <td>۲</td>
-                  <td>۲۹۶,۰۰۰ تومان</td>
+                  <td>{{item.product_obj.name}}</td>
+                  <td>{{item.quantity|translate_number}}</td>
+                  <td>{{item.total_price|convert_currency|translate_number}}</td>
                 </tr>
-                <tr>
-                  <td>محصول شماره دو</td>
-                  <td>۱</td>
-                  <td>۵۸,۰۰۰ تومان</td>
-                </tr>
+                {% endfor %}
               </tbody>
               <tfoot>
                 <tr>
-                  <th>مجموع</th>
-                  <td colspan="2">۳۴۸,۰۰۰ تومان</td>
+                  <th>{% trans "Overall Total" %}</th>
+                  <td colspan="2">{{cart.get_total_price|convert_currency|translate_number}}</td>
                 </tr>
               </tfoot>
             </table>
-            <a href="#" class="btn btn-success btn-block">پرداخت</a>
+            {% comment %} <a href="#" class="btn btn-success btn-block">{% trans "Payment" %}</a> {% endcomment %}
+            <div class="checkout-payment">
+              <h2 class="py-5">{% trans "Payment Method" %}</h2>
+              <form action="#" class="payment-form">
+                <div class="payment-group mb--10">
+                  <div class="payment-radio">
+                    <input type="radio" value="bank" name="payment-method" id="bank" checked />
+                    <label class="payment-label" for="cheque">{% trans "Zarin Pal online portal" %}</label>
+                  </div>
+                </div>
+              </form>
+            </div>
           </div>
         </div>
       </div>

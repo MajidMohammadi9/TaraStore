@@ -3,6 +3,7 @@ from django.utils.translation import gettext_lazy as _
 from phonenumber_field.modelfields import PhoneNumberField
 
 from accounts.models import Customer
+from products.models import Product
 
 
 class Order(models.Model):
@@ -16,10 +17,6 @@ class Order(models.Model):
     ]
     
     customer = models.ForeignKey(Customer, on_delete=models.PROTECT, related_name='orders')
-    first_name=models.CharField(verbose_name=_('First Name'),max_length=100)
-    last_name=models.CharField(verbose_name=_('Last Name'),max_length=100)
-    phone_number = PhoneNumberField(region="OM", blank=True, verbose_name=_('Phone Number'))
-    # address=models.CharField(verbose_name=_('Address'),max_length=700)
     order_note=models.CharField(verbose_name=_('Note'),max_length=700,blank=True)
     status = models.CharField(max_length=1, choices=ORDER_STATUS, default=ORDER_STATUS_UNPAID)
     datetime_created=models.DateTimeField(verbose_name=_('Date Time Created'),auto_now_add=True)
@@ -27,3 +24,16 @@ class Order(models.Model):
 
     def __str__(self):
         return f'Order id={self.id}'
+    
+    def get_total_price(self):
+        return sum(item.quantity*item.price for item in self.items.all())
+    
+
+class OrderItem(models.Model):
+    order=models.ForeignKey(Order, on_delete=models.CASCADE, related_name='items',verbose_name=_('Order'))
+    product=models.ForeignKey(Product, on_delete=models.CASCADE, related_name='order_items',verbose_name=_('Product'))
+    quantity=models.PositiveIntegerField(verbose_name=_('Quantity'),default=1)
+    price=models.PositiveIntegerField(verbose_name=_('Price'))
+
+    def __str__(self):
+        return f'Order Item {self.id}: {self.product} x {self.quantity}'

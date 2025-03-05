@@ -12,7 +12,7 @@ class CustomUser(AbstractUser):
 
 class Customer(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.PROTECT, verbose_name=_('User'))
-    phone_number = PhoneNumberField(region="OM", blank=True, verbose_name=_('Phone Number'))
+    phone_number = PhoneNumberField(region="OM", verbose_name=_('Phone Number'))
     birth_date = models.DateField(null=True, blank=True, verbose_name=_('Birth Date'))
 
     def __str__(self):
