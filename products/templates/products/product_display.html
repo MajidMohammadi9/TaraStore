@@ -2,82 +2,86 @@
 {% load i18n %}
 {% load translation_tags %}
 
-  <!-- ***** Main Banner Area Start ***** -->
-  {% include "pages/banner.html" with banner_title=banner_title %}
-  <!-- ***** Main Banner Area End ***** -->
+<!-- ***** Main Banner Area Start ***** -->
+{% include 'pages/banner.html' with banner_title=banner_title %}
+<!-- ***** Main Banner Area End ***** -->
 
-  <!-- ***** Products Area Starts ***** -->
-  <section class="section" id="products">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12">
-          <div class="section-heading">
-            {% if query %}
-              <h2>{{ found_products_count|translate_number }} {% trans "Result for" %} &laquo;{{ query }}&raquo;</h2>
-            {% else %}
-              <h2>{% trans "Our Latest Products" %}</h2>
-              <span>{% trans "Check out all of our products" %}</span>
-            {% endif %}
-          </div>
+<!-- ***** Products Area Starts ***** -->
+<section class="section" id="products">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="section-heading">
+          {% if query %}
+            <h2>{{ found_products_count|translate_number }} {% trans 'Result for' %}&laquo;{{ query }}&raquo;</h2>
+          {% else %}
+            <h2>{% trans 'Our Latest Products' %}</h2>
+            <span>{% trans 'Check out all of our products' %}</span>
+          {% endif %}
         </div>
       </div>
     </div>
-    <div class="container">
-      <div class="row">
-        {% for product in products %}
-          <div class="col-lg-4">
-            <div class="item">
-              <div class="thumb">
-                <div class="hover-content">
-                  <ul>
-                    <li>
-                      <a href="{{ product.get_absolute_url }}"><i class="fa fa-eye"></i></a>
-                    </li>
-                    <li>
-                      <a href="{{ product.get_absolute_url }}"><i class="fa fa-star"></i></a>
-                    </li>
-                    <li>
-                      <a href="{{ product.get_absolute_url }}"><i class="fa fa-shopping-cart"></i></a>
-                    </li>
-                  </ul>
-                </div>
-                {% if product.images %}
-                  <div id="carousel{{ product.id }}" class="carousel slide" data-bs-ride="carousel">
-                    <div class="carousel-inner">
-                      {% for img in product.images.all %}
-                        <div class="carousel-item {% if forloop.first %}active{% endif %}">
-                          <img src="{{ img.image.url }}" class="d-block w-100" style="width: 370px; height: 390px;" alt="Product Image" />
-                        </div>
-                      {% empty %}
-                        <div class="carousel-item active">
-                          <img src="{% static 'images/default.jpg' %}" class="d-block w-100" style="width: 370px; height: 390px;" alt="No Image" />
-                        </div>
-                      {% endfor %}
-                    </div>
-
-                    <!-- Left and right buttons -->
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carousel{{ product.id }}" data-bs-slide="prev"><span class="carousel-control-prev-icon" aria-hidden="true"></span></button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carousel{{ product.id }}" data-bs-slide="next"><span class="carousel-control-next-icon" aria-hidden="true"></span></button>
+  </div>
+  <div class="container">
+    <div class="row">
+      {% for product in products %}
+        <div class="col-lg-4">
+          <div class="item">
+            <div class="thumb">
+              <div class="hover-content">
+                <ul>
+                  <li>
+                    <a href="{{ product.get_absolute_url }}"><i class="fa fa-eye"></i></a>
+                  </li>
+                  <li>
+                    <a href="{{ product.get_absolute_url }}"><i class="fa fa-star"></i></a>
+                  </li>
+                  <li>
+                    <form action="{% url 'cart:cart_add' product.id %}" method="post" style="display: inline-flex;">
+                      {% csrf_token %}
+                      <input type="hidden" name="quantity" value="1">                      
+                      <button type="submit" style="border: none; align-items: center; justify-content: center; width: 50px; height: 50px; display: flex; font-size: 30px; line-height: normal; padding: 0; margin: 0;"><i class="fa-solid fa-cart-plus"></i></button>
+                    </form>
+                  </li>
+                </ul>
+              </div>
+              {% if product.images %}
+                <div id="carousel{{ product.id }}" class="carousel slide" data-bs-ride="carousel">
+                  <div class="carousel-inner">
+                    {% for img in product.images.all %}
+                      <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                        <img src="{{ img.image.url }}" class="d-block w-100" style="width: 370px; height: 390px;" alt="Product Image" />
+                      </div>
+                    {% empty %}
+                      <div class="carousel-item active">
+                        <img src="{% static 'images/default.jpg' %}" class="d-block w-100" style="width: 370px; height: 390px;" alt="No Image" />
+                      </div>
+                    {% endfor %}
                   </div>
-                {% endif %}
-              </div>
-              <div class="down-content">
-                <a href="{{ product.get_absolute_url }}" style="color:black;"><h6>{{ product.name }}</h6></a>
-                <span>{{ product.unit_price|convert_currency|translate_number }}</span>
-                {% include 'products/stars.html' %}
-              </div>
+
+                  <!-- Left and right buttons -->
+                  <button class="carousel-control-prev" type="button" data-bs-target="#carousel{{ product.id }}" data-bs-slide="prev"><span class="carousel-control-prev-icon" aria-hidden="true"></span></button>
+                  <button class="carousel-control-next" type="button" data-bs-target="#carousel{{ product.id }}" data-bs-slide="next"><span class="carousel-control-next-icon" aria-hidden="true"></span></button>
+                </div>
+              {% endif %}
+            </div>
+            <div class="down-content">
+              <a href="{{ product.get_absolute_url }}" style="color:black;"><h6>{{ product.name }}</h6></a>
+              <span>{{ product.unit_price|convert_currency|translate_number }}</span>
+              {% include 'products/stars.html' %}
             </div>
           </div>
-        {% empty %}
-          <h3>{% trans "No products found" %}.</h3>
-        {% endfor %}
+        </div>
+      {% empty %}
+        <h3>{% trans 'No products found' %}.</h3>
+      {% endfor %}
 
-        <!-- ***** Main Banner Area Start ***** -->
-        {% include 'pages/pagination.html' %}
-        <!-- ***** Main Banner Area End ***** -->
-      </div>
+      <!-- ***** Main Banner Area Start ***** -->
+      {% include 'pages/pagination.html' %}
+      <!-- ***** Main Banner Area End ***** -->
     </div>
-  </section>
-  <!-- ***** Products Area Ends ***** -->
+  </div>
+</section>
+<!-- ***** Products Area Ends ***** -->
 
-  {% comment %} {% include 'cart/cart_sidebar.html' %} {% endcomment %}
+{% comment %} {% include 'cart/cart_sidebar.html' %} {% endcomment %}

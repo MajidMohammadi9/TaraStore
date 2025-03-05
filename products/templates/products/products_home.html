@@ -13,7 +13,11 @@
           <a href="{{ product.get_absolute_url }}"><i class="fa fa-star"></i></a>
         </li>
         <li>
-          <a href="{{ product.get_absolute_url }}"><i class="fa fa-shopping-cart"></i></a>
+          <form action="{% url 'cart:cart_add' product.id %}" method="post" style="display: inline-flex;">
+            {% csrf_token %}
+            <input type="hidden" name="quantity" value="1">                      
+            <button type="submit" style="border: none; align-items: center; justify-content: center; width: 50px; height: 50px; display: flex; font-size: 30px; line-height: normal; padding: 0; margin: 0;"><i class="fa-solid fa-cart-plus"></i></button>
+          </form>
         </li>
       </ul>
     </div>

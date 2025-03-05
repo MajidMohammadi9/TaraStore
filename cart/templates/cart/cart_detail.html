@@ -12,7 +12,7 @@
   {% include 'pages/banner.html' with banner_title=cart_detail %}
 
   <section class="section" id="cart">
-    {% if cart %}
+    {% if not cart.is_empty %}
       <div class="container">
         <div class="row">
           <div class="col-lg-8">
@@ -84,7 +84,10 @@
                 {% endfor %}
               </tbody>
             </table>
-            <button class="btn btn-primary">{% trans 'Empty Cart' %}</button>
+            <form action="{% url 'cart:cart_clear' %}" method="post">
+              {% csrf_token %}
+              <button class="cart-btn">{% trans 'Empty Cart' %}</button>
+            </form>
           </div>
           <div class="col-lg-4">
             <div class="border p-3 rounded">

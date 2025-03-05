@@ -19,6 +19,7 @@ def order_create_view(request):
 
         if len(cart)==0:
             messages.warning(request, _('You can not proceed to checkout page, because your cart is empty!'))
+            return redirect('home')
 
         if order_form.is_valid():
             order_obj=order_form.save(commit=False)

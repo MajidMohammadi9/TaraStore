@@ -8,41 +8,47 @@
     <h3>{% trans 'Cart' %}</h3>
     <button class="close-btn" onclick="toggleMiniCart()">×</button>
   </div>
-  <div class="cart-sidebar-content">
-    <p id="empty-cart-message" style="display: none;">
-      {% trans 'Cart is empty' %}
-    </p>
-    <ul id="cart-items-list" class="cart-items-list">
-      {% for item in cart %}
-        <li class="cart-item">
-          <div class="cart-item-container">
-            {% if item.product_obj.first_image %}
-              <a href="{{ item.product_obj.get_absolute_url }}"><img src="{% get_media_prefix %}{{ item.product_obj.first_image }}" width="70" height="75" /></a>
-            {% else %}
-              <a href="{{ item.product_obj.get_absolute_url }}"><img src="{% static 'images/default.jpg' %}" class="d-block w-100" width="70" height="75" alt="No Image" /></a>
-            {% endif %}
-            <div class="cart-item-details">
-              <span class="cart-item-name">{{ item.product_obj.name }}</span>
-              <div class="cart-item-info">
-                <span class="price">{{ item.product_obj.unit_price|convert_currency|translate_number }}</span>
-                <span class="quantity">x {{ item.quantity }}</span>
+  {% if not cart.is_empty %}
+    <div class="cart-sidebar-content">
+      <ul id="cart-items-list" class="cart-items-list">
+        {% for item in cart %}
+          <li class="cart-item">
+            <div class="cart-item-container">
+              {% if item.product_obj.first_image %}
+                <a href="{{ item.product_obj.get_absolute_url }}"><img src="{% get_media_prefix %}{{ item.product_obj.first_image }}" width="70" height="75" /></a>
+              {% else %}
+                <a href="{{ item.product_obj.get_absolute_url }}"><img src="{% static 'images/default.jpg' %}" class="d-block w-100" width="70" height="75" alt="No Image" /></a>
+              {% endif %}
+              <div class="cart-item-details">
+                <span class="cart-item-name">{{ item.product_obj.name }}</span>
+                <div class="cart-item-info">
+                  <span class="price">{{ item.product_obj.unit_price|convert_currency|translate_number }}</span>
+                  <span class="quantity">x {{ item.quantity }}</span>
+                </div>
               </div>
+              <form action="{% url 'cart:cart_remove' item.product_obj.id %}" method="post">
+                {% csrf_token %}
+                <button class="btn btn-danger">X</button>
+              </form>
             </div>
-            <form action="{% url 'cart:cart_remove' item.product_obj.id %}" method="post">
-              {% csrf_token %}
-              <button class="btn btn-danger">X</button>
-            </form>
-          </div>
-        </li>
-      {% endfor %}
-    </ul>
-    <div class="cart-total" style="padding-top: 30px;">
-      <strong>{% trans "Overall Total" %}:</strong>
-      <span id="cart-total-price">{{cart.get_total_price|convert_currency|translate_number}}</span>
+          </li>
+        {% endfor %}
+      </ul>
+      <div class="cart-total" style="padding-top: 30px;">
+        <strong>{% trans 'Overall Total' %}:</strong>
+        <span id="cart-total-price">{{ cart.get_total_price|convert_currency|translate_number }}</span>
+      </div>
+      <div class="mini-cart__buttons">
+        <a href="{% url 'cart:cart_detail' %}" class="continue-shopping-btn">{% trans 'Go to Cart' %}</a>
+        <a href="{% url 'order_create' %}" class="checkout-btn">{% trans 'Checkout' %}</a>
+      </div>
     </div>
+  {% else %}
+    <p>
+      {% trans 'Cart is Empty!, please add some products to the cart' %}
+    </p>
     <div class="mini-cart__buttons">
-      <a href="{% url 'cart:cart_detail' %}" class="continue-shopping-btn">{% trans "Go to Cart" %}</a>
-      <a href="/checkout" class="checkout-btn">{% trans "Checkout" %}</a>
+      <a href="{% url 'product_list' %}" class="continue-shopping-btn">{% trans 'Go shopping' %}</a>
     </div>
-  </div>
+  {% endif %}
 </aside>
