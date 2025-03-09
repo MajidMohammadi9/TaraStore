@@ -18,6 +18,7 @@ class Order(models.Model):
     
     customer = models.ForeignKey(Customer, on_delete=models.PROTECT, related_name='orders')
     order_note=models.CharField(verbose_name=_('Note'),max_length=700,blank=True)
+    authority=models.CharField(max_length=255, blank=True, verbose_name=_('Authority'))
     status = models.CharField(max_length=1, choices=ORDER_STATUS, default=ORDER_STATUS_UNPAID)
     datetime_created=models.DateTimeField(verbose_name=_('Date Time Created'),auto_now_add=True)
     datetime_modified=models.DateTimeField(verbose_name=_('Date Time Modified'),auto_now=True)

@@ -36,9 +36,6 @@ def order_create_view(request):
                 )
             cart.clear()
 
-            messages.success(request, _('Your order has successfully placed.'))
-            request.session['order_id']=order_obj.id
-
             customer.user.first_name=order_form.cleaned_data['first_name']
             customer.user.last_name = order_form.cleaned_data['last_name']
             customer.phone_number = order_form.cleaned_data['phone_number']
@@ -58,9 +55,11 @@ def order_create_view(request):
                 Address.objects.filter(customer=customer).update(**address_data)
             else:
                 Address.objects.create(customer=customer, **address_data)
-
-            # return redirect('payment:payment_process')
-            return redirect('home')
+            
+            request.session['order_id']=order_obj.id
+            return redirect('payment:payment_process')
+            # messages.success(request, _('Your order has successfully placed.'))
+            # return redirect('home')
     else:
         order_form=OrderForm(customer=customer, address=address)
 

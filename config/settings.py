@@ -64,6 +64,7 @@ INSTALLED_APPS = [
     "translates",
     "cart",
     "orders",
+    "payment",
 ]
 
 SITE_ID=1
@@ -225,3 +226,5 @@ MESSAGE_TAGS={
     messages.ERROR:'danger'
 }
 
+# zarinpal
+ZARINPAL_MERCHANT_ID=env("DJANGO_ZARINPAL_MERCHANT_ID")
