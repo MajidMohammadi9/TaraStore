@@ -5,6 +5,8 @@ from django.shortcuts import render,get_object_or_404,redirect
 from django.urls import reverse
 from django.conf import settings
 from django.http import HttpResponse
+from django.contrib import messages
+from django.utils.translation import gettext as _
 
 from orders.models import Order
 
@@ -49,7 +51,7 @@ def payment_callback(request):
     payment_authority=request.GET.get('Authority')
     payment_status=request.GET.get('Status')
 
-    order=get_object_or_404(Order,zarinpal_authority=payment_authority)
+    order=get_object_or_404(Order, authority=payment_authority)
     toman_total_price=order.get_total_price()
     rial_total_price=toman_total_price*10
 
@@ -117,7 +119,7 @@ def payment_process_sandbox(request):
 		# 'merchant_id':'87f01487-b706-47a3-97af-49fc1420d97b',
         'merchant_id': settings.ZARINPAL_MERCHANT_ID,
 		'amount': rial_total_price,
-		'description': f'#{order.id}: {order.user.first_name} {order.user.last_name}',
+		'description': f'#{order.id}: {order.customer.full_name}',
 		'callback_url': request.build_absolute_uri(reverse('payment:payment_callback')),
     }
     
@@ -142,7 +144,7 @@ def payment_callback_sandbox(request):
     payment_authority=request.GET.get('Authority')
     payment_status=request.GET.get('Status')
 
-    order=get_object_or_404(Order,zarinpal_authority=payment_authority)
+    order=get_object_or_404(Order, authority=payment_authority)
     toman_total_price=order.get_total_price()
     rial_total_price=toman_total_price*10
 
@@ -173,25 +175,32 @@ def payment_callback_sandbox(request):
             payment_code=data['code']
 
             if payment_code==100:
-                order.is_paid=True
+                order.status=settings.ORDER_STATUS_PAID
                 order.ref_id=data['ref_id']
                 order.data=data
                 order.save()
 
-                return HttpResponse('Your payment was successful.')
+                # return HttpResponse('Your payment was successful.')
+                messages.success(request, _('Your payment was successful.'))
+                return redirect('home')
             elif payment_code==101:
-                return HttpResponse('Your payment was successful. However, this transaction has already recorded.')
+                # return HttpResponse('Your payment was successful. However, this transaction has already recorded.')
+                messages.success(request, _('Your payment was successful. However, this transaction has already recorded.'))
+                return redirect('home')
             else:
                 error_code=res.json()['data']['errors']['code']
                 error_message=res.json()['data']['errors']['messages']
                 # you can write a code that prevents the cart from emptying.
                    
-                return HttpResponse(f'The transaction was unsuccessful.{error_code:} {error_message}')
-               
+                # return HttpResponse(f'The transaction was unsuccessful.{error_code:} {error_message}')
+                messages.error(request, _(f'The transaction was unsuccessful.{error_code:} {error_message}'))
+                return redirect('home')
     else:
         # you can write a code that prevents the cart from emptying.
-        return HttpResponse(f'The transaction was unsuccessful.')
+        # return HttpResponse(f'The transaction was unsuccessful.')
 
+        messages.error(request, _('The transaction was unsuccessful.'))
+        return redirect('home')
 
 
 def payment_process_omannet(request):

@@ -16,18 +16,18 @@ def cart_detail_view(request):
     return render(request, 'cart/cart_detail.html', {'cart':cart})
 
 @require_POST
-def add_to_cart_view(requset, product_id):
-    cart=Cart(requset)
+def add_to_cart_view(request, product_id):
+    cart=Cart(request)
 
     product=get_object_or_404(Product, id=product_id)
-    form=AddToCartProductForm(requset.POST)
+    form=AddToCartProductForm(request.POST)
 
     if form.is_valid():
         cleaned_data=form.cleaned_data
         quantity=cleaned_data['quantity']
         cart.add(product, quantity, replace_current_quantity=cleaned_data['inplace'])
 
-    referer=requset.META.get('HTTP_REFERER')
+    referer=request.META.get('HTTP_REFERER')
     return redirect(referer)
 
 @require_POST

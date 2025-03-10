@@ -52,24 +52,10 @@ class Cart:
         
         if product_id in self.cart:
             del self.cart[product_id]
+            # self.cart.pop(product_id, None)
 
         messages.success(self.request, _('product removed from the cart successfully.'))
         self.save()
-
-    # def __iter__(self):
-    #     product_ids=self.cart.keys()
-    #     products=Product.objects.filter(id__in=product_ids).prefetch_related('images')
-
-    #     cart=self.cart.copy()
-
-    #     for product in products:
-    #         cart[str(product.id)]['product_obj']=product
-    #         cart[str(product.id)]['first_image']=product.images.first()
-
-    #     for item in cart.values():
-    #         item['total_price']=item['quantity']*item['product_obj'].unit_price
-    #         item['product_update_quantity_form']=AddToCartProductForm(initial={'quantity': item['quantity'], 'inplace' :True})
-    #         yield item
 
     def __iter__(self):
         product_ids = self.cart.keys()
@@ -89,10 +75,9 @@ class Cart:
 
         for item in cart.values():
             item['total_price'] = item['quantity'] * item['product_obj'].unit_price
+            # This is used in cart_detail.html to refresh the quantity
             item['product_update_quantity_form']=AddToCartProductForm(initial={'quantity': item['quantity'], 'inplace' :True})
             yield item
-
-
 
     def __len__(self):
         return sum(item['quantity'] for item in self.cart.values())
@@ -106,10 +91,9 @@ class Cart:
             return False
         return True
     
-    # def get_total_price(self):
-    #     return sum(item['quantity']*item['product_obj'].unit_price for item in self.cart.values())
-    
     def get_total_price(self):
-        return sum(item['total_price'] for item in self.cart.values())  # Using the generated value in __iter__
+        return sum(item['quantity']*item['product_obj'].unit_price for item in self.cart.values())
+    
+
 
         
