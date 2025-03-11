@@ -104,8 +104,8 @@ def payment_process_sandbox(request):
     # Get the order object
     order=get_object_or_404(Order,id=order_id)
 
-    toman_total_price=order.get_total_price()
-    rial_total_price=toman_total_price*10
+    total_price=order.get_total_price()
+    rial_total_price=total_price*920000
 
     # zarinpal_request_url='https://sandbox.zarinpal.com/pg/rest/WebGate/PaymanRequest.json'
     zarinpal_request_url='https://sandbox.zarinpal.com/pg/v4/payment/request.json'
@@ -145,8 +145,8 @@ def payment_callback_sandbox(request):
     payment_status=request.GET.get('Status')
 
     order=get_object_or_404(Order, authority=payment_authority)
-    toman_total_price=order.get_total_price()
-    rial_total_price=toman_total_price*10
+    total_price=order.get_total_price()
+    rial_total_price=total_price*920000
 
     if payment_status=='OK':
         
