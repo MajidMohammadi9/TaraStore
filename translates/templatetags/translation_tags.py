@@ -65,7 +65,8 @@ def convert_currency(price):
 
     language=get_language()
 
-    rate=Decimal(CURRENCY_RATES.get(language, 1))
+    # rate=Decimal(CURRENCY_RATES.get(language, 1))
+    rate=CURRENCY_RATES.get(language, 1)
     symbol=CURRENCY_SYMBOLS.get(language, '$')
     decimal_places=DECIMAL_PLACES.get(language, 2)
 

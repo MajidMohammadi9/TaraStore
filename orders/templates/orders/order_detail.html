@@ -1,0 +1,55 @@
+{% extends '_base.html' %}
+{% load static %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+{% load translation_tags %}
+
+{% block page_title %}
+  {% trans 'Order Details' %}
+{% endblock %}
+
+{% block content %}
+  <!-- ***** Main Banner Area Start ***** -->
+  {% trans 'Order Details' as order_details %}
+  {% include 'pages/banner.html' with banner_title=order_details %}
+  <!-- ***** Main Banner Area End ***** -->
+
+  <section class="section" id="cart">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+            <table class="table table-bordered text-center">
+                <thead>
+                <tr>
+                    <th>
+                        {% trans 'Product' %}
+                    </th>
+                    <th>
+                        {% trans 'Quantity' %}
+                    </th>
+                    <th>
+                        {% trans 'Price' %}
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for item in order.items.all %}
+                    <tr>
+                        <td>
+                            {{ item.product }}
+                        </td>
+                        <td>
+                            {{ item.quantity }}
+                        </td>
+                        <td>
+                            {{item.price|convert_currency|translate_number}}
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            </div>
+        </div>
+    </div>
+  </section>
+{% endblock%}

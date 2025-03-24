@@ -1,0 +1,82 @@
+{% extends '_base.html' %}
+{% load static %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+{% load translation_tags %}
+
+{% block page_title %}
+  {% trans 'My Orders' %}
+{% endblock %}
+
+{% block content %}
+  <!-- ***** Main Banner Area Start ***** -->
+  {% trans 'My Orders' as my_orders %}
+  {% include 'pages/banner.html' with banner_title=my_orders %}
+  <!-- ***** Main Banner Area End ***** -->
+
+  <section class="section" id="cart">
+    {% if orders %}
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8">
+            <table class="table table-bordered text-center">
+              <thead>
+                <tr>
+                  <th>
+                    {% trans 'Order ID/View' %}
+                  </th>
+                  <th>
+                      {% trans 'Total Price' %}
+                    </th>
+                    <th>
+                        {% trans 'Date' %}
+                    </th>
+                    <th>
+                      {% trans 'Status' %}
+                    </th>
+                  <th>
+                    {% trans 'Payment' %}
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for order in orders %}
+                  <tr>
+                    <td>
+                        <a href="{% url 'order_detail' order.id %}">{{order.id}}</a>
+                    </td>
+                    <td>
+                        {{ order.get_total_price|convert_currency|translate_number }}
+                    </td>
+                    <td>
+                        {{ order.datetime_created}}
+                    </td>
+                    <td>
+                      {{order.get_status_display}}
+                    </td>
+                    {% if order.status != 'p' %}
+                        <td>
+                        <form action="{% url 'payment:payment_process' %}" method="post">
+                            {% csrf_token %}
+                            <input type="hidden" name="order_id" value="{{ order.id }}">
+                            <button type="submit" class="cart-btn">{% trans "Checkout" %}</button>
+                        </form>
+                        </td>
+                    {% endif %}
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    {% else %}
+      <h3>
+        {% url 'product_list' as product_list_url %}
+        {% blocktrans %}
+        There is no order in your account, Please <a href="{{ product_list_url }}">add some items</a> to the cart.
+        {% endblocktrans %}
+      </h3>
+    {% endif %}
+  </section>
+{% endblock%}

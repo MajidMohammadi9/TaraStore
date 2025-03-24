@@ -29,14 +29,15 @@ class Order(models.Model):
         return f'Order id={self.id}'
     
     def get_total_price(self):
-        return sum(item.quantity*item.price for item in self.items.all())
+            return float(sum(item.quantity*item.price for item in self.items.all()))
     
 
 class OrderItem(models.Model):
     order=models.ForeignKey(Order, on_delete=models.CASCADE, related_name='items',verbose_name=_('Order'))
     product=models.ForeignKey(Product, on_delete=models.CASCADE, related_name='order_items',verbose_name=_('Product'))
     quantity=models.PositiveIntegerField(verbose_name=_('Quantity'),default=1)
-    price=models.PositiveIntegerField(verbose_name=_('Price'))
+    price=models.DecimalField(max_digits=7, decimal_places=3, verbose_name=_('Price'))
+    # price=models.PositiveIntegerField(verbose_name=_('Price'))
 
     def __str__(self):
         return f'Order Item {self.id}: {self.product} x {self.quantity}'

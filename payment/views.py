@@ -4,7 +4,7 @@ import json
 from django.shortcuts import render,get_object_or_404,redirect
 from django.urls import reverse
 from django.conf import settings
-from django.http import HttpResponse
+from django.http import HttpResponse,JsonResponse
 from django.contrib import messages
 from django.utils.translation import gettext as _
 
@@ -98,8 +98,8 @@ def payment_callback(request):
     
 def payment_process_sandbox(request):
 
-    # Get order id from session
-    order_id=request.session.get('order_id')
+    # Get order id from session or from request (in my_orders.html if unpaid)
+    order_id = request.POST.get("order_id") or request.session.get("order_id")
     
     # Get the order object
     order=get_object_or_404(Order,id=order_id)
@@ -125,9 +125,9 @@ def payment_process_sandbox(request):
     
     res=requests.post(url=zarinpal_request_url, data=json.dumps(request_data), headers=request_header)
     
-    print(f'res json process={res.json()}') # just for test
+    # print(f'res json process={res.json()}') # just for test
     data=res.json()['data']
-    print(f'res.json[data]={data}')
+    # print(f'res.json[data]={data}')
 
     authority=data['authority']
     order.authority=authority
@@ -167,8 +167,8 @@ def payment_callback_sandbox(request):
             data=json.dumps(request_data),
             headers=request_header,
             )
-        print(f'res json callback={res.json()}')
-        print(f'res json[data] callback={res.json()["data"]}')
+        # print(f'res json callback={res.json()}')
+        # print(f'res json[data] callback={res.json()["data"]}')
 
         if 'errors' not in res.json()['data'] or len(res.json()['data']['errors']==0):
             data=res.json()['data']
@@ -201,10 +201,123 @@ def payment_callback_sandbox(request):
 
         messages.error(request, _('The transaction was unsuccessful.'))
         return redirect('home')
+    
+
+def payment_sandbox_paypal(request):
+    """ Initiates a PayPal sandbox payment """
+
+    # Get order id from session or from request (in my_orders.html if unpaid)
+    order_id = request.POST.get("order_id") or request.session.get("order_id")
+    order=get_object_or_404(Order, id=order_id)
+    total_price=order.get_total_price()
+    # print(f'type={type(total_price)}')
+    # omr_total_price=total_price * 0.386
+
+    currency = "USD"
+
+    # PayPal API authentication
+    auth_response = requests.post(
+        f"{settings.PAYPAL_API_BASE}/v1/oauth2/token",
+        auth=(settings.PAYPAL_CLIENT_ID, settings.PAYPAL_SECRET),
+        data={"grant_type": "client_credentials"},
+    )
+
+    if auth_response.status_code == 200:
+        access_token = auth_response.json()["access_token"]
+        if not access_token:
+            messages.error(request, _('Failed to retrieve access token'))
+            return redirect('home')
+            # return JsonResponse({"error": "Failed to retrieve access token"}, status=401)
+        
+        # Create a PayPal order
+        order_data = {
+            "intent": "CAPTURE",
+            "purchase_units": [{"amount": {"currency_code": currency, "value": total_price}}],
+            "application_context": {
+                "return_url": request.build_absolute_uri(reverse("payment:payment_callback")),
+                "cancel_url": request.build_absolute_uri(reverse("home")),
+            },
+        }
+
+        headers = {
+            "Content-Type": "application/json",
+            "Authorization": f"Bearer {access_token}",
+        }
+
+        order_response = requests.post(
+            f"{settings.PAYPAL_API_BASE}/v2/checkout/orders",
+            json=order_data,
+            headers=headers,
+        )
+
+        if order_response.status_code == 201:
+            order_info = order_response.json()
+            order.authority=order_info['id']
+            order.save()
+            approval_url = next(link["href"] for link in order_info["links"] if link["rel"] == "approve")
+            return redirect(approval_url)
+    else:
+        messages.error(request, _('Authentication failed with PayPal'))
+        return redirect('home')
+        # return JsonResponse({"error": "Authentication failed with PayPal"}, status=401)
+
+    messages.error(request, _('Unable to create PayPal order'))
+    return redirect('home')
+    # return JsonResponse({"error": "Unable to create PayPal order"}, status=400)
 
 
-def payment_process_omannet(request):
-    pass
+def callback_sandbox_paypal(request):
+    token = request.GET.get("token")
+    order=get_object_or_404(Order, authority=token)
 
-def  payment_callback_omannet(request):
-    pass
+    if not token:
+        messages.error(request, _('Invalid request'))
+        return redirect('home')
+        # return JsonResponse({"error": "Invalid request"}, status=400)
+
+    # PayPal API authentication
+    auth_response = requests.post(
+        f"{settings.PAYPAL_API_BASE}/v1/oauth2/token",
+        auth=(settings.PAYPAL_CLIENT_ID, settings.PAYPAL_SECRET),
+        data={"grant_type": "client_credentials"},
+    )
+
+    if auth_response.status_code == 200:
+        access_token = auth_response.json()["access_token"]
+
+        # Capture the PayPal order
+        headers = {
+            "Content-Type": "application/json",
+            "Authorization": f"Bearer {access_token}",
+        }
+
+        capture_response = requests.post(
+            f"{settings.PAYPAL_API_BASE}/v2/checkout/orders/{token}/capture",
+            headers=headers,
+        )
+
+        capture_data = capture_response.json()
+
+        if capture_response.status_code == 201:
+            order.status=settings.ORDER_STATUS_PAID
+            order.ref_id=capture_data.get('payer', {}).get('payer_id')
+            order.save
+            order.data=capture_data
+            order.save()
+
+            messages.success(request, _('Payment captured successfully'))
+            return redirect('home')
+            # return JsonResponse({"success": "Payment captured successfully"})
+        
+        elif capture_response.status_code == 400 and capture_data.get("name") == "ORDER_ALREADY_CAPTURED":
+            messages.error(request, _('This order has already been captured'))
+            return redirect('home')
+            # return JsonResponse({"error": "This order has already been captured"}, status=400)
+    else:
+        messages.error(request, _('Authentication failed'))
+        return redirect('home')
+        # return JsonResponse({"error": "Authentication failed"}, status=401)
+    
+    messages.error(request, _('Payment capture failed'))
+    return redirect('home')
+    # return JsonResponse({"error": "Payment capture failed"}, status=400)
