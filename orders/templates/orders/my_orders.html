@@ -9,74 +9,111 @@
 {% endblock %}
 
 {% block content %}
-  <!-- ***** Main Banner Area Start ***** -->
-  {% trans 'My Orders' as my_orders %}
-  {% include 'pages/banner.html' with banner_title=my_orders %}
-  <!-- ***** Main Banner Area End ***** -->
+    <!-- ***** Main Banner Area Start ***** -->
+    {% trans 'My Orders' as my_orders %}
+    {% include 'pages/banner.html' with banner_title=my_orders %}
+    <!-- ***** Main Banner Area End ***** -->
 
-  <section class="section" id="cart">
-    {% if orders %}
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-8">
-            <table class="table table-bordered text-center">
-              <thead>
-                <tr>
-                  <th>
-                    {% trans 'Order ID/View' %}
-                  </th>
-                  <th>
-                      {% trans 'Total Price' %}
+    <section class="section" id="cart">
+        {% if orders %}
+        <div class="container">
+            <div class="row">
+            <div class="col-lg-8">
+                <table class="table table-bordered text-center">
+                <thead>
+                    <tr>
+                    <th>
+                        {% trans 'Order ID/View' %}
                     </th>
                     <th>
-                        {% trans 'Date' %}
-                    </th>
+                        {% trans 'Total Price' %}
+                        </th>
+                        <th>
+                            {% trans 'Date' %}
+                        </th>
+                        <th>
+                        {% trans 'Status' %}
+                        </th>
                     <th>
-                      {% trans 'Status' %}
+                        {% trans 'Payment' %}
                     </th>
-                  <th>
-                    {% trans 'Payment' %}
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {% for order in orders %}
-                  <tr>
-                    <td>
-                        <a href="{% url 'order_detail' order.id %}">{{order.id}}</a>
-                    </td>
-                    <td>
-                        {{ order.get_total_price|convert_currency|translate_number }}
-                    </td>
-                    <td>
-                        {{ order.datetime_created}}
-                    </td>
-                    <td>
-                      {{order.get_status_display}}
-                    </td>
-                    {% if order.status != 'p' %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for order in orders %}
+                    <tr>
                         <td>
-                        <form action="{% url 'payment:payment_process' %}" method="post">
-                            {% csrf_token %}
-                            <input type="hidden" name="order_id" value="{{ order.id }}">
-                            <button type="submit" class="cart-btn">{% trans "Checkout" %}</button>
-                        </form>
+                            <a href="{% url 'order_detail' order.id %}">{{order.id}}</a>
                         </td>
-                    {% endif %}
-                  </tr>
-                {% endfor %}
-              </tbody>
-            </table>
-          </div>
+                        <td>
+                            {{ order.get_total_price|convert_currency|translate_number }}
+                        </td>
+                        <td>
+                            {{ order.datetime_created}}
+                        </td>
+                        <td>
+                        {{order.get_status_display}}
+                        </td>
+                        {% if order.status != 'p' %}
+                            <td>
+                            <form id="payment-form" method="post" onsubmit="return validatePayment(event);">
+                                {% csrf_token %}
+                                <input type="hidden" name="order_id" value="{{ order.id }}">
+                                <div style="display: flex; gap: 40px; align-items: center;">
+                                    <div class="payment-radio">
+                                        <input type="radio" value="{% url 'payment:payment_paypal' %}" name="payment-method" id="paypal">
+                                        <label for="paypal">{% trans "PayPal" %}</label>
+                                    </div>
+                                    <div class="payment-radio">
+                                        <input type="radio" value="{% url 'payment:payment_zarinpal' %}" name="payment-method" id="zarinpal">
+                                        <label for="zarinpal">{% trans "ZarinPal" %}</label>
+                                    </div>
+                                </div>
+                                <button type="submit" class="cart-btn">{% trans "Checkout" %}</button>
+                            </form>
+                            </td>
+                        {% endif %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                </table>
+            </div>
+            </div>
         </div>
-      </div>
-    {% else %}
-      <h3>
-        {% url 'product_list' as product_list_url %}
-        {% blocktrans %}
-        There is no order in your account, Please <a href="{{ product_list_url }}">add some items</a> to the cart.
-        {% endblocktrans %}
-      </h3>
-    {% endif %}
-  </section>
+        {% else %}
+        <h3>
+            {% url 'product_list' as product_list_url %}
+            {% blocktrans %}
+            There is no order in your account, Please <a href="{{ product_list_url }}">add some items</a> to the cart.
+            {% endblocktrans %}
+        </h3>
+        {% endif %}
+    </section>
+
+    <script>
+        function validatePayment() {
+            const paymentMethod = document.querySelector('input[name="payment-method"]:checked');
+            if (!paymentMethod) {
+                event.preventDefault();
+                alert("{% trans 'Please select one of the payment methods.' %}");
+                return false;
+            }
+            return true; 
+        }
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const form = document.getElementById('payment-form');
+            const paymentRadios = document.querySelectorAll('input[name="payment-method"]');
+
+            paymentRadios.forEach(radio => {
+                radio.addEventListener('change', function () {
+                    
+                    form.action = this.value;
+                });
+            });
+        });
+    </script>
+
 {% endblock%}

@@ -96,7 +96,7 @@ def payment_callback(request):
           # you can write a code that prevents the cart from emptying.
           return HttpResponse(f'The transaction was unsuccessful.{error_code:} {error_message}')
     
-def payment_process_sandbox(request):
+def payment_sandbox_zarinpal(request):
 
     # Get order id from session or from request (in my_orders.html if unpaid)
     order_id = request.POST.get("order_id") or request.session.get("order_id")
@@ -120,7 +120,7 @@ def payment_process_sandbox(request):
         'merchant_id': settings.ZARINPAL_MERCHANT_ID,
 		'amount': rial_total_price,
 		'description': f'#{order.id}: {order.customer.full_name}',
-		'callback_url': request.build_absolute_uri(reverse('payment:payment_callback')),
+		'callback_url': request.build_absolute_uri(reverse('payment:callback_zarinpal')),
     }
     
     res=requests.post(url=zarinpal_request_url, data=json.dumps(request_data), headers=request_header)
@@ -139,7 +139,7 @@ def payment_process_sandbox(request):
         return HttpResponse('Error from zarinpal')
 
 
-def payment_callback_sandbox(request):
+def callback_sandbox_zarinpal(request):
     
     payment_authority=request.GET.get('Authority')
     payment_status=request.GET.get('Status')
@@ -234,7 +234,7 @@ def payment_sandbox_paypal(request):
             "intent": "CAPTURE",
             "purchase_units": [{"amount": {"currency_code": currency, "value": total_price}}],
             "application_context": {
-                "return_url": request.build_absolute_uri(reverse("payment:payment_callback")),
+                "return_url": request.build_absolute_uri(reverse("payment:callback_paypal")),
                 "cancel_url": request.build_absolute_uri(reverse("home")),
             },
         }

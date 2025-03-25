@@ -25,7 +25,22 @@
           <form action="" method='post'>
             {% csrf_token %}
             {{form|crispy}}
-            <button type="submit" class="cart-btn">{% trans "Checkout" %}</button>
+
+            <div class="checkout-payment">
+              <h2 class="py-4">{% trans "Payment Method" %}</h2>
+              <div class="payment-group mb--10">
+                <div class="payment-radio">
+                  <input type="radio" value="paypal" name="payment-method" id="paypal" />
+                  <label class="payment-label" for="paypal">{% trans "PayPal online portal" %}</label>
+                </div>
+                <div class="payment-radio">
+                  <input type="radio" value="zarinpal" name="payment-method" id="zarinpal" />
+                  <label class="payment-label" for="zarinpal">{% trans "ZarinPal online portal" %}</label>
+                </div>
+              </div>
+            </div>
+
+            <button type="submit" class="cart-btn" style="margin-top: 20px;">{% trans "Checkout" %}</button>
           </form>
         </div>
         <div class="col-lg-4">
@@ -55,17 +70,7 @@
                 </tr>
               </tfoot>
             </table>
-            <div class="checkout-payment">
-              <h2 class="py-5">{% trans "Payment Method" %}</h2>
-              <form action="#" class="payment-form">
-                <div class="payment-group mb--10">
-                  <div class="payment-radio">
-                    <input type="radio" value="bank" name="payment-method" id="bank" checked />
-                    <label class="payment-label" for="cheque">{% trans "Zarin Pal online portal" %}</label>
-                  </div>
-                </div>
-              </form>
-            </div>
+            
           </div>
         </div>
       </div>

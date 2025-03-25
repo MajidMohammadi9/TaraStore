@@ -16,7 +16,7 @@ def order_create_view(request):
     address=Address.objects.filter(customer=customer).first()  # None is returned if no address exists.
 
     if request.method=='POST':
-        print(request.POST.get('payment-method'))
+        payment_method = request.POST.get('payment-method')
         order_form=OrderForm(request.POST, customer=customer, address=address)
         cart=Cart(request)
 
@@ -24,7 +24,7 @@ def order_create_view(request):
             messages.warning(request, _('You can not proceed to checkout page, because your cart is empty!'))
             return redirect('home')
 
-        if order_form.is_valid():
+        if order_form.is_valid() and payment_method in ['zarinpal', 'paypal']:
             with transaction.atomic():
                 order_obj=order_form.save(commit=False)
                 order_obj.customer=customer
@@ -61,9 +61,13 @@ def order_create_view(request):
                     Address.objects.create(customer=customer, **address_data)
                 
                 request.session['order_id']=order_obj.id
-            return redirect('payment:payment_process')
-            # messages.success(request, _('Your order has successfully placed.'))
-            # return redirect('home')
+                if payment_method == 'paypal':
+                    return redirect('payment:payment_paypal')
+                elif payment_method == 'zarinpal':
+                    return redirect('payment:payment_zarinpal')
+                
+        else:
+            messages.error(request, _('Please fill in all fields and select a payment method.'))
     else:
         order_form=OrderForm(customer=customer, address=address)
 

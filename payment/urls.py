@@ -3,8 +3,8 @@ from django.urls import path
 from .views import (
     payment_process,
     payment_callback,
-    payment_process_sandbox,
-    payment_callback_sandbox,
+    payment_sandbox_zarinpal,
+    callback_sandbox_zarinpal,
     payment_sandbox_paypal,
     callback_sandbox_paypal,
 )
@@ -12,8 +12,8 @@ from .views import (
 app_name='payment'
 
 urlpatterns = [
-    # path('process/' ,payment_process_sandbox, name='payment_process'),
-    # path('callback/',payment_callback_sandbox, name='payment_callback'),
-    path('process/' ,payment_sandbox_paypal, name='payment_process'),
-    path('callback/',callback_sandbox_paypal, name='payment_callback'),
+    path('payment-zarinpal/' , payment_sandbox_zarinpal, name='payment_zarinpal'),
+    path('callback-zarinpal/', callback_sandbox_zarinpal, name='callback_zarinpal'),
+    path('payment-paypal/' , payment_sandbox_paypal, name='payment_paypal'),
+    path('callback-paypal/', callback_sandbox_paypal, name='callback_paypal'),
 ]
