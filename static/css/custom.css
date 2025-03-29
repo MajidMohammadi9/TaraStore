@@ -1,8 +1,8 @@
 .cart-sidebar {
   position: fixed;
   top: 0;
-  right: -400px; /* عرض جدید */
-  width: 400px; /* عرض جدید */
+  right: -400px;
+  width: 400px;
   height: 100%;
   background: #fff;
   box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
@@ -62,15 +62,14 @@
 .submenu a i {
   margin-right: 8px;
   font-size: 24px;
-  /* تغییر اندازه آیکون */
 }
 
 .submenu a span {
   margin-left: 8px;
   font-size: 16px;
-  /* اندازه فونت */
+  
   color: #000;
-  /* رنگ متن */
+  
 }
 
 .cart-sidebar-header {
@@ -90,20 +89,20 @@
 
 .cart-item-container {
   display: flex;
-  align-items: center; /* عناصر را عمودی مرکز‌چین کند */
-  gap: 10px; /* فاصله بین عناصر */
+  align-items: center; 
+  gap: 10px; 
   padding: 10px 0;
 }
 
 .cart-item-image {
-  width: 50px; /* اندازه تصویر */
+  width: 50px; 
   height: 50px;
-  object-fit: cover; /* تصویر را بدون کشیدگی نمایش دهد */
-  border-radius: 5px; /* گرد کردن گوشه‌ها */
+  object-fit: cover; 
+  border-radius: 5px; 
 }
 
 .cart-item-details {
-  flex-grow: 1; /* این بخش تمام فضای باقی‌مانده را اشغال می‌کند */
+  flex-grow: 1; 
 }
 
 .cart-item-name {
@@ -129,52 +128,52 @@
 
 .mini-cart__buttons {
   display: flex;
-  justify-content: space-between; /* فاصله بین دکمه‌ها */
-  align-items: center; /* مرکز‌چین کردن عمودی */
-  margin-top: 20px; /* فاصله از بالا */
+  justify-content: space-between; 
+  align-items: center; 
+  margin-top: 20px; 
 }
 
 .mini-cart__buttons button {
-  padding: 10px 20px; /* حاشیه داخلی دکمه‌ها */
-  font-size: 16px; /* اندازه فونت */
-  border: none; /* بدون حاشیه */
-  border-radius: 5px; /* گرد کردن گوشه‌ها */
-  cursor: pointer; /* تغییر مکان‌نما به دست */
-  transition: background-color 0.3s ease, transform 0.3s ease; /* افکت‌های انتقالی */
+  padding: 10px 20px; 
+  font-size: 16px; 
+  border: none; 
+  border-radius: 5px;
+  cursor: pointer; 
+  transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 .mini-cart__buttons a {
-  text-decoration: none; /* حذف زیرخط لینک */
-  padding: 10px 20px; /* حاشیه داخلی لینک‌ها */
-  font-size: 16px; /* اندازه فونت */
-  border: none; /* بدون حاشیه */
-  border-radius: 5px; /* گرد کردن گوشه‌ها */
-  cursor: pointer; /* تغییر مکان‌نما به دست */
-  transition: background-color 0.3s ease, transform 0.3s ease; /* افکت‌های انتقالی */
-  text-align: center; /* متن را در وسط قرار دهد */
-  display: inline-block; /* برای استایل‌دهی بهتر */
+  text-decoration: none; 
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none; 
+  border-radius: 5px; 
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  text-align: center; 
+  display: inline-block; 
 }
 
 .continue-shopping-btn {
-  background-color: rgb(224, 217, 217); /* رنگ زمینه */
-  color: black; /* رنگ متن */
+  background-color: rgb(224, 217, 217);
+  color: black; 
 }
 
 .continue-shopping-btn:hover {
-  background-color: black; /* تغییر رنگ هنگام حرکت ماوس */
+  background-color: black; 
   color: rgb(224, 217, 217);
-  transform: scale(1.05); /* بزرگ‌نمایی کمی */
+  transform: scale(1.05);
 }
 
 .checkout-btn {
-  background-color: rgb(224, 217, 217); /* رنگ زمینه */
-  color: black; /* رنگ متن */
+  background-color: rgb(224, 217, 217);
+  color: black; 
 }
 
 .checkout-btn:hover {
-  background-color: black; /* تغییر رنگ هنگام حرکت ماوس */
+  background-color: black;
   color: rgb(224, 217, 217);
-  transform: scale(1.05); /* بزرگ‌نمایی کمی */
+  transform: scale(1.05); 
 }
 
 .cart-btn {
@@ -191,4 +190,22 @@
 .cart-btn:hover {
   background-color: black;
   color: white;
+}
+
+/* Enable scroll for cart content */
+.cart-sidebar-content {
+  flex: 1; /* Allows it to take remaining space */
+  overflow-y: auto; /* Enable vertical scroll if content exceeds height */
+  max-height: calc(100vh - 150px); /* Adjusts content height dynamically */
+  padding-right: 10px; /* Optional: Prevents content from touching scrollbar */
+}
+
+/* Ensure mini-cart buttons stay at the bottom */
+.mini-cart__buttons {
+  position: sticky; /* Keep it visible while scrolling */
+  bottom: 0; /* Stick to bottom of cart */
+  background: #fff; /* Ensure background covers content behind */
+  padding: 15px 0; /* Space for buttons */
+  border-top: 1px solid #ddd; /* Optional: Divider between content and buttons */
+  z-index: 10; /* Ensures it's on top of scroll content */
 }

@@ -41,39 +41,40 @@
                 </thead>
                 <tbody>
                     {% for order in orders %}
-                    <tr>
-                        <td>
-                            <a href="{% url 'order_detail' order.id %}">{{order.id}}</a>
-                        </td>
-                        <td>
-                            {{ order.get_total_price|convert_currency|translate_number }}
-                        </td>
-                        <td>
-                            {{ order.datetime_created}}
-                        </td>
-                        <td>
-                        {{order.get_status_display}}
-                        </td>
-                        {% if order.status != 'p' %}
+                        <tr>
                             <td>
-                            <form id="payment-form" method="post" onsubmit="return validatePayment(event);">
-                                {% csrf_token %}
-                                <input type="hidden" name="order_id" value="{{ order.id }}">
-                                <div style="display: flex; gap: 40px; align-items: center;">
-                                    <div class="payment-radio">
-                                        <input type="radio" value="{% url 'payment:payment_paypal' %}" name="payment-method" id="paypal">
-                                        <label for="paypal">{% trans "PayPal" %}</label>
-                                    </div>
-                                    <div class="payment-radio">
-                                        <input type="radio" value="{% url 'payment:payment_zarinpal' %}" name="payment-method" id="zarinpal">
-                                        <label for="zarinpal">{% trans "ZarinPal" %}</label>
-                                    </div>
-                                </div>
-                                <button type="submit" class="cart-btn">{% trans "Checkout" %}</button>
-                            </form>
+                                <a href="{% url 'order_detail' order.id %}">{{order.id}}</a>
                             </td>
-                        {% endif %}
-                    </tr>
+                            <td>
+                                {{ order.get_total_price|convert_currency|translate_number }}
+                            </td>
+                            <td>
+                                {{ order.datetime_created}}
+                            </td>
+                            <td>
+                            {{order.get_status_display}}
+                            </td>
+                            {% if order.status != order.ORDER_STATUS_PAID %}
+                                <td>
+                                <form id="payment-form-{{ order.id }}" method="post" onsubmit="return validatePayment(event, '{{ order.id }}');">
+                                {% comment %} <form id="payment-form-{{ order.id }}" method="post" onsubmit="handlePayment(event, '{{ order.id }}');"> {% endcomment %}
+                                    {% csrf_token %}
+                                    <input type="hidden" name="order_id" value="{{ order.id }}">
+                                    <div style="display: flex; gap: 40px; align-items: center;">
+                                        <div class="payment-radio">
+                                            <input type="radio" value="{% url 'payment:payment_paypal' %}" name="payment-method-{{ order.id }}" id="paypal-{{ order.id }}">
+                                            <label for="paypal-{{ order.id }}">{% trans "PayPal" %}</label>
+                                        </div>
+                                        <div class="payment-radio">
+                                            <input type="radio" value="{% url 'payment:payment_zarinpal' %}" name="payment-method-{{ order.id }}" id="zarinpal-{{ order.id }}">
+                                            <label for="zarinpal-{{ order.id }}">{% trans "ZarinPal" %}</label>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="cart-btn">{% trans "Checkout" %}</button>
+                                </form>
+                                </td>
+                            {% endif %}
+                        </tr>
                     {% endfor %}
                 </tbody>
                 </table>
@@ -91,26 +92,72 @@
     </section>
 
     <script>
-        function validatePayment() {
-            const paymentMethod = document.querySelector('input[name="payment-method"]:checked');
+        function validatePayment(event, orderId) {
+            const paymentMethod = document.querySelector(`input[name="payment-method-${orderId}"]:checked`);
             if (!paymentMethod) {
                 event.preventDefault();
                 alert("{% trans 'Please select one of the payment methods.' %}");
                 return false;
             }
-            return true; 
+            document.getElementById(`payment-form-${orderId}`).action = paymentMethod.value;
+            return true;
         }
     </script>
 
+    {% comment %} <script>
+        // Payment Management Function
+        // After clicking the checkout button, refresh the page and then proceed to payment, as refreshing the page will update the prices for unpaid orders.
+        function handlePayment(event, orderId) {
+            event.preventDefault(); // Prevent immediate form submission
+    
+            const paymentMethod = document.querySelector(`input[name="payment-method-${orderId}"]:checked`);
+            if (!paymentMethod) {
+                alert("{% trans 'Please select one of the payment methods.' %}");
+                return false;
+            }
+    
+            // Saving the user's selection in localStorage
+            localStorage.setItem('paymentMethod', paymentMethod.value);
+            localStorage.setItem('orderId', orderId);
+    
+             // Delay before refreshing the page (3 seconds)
+            setTimeout(function() {
+                location.reload();
+            }, 5); // 5 milliseconds
+        }
+    
+        // Auto-submit to the payment gateway after page load.
+        window.addEventListener('load', function () {
+            const paymentMethod = localStorage.getItem('paymentMethod');
+            const orderId = localStorage.getItem('orderId');
+    
+            if (paymentMethod && orderId) {
+                
+                const form = document.getElementById(`payment-form-${orderId}`);
+                if (form) {
+                    form.action = paymentMethod;
+                    form.submit();
+                }
+    
+                // Clearing data from localStorage
+                localStorage.removeItem('paymentMethod');
+                localStorage.removeItem('orderId');
+            }
+        });
+    </script> {% endcomment %}
+    
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            const form = document.getElementById('payment-form');
-            const paymentRadios = document.querySelectorAll('input[name="payment-method"]');
-
-            paymentRadios.forEach(radio => {
-                radio.addEventListener('change', function () {
-                    
-                    form.action = this.value;
+            const forms = document.querySelectorAll('form[id^="payment-form-"]');
+            
+            forms.forEach(form => {
+                const orderId = form.getAttribute('id').split('-')[2];
+                const paymentRadios = form.querySelectorAll(`input[name="payment-method-${orderId}"]`);
+                
+                paymentRadios.forEach(radio => {
+                    radio.addEventListener('change', function () {
+                        form.action = this.value;
+                    });
                 });
             });
         });

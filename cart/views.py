@@ -35,7 +35,8 @@ def remove_from_cart(request, product_id):
     cart=Cart(request)
     product=get_object_or_404(Product, id=product_id)
     cart.remove(product)
-    return redirect('cart:cart_detail')
+    return redirect(request.META.get('HTTP_REFERER'))
+    # return redirect('cart:cart_detail')
 
 @require_POST
 def clear_cart(request):

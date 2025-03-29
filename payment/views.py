@@ -210,8 +210,6 @@ def payment_sandbox_paypal(request):
     order_id = request.POST.get("order_id") or request.session.get("order_id")
     order=get_object_or_404(Order, id=order_id)
     total_price=order.get_total_price()
-    # print(f'type={type(total_price)}')
-    # omr_total_price=total_price * 0.386
 
     currency = "USD"
 

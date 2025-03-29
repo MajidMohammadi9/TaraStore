@@ -69,6 +69,7 @@
               <a href="{{ product.get_absolute_url }}" style="color:black;"><h6>{{ product.name }}</h6></a>
               <span>{{ product.unit_price|convert_currency|translate_number }}</span>
               {% include 'products/stars.html' %}
+              Stock: {{product.inventory}}
             </div>
           </div>
         </div>
@@ -84,4 +85,3 @@
 </section>
 <!-- ***** Products Area Ends ***** -->
 
-{% comment %} {% include 'cart/cart_sidebar.html' %} {% endcomment %}

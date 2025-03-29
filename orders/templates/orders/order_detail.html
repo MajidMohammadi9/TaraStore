@@ -43,6 +43,11 @@
                         </td>
                         <td>
                             {{item.price|convert_currency|translate_number}}
+                            {% comment %} {% if order.status == order.ORDER_STATUS_PAID %}
+                                {{item.price|convert_currency|translate_number}}
+                            {% elif order.status == order.ORDER_STATUS_UNPAID %}
+                                {{item.product.unit_price|convert_currency|translate_number}}
+                            {% endif %} {% endcomment %}
                         </td>
                     </tr>
                 {% endfor %}
