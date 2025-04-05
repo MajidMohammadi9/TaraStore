@@ -176,8 +176,20 @@ class ProductDeleteView(UserPassesTestMixin, DeleteView):
         return redirect('product_list')
     
     def post(self, request, *args, **kwargs):
-        product=self.get_object()
-        # messages.success(self.request, _("Product was deleted successfully"))
+    
+        # if product is associated with any order, prevent deletion
+        product = self.get_object()
+        if product.order_items.exists():
+            order_items = product.order_items.all()
+            order_ids = ", ".join(str(item.order.id) for item in order_items)
+            messages.warning(
+                self.request, 
+                _("Cannot delete %(name)s because it is associated with order items: %(order)s.") % {
+                    "name": product.name,
+                    "order": order_ids
+                }
+            )
+            return redirect('product_list')
         messages.success(self.request, _("%(name)s was deleted successfully!") % {"name": product.name})
         return super().post(request, *args, **kwargs)
 

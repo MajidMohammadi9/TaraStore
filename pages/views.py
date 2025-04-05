@@ -17,7 +17,7 @@ class HomePageView(ListView):
     queryset = Category.objects.prefetch_related(
             Prefetch(
                 'products',
-                queryset=Product.objects.annotate(
+                queryset=Product.objects.filter(active=True).annotate(
                     average_rating=Coalesce(Avg('comments__stars'), Value(0, output_field=FloatField())),
                     product_stars_count=Count('comments', filter=Q(comments__stars__isnull=False))
                 ).prefetch_related('images').order_by('-datetime_created')
@@ -37,9 +37,6 @@ class HomePageView(ListView):
 class AboutUsPageView(TemplateView):
     template_name = 'pages/aboutus.html'
 
-
-# class ContactUsPageView(TemplateView):
-#     template_name = 'pages/contact_us.html'
 
 def contact_us_view(request):
     if request.method=='POST':
