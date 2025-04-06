@@ -70,13 +70,14 @@
                         {% comment %} <input type="number" class="form-control" value="{{ item.quantity }}" min="1" /> {% endcomment %}
                         <div class="right-content">
                           <div class="quantity buttons_added">
-                            <input type="button" value="-" class="minus" />
+                            <input type="button" value="-" class="custom-minus" />
                             {{ item.product_update_quantity_form.quantity }}
-                            <input type="button" value="+" class="plus" />
+                            <input type="button" value="+" class="custom-plus" />
                           </div>
                         </div>
                         {{ item.product_update_quantity_form.inplace }}
                         <button type="submit" class="small cart-btn" style="padding: 2px 5px; font-size: 10px;"><i class="fa fa-refresh"></i></button>
+                        <input type="hidden" value="{{ item.product_obj.inventory }}" data-max="{{ item.product_obj.inventory }}">
                       </form>
                     </td>
                     <td>{{ item.total_price|convert_currency|translate_number }}</td>

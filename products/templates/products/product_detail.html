@@ -54,9 +54,9 @@
                 </div>
                 <div class="right-content">
                   <div class="quantity buttons_added">
-                    <input type="button" value="-" class="minus" />
+                    <input type="button" value="-" class="custom-minus"/>                    
                     {{ add_to_cart_form.quantity }}
-                    <input type="button" value="+" class="plus" />
+                    <input type="button" value="+" class="custom-plus"/>
                   </div>
                 </div>
               </div>
@@ -132,5 +132,48 @@
   </section>
   <!-- ***** Comments Section Ends ***** -->
 
-  {% comment %} {% include 'cart/cart_sidebar.html' %} {% endcomment %}
+  <script>
+    window.productMaxQuantity = {{ product.inventory }};
+  </script>
+  {% comment %} <script>
+    var maxQuantity = {{ product.inventory }};
+  </script> {% endcomment %}
+  
+  {% comment %} <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const quantityInput = document.querySelector('input[name="quantity"]');
+      const plusButton = document.querySelector(".custom-plus");
+      const minusButton = document.querySelector(".custom-minus");
+      const maxQuantity = parseInt("{{ product.inventory }}");
+  
+      function updateQuantityButtons(value) {
+        plusButton.disabled = value >= maxQuantity;
+        minusButton.disabled = value <= 1;
+      }
+  
+      if (plusButton && minusButton && quantityInput) {
+        plusButton.addEventListener("click", function (e) {
+          e.preventDefault();
+          e.stopPropagation();
+          let current = parseInt(quantityInput.value) || 1;
+          if (current < maxQuantity) {
+            quantityInput.value = current + 1;
+            updateQuantityButtons(current + 1);
+          }
+        });
+  
+        minusButton.addEventListener("click", function (e) {
+          e.preventDefault();
+          e.stopPropagation();
+          let current = parseInt(quantityInput.value) || 1;
+          if (current > 1) {
+            quantityInput.value = current - 1;
+            updateQuantityButtons(current - 1);
+          }
+        });
+  
+        updateQuantityButtons(parseInt(quantityInput.value));
+      }
+    });
+  </script> {% endcomment %}
 {% endblock %}

@@ -13,4 +13,3 @@ class AddToCartProductForm(forms.Form):
     )
 
     inplace = forms.BooleanField(required=False, widget=forms.HiddenInput)
-    

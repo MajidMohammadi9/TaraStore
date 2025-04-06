@@ -35,8 +35,11 @@ class Cart:
         else:
             self.cart[product_id]['quantity'] += quantity
 
-        messages.success(self.request, _('Product added to cart successfully.'))
-        self.save()
+        if self.cart[product_id]['quantity'] <= product.inventory:
+            self.save()
+            messages.success(self.request, _('Product added to cart successfully.'))
+        else:
+            messages.error(self.request, _('Sorry, The selected quantity exceeds the available stock.'))
 
     def save(self):
         """

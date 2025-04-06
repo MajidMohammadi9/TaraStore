@@ -96,47 +96,101 @@ def payment_callback(request):
           # you can write a code that prevents the cart from emptying.
           return HttpResponse(f'The transaction was unsuccessful.{error_code:} {error_message}')
     
+# def payment_sandbox_zarinpal(request):
+
+#     # Get order id from session or from request (in my_orders.html if unpaid)
+#     order_id = request.POST.get("order_id") or request.session.get("order_id")
+    
+#     # Get the order object
+#     order=get_object_or_404(Order,id=order_id)
+
+#     total_price=order.get_total_price()
+#     rial_total_price=total_price*920000
+
+#     # zarinpal_request_url='https://sandbox.zarinpal.com/pg/rest/WebGate/PaymanRequest.json'
+#     zarinpal_request_url='https://sandbox.zarinpal.com/pg/v4/payment/request.json'
+
+#     request_header={
+# 		"accept":"application/json",
+# 		"content-type":"application/json",
+#     }
+
+#     request_data={
+# 		# 'merchant_id':'87f01487-b706-47a3-97af-49fc1420d97b',
+#         'merchant_id': settings.ZARINPAL_MERCHANT_ID,
+# 		'amount': rial_total_price,
+# 		'description': f'#{order.id}: {order.customer.full_name}',
+# 		'callback_url': request.build_absolute_uri(reverse('payment:callback_zarinpal')),
+#     }
+    
+#     res=requests.post(url=zarinpal_request_url, data=json.dumps(request_data), headers=request_header)
+    
+#     # print(f'res json process={res.json()}') # just for test
+#     data=res.json()['data']
+#     # print(f'res.json[data]={data}')
+#     authority=data['authority']
+#     order.authority=authority
+#     order.save()
+
+#     if 'errors' not in data or len(data['errors'])==0:
+#         return redirect('https://sandbox.zarinpal.com/pg/StartPay/{authority}'.format(authority=authority))
+#     else:
+#         return HttpResponse('Error from zarinpal')
+
 def payment_sandbox_zarinpal(request):
+    try:
+        order_id = request.POST.get("order_id") or request.session.get("order_id")
+        if not order_id:
+            return HttpResponse("No order ID provided.")
 
-    # Get order id from session or from request (in my_orders.html if unpaid)
-    order_id = request.POST.get("order_id") or request.session.get("order_id")
-    
-    # Get the order object
-    order=get_object_or_404(Order,id=order_id)
+        order = get_object_or_404(Order, id=order_id)
 
-    total_price=order.get_total_price()
-    rial_total_price=total_price*920000
+        for item in order.items.select_related('product'):
+            if item.product.inventory < item.quantity:
+                messages.error(request, _(f'Not enough inventory for {item.product.name}.'))
+                return redirect(request.META.get('HTTP_REFERER'))
 
-    # zarinpal_request_url='https://sandbox.zarinpal.com/pg/rest/WebGate/PaymanRequest.json'
-    zarinpal_request_url='https://sandbox.zarinpal.com/pg/v4/payment/request.json'
+        total_price = order.get_total_price()
+        rial_total_price = int(total_price * 920000) 
 
-    request_header={
-		"accept":"application/json",
-		"content-type":"application/json",
-    }
+        zarinpal_request_url = 'https://sandbox.zarinpal.com/pg/v4/payment/request.json'
+        request_header = {
+            "accept": "application/json",
+            "content-type": "application/json",
+        }
+        request_data = {
+            "merchant_id": settings.ZARINPAL_MERCHANT_ID,
+            "amount": rial_total_price,
+            "description": f"#{order.id}: {order.customer.full_name}",
+            "callback_url": request.build_absolute_uri(reverse('payment:callback_zarinpal')),
+        }
 
-    request_data={
-		# 'merchant_id':'87f01487-b706-47a3-97af-49fc1420d97b',
-        'merchant_id': settings.ZARINPAL_MERCHANT_ID,
-		'amount': rial_total_price,
-		'description': f'#{order.id}: {order.customer.full_name}',
-		'callback_url': request.build_absolute_uri(reverse('payment:callback_zarinpal')),
-    }
-    
-    res=requests.post(url=zarinpal_request_url, data=json.dumps(request_data), headers=request_header)
-    
-    # print(f'res json process={res.json()}') # just for test
-    data=res.json()['data']
-    # print(f'res.json[data]={data}')
+        res = requests.post(
+            url=zarinpal_request_url,
+            data=json.dumps(request_data),
+            headers=request_header,
+        )
 
-    authority=data['authority']
-    order.authority=authority
-    order.save()
+        res_data = res.json()
 
-    if 'errors' not in data or len(data['errors'])==0:
-        return redirect('https://sandbox.zarinpal.com/pg/StartPay/{authority}'.format(authority=authority))
-    else:
-        return HttpResponse('Error from zarinpal')
+        if res.status_code == 200 and 'data' in res_data:
+            data = res_data['data']
+            if data.get('code') == 100 and 'authority' in data:
+                authority = data['authority']
+                order.authority = authority
+                order.save()
+                return redirect(f"https://sandbox.zarinpal.com/pg/StartPay/{authority}")
+            else:
+                error_message = data.get('message', 'A problem occurred during the payment.')
+                return HttpResponse(f"Zarinpal Error: {error_message}")
+        else:
+            errors = res_data.get('errors', [])
+            return HttpResponse(f"Zarinpal Error: {errors}")
+
+    except requests.exceptions.RequestException as e:
+        return HttpResponse(f"Request Error: {str(e)}")
+    except Exception as e:
+        return HttpResponse(f"Unexpected Error: {str(e)}")
 
 
 def callback_sandbox_zarinpal(request):
@@ -180,6 +234,11 @@ def callback_sandbox_zarinpal(request):
                 order.data=data
                 order.save()
 
+                for item in order.items.select_related('product'):
+                    item.product.inventory-=item.quantity
+                    item.product.save()
+
+
                 # return HttpResponse('Your payment was successful.')
                 messages.success(request, _('Your payment was successful.'))
                 return redirect('home')
@@ -209,6 +268,12 @@ def payment_sandbox_paypal(request):
     # Get order id from session or from request (in my_orders.html if unpaid)
     order_id = request.POST.get("order_id") or request.session.get("order_id")
     order=get_object_or_404(Order, id=order_id)
+
+    for item in order.items.select_related('product'):
+            if item.product.inventory < item.quantity:
+                messages.error(request, _(f'Not enough inventory for {item.product.name}.'))
+                return redirect(request.META.get('HTTP_REFERER'))
+            
     total_price=order.get_total_price()
 
     currency = "USD"
@@ -302,6 +367,10 @@ def callback_sandbox_paypal(request):
             order.save
             order.data=capture_data
             order.save()
+
+            for item in order.items.select_related('product'):
+                    item.product.inventory-=item.quantity
+                    item.product.save()
 
             messages.success(request, _('Payment captured successfully'))
             return redirect('home')

@@ -25,7 +25,7 @@ class Discount(models.Model):
 
 
 class Product(models.Model):
-    name = models.CharField(max_length=255, verbose_name=_('Product Name'))
+    name = models.CharField(max_length=255, unique=True, verbose_name=_('Product Name'))
     category = models.ForeignKey(Category, on_delete=models.PROTECT, related_name='products', verbose_name=_('Category'))
     slug = models.SlugField(verbose_name=_('Slug'))
     description = RichTextField(verbose_name=_('Description'))
