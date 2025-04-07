@@ -70,7 +70,7 @@ def convert_currency(price):
     symbol=CURRENCY_SYMBOLS.get(language, '$')
     decimal_places=DECIMAL_PLACES.get(language, 2)
 
-    converted_price=price*rate
+    converted_price=Decimal(price)*Decimal(rate)
 
     return f'{converted_price:,.{decimal_places}f} {symbol}'
 

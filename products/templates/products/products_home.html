@@ -45,6 +45,6 @@
     <a href="{{ product.get_absolute_url }}" style="color: black;"><h6>{{ product.name }}</h6></a>
     <span>{{ product.unit_price|convert_currency|translate_number }}</span>
     {% include 'products/stars.html' %}
-    Stock: {{product.inventory}}
+    {% trans "Stock" %}: {{product.inventory|translate_number}}
   </div>
 </div>
