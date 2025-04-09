@@ -1,0 +1,82 @@
+{% extends "_base.html" %}
+{% load static %}
+{% load i18n %}
+{% load translation_tags %}
+
+{% block page_title %}
+    {% trans "FAQ" %}
+{% endblock page_title %}
+
+{% block content %}
+<!-- ***** Main Banner Area Start ***** -->
+{% trans "FAQ" as faq %}
+{% include "pages/banner.html" with banner_title=faq %}
+<!-- ***** Main Banner Area End ***** -->
+
+<div class="container mt-5 mb-5" style="max-width: 800px; padding-left: 15px; padding-right: 15px;">
+    <!-- Search Box -->
+    <form method="GET" action="" class="mb-4">
+        <div class="input-group">
+            <input type="text" name="q" class="form-control" placeholder="{% trans 'Search' %}" value="{{ query|default_if_none:'' }}">
+            <button type="submit" class="btn btn-primary">{% trans "Search" %}</button>
+        </div>
+    </form>
+
+    <!-- Accordion -->
+    {% if categories %}
+        <div class="accordion" id="faqAccordion">
+            {% for category in categories %}
+                <h3 style="
+                    {% if not forloop.first %}
+                        border-top: 1px solid #dee2e6;
+                        padding-top: 25px;
+                    {% endif %}
+                    margin-bottom: 15px;
+                    margin-top: 20px;
+                    font-weight: bold;
+                ">
+                    {% if language == 'fa' %}
+                        {{ category.title_fa }}
+                    {% elif language == 'ar' %}
+                        {{ category.title_ar }}
+                    {% else %}
+                        {{ category.title_en }}
+                    {% endif %}
+                </h3>
+
+                {% for faq in category.faqs.all %}
+                    <div class="accordion-item mb-2">
+                        <h2 class="accordion-header" id="heading{{ faq.id }}">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapse{{ faq.id }}" aria-expanded="false"
+                                    aria-controls="collapse{{ faq.id }}">
+                                {% if language == 'fa' %}
+                                    {{ faq.question_fa }}
+                                {% elif language == 'ar' %}
+                                    {{ faq.question_ar }}
+                                {% else %}
+                                    {{ faq.question_en }}
+                                {% endif %}
+                            </button>
+                        </h2>
+                        <div id="collapse{{ faq.id }}" class="accordion-collapse collapse"
+                            aria-labelledby="heading{{ faq.id }}" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                {% if language == 'fa' %}
+                                    {{ faq.answer_fa }}
+                                {% elif language == 'ar' %}
+                                    {{ faq.answer_ar }}
+                                {% else %}
+                                    {{ faq.answer_en }}
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="text-danger mt-4">{% trans "No results found." %}</p>
+    {% endif %}
+</div>
+{% endblock %}
