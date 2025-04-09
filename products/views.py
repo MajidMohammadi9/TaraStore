@@ -10,6 +10,8 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.core.paginator import Paginator
 from django.db.models.functions import Coalesce
+from django.http import JsonResponse
+from django.views import View
 
 from .models import Product, Comment, ProductImage, Category
 from .forms import CommentForm, ProductForm
@@ -226,4 +228,25 @@ class ProductSearchView(BaseProductListView):
 
 #     return render(request, 'products/search.html', {'query': query, 'page_obj': page_obj})
 
-    
+
+class LiveSearchView(View):
+    def get(self, request, *args, **kwargs):
+        query = request.GET.get('q', '').strip()
+        if not query:
+            return JsonResponse({'results': []})
+        
+        products = Product.objects.filter(
+            Q(active=True) & (Q(name__icontains=query) | Q(category__title__icontains=query))            
+        ).distinct()[:10] 
+        
+        results = []
+        for product in products:
+            results.append({
+                'id': product.id,
+                'name': product.name,
+                'url': product.get_absolute_url(),
+                # 'image': product.images.first().image.url if product.images.exists() else '/static/images/default.jpg',
+                # 'price': str(product.unit_price),
+            })
+        
+        return JsonResponse({'results': results})

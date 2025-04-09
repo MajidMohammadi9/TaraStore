@@ -167,6 +167,14 @@
                   <input class="form-control me-2" type="search" placeholder="{% trans 'Search' %}..." aria-label="Search" name="q" value="{{ query }}" />
                   <button class="btn btn-outline-success" type="submit">{% trans 'Search' %}</button>
                 </form>
+
+                <!-- This form for live search -->
+                {% comment %} <form class="d-flex ms-auto position-relative" onsubmit="return false;">
+                  <input id="live-search-box" class="form-control me-2" type="search"
+                         placeholder="{% trans 'Search' %}..." aria-label="Search" autocomplete="off" />
+                  <div id="live-search-results" class="list-group position-absolute bg-white w-100 shadow"
+                       style="z-index: 999; top: 100%; display: none;"></div> {% endcomment %}
+                </form>
               </li>
             </ul>
             <!-- ***** Menu End ***** -->
@@ -281,5 +289,57 @@
         }
       })
     </script>
+
+    <script>
+      // For live search
+      document.addEventListener("DOMContentLoaded", function() {
+        const searchBox = document.getElementById("live-search-box");
+        const resultsBox = document.getElementById("live-search-results");
+      
+        searchBox.addEventListener("input", function() {
+          const query = this.value.trim();
+      
+          if (query.length === 0) {
+            resultsBox.innerHTML = "";
+            resultsBox.style.display = "none";
+            return;
+          }
+      
+          fetch(`/products/live-search/?q=${encodeURIComponent(query)}`)
+            .then(response => response.json())
+            .then(data => {
+              resultsBox.innerHTML = "";
+      
+              if (data.results.length === 0) {
+                resultsBox.style.display = "none";
+                return;
+              }
+      
+              data.results.forEach(product => {
+                const item = document.createElement("a");
+                item.href = product.url;
+                item.className = "list-group-item list-group-item-action d-flex align-items-center gap-2";
+                item.innerHTML = `
+                  {% comment %} <img src="${product.image}" style="width: 50px; height: 50px; object-fit: cover;" /> {% endcomment %}
+                  <div>
+                    <strong>${product.name}</strong><br />
+                    {% comment %} <small>${product.price}</small> {% endcomment %}
+                  </div>
+                `;
+                resultsBox.appendChild(item);
+              });
+      
+              resultsBox.style.display = "block";
+            });
+        });
+      
+        // Close the list on outside click.
+        document.addEventListener("click", function(event) {
+          if (!searchBox.contains(event.target) && !resultsBox.contains(event.target)) {
+            resultsBox.style.display = "none";
+          }
+        });
+      });
+    </script>      
   </body>
 </html>
