@@ -12,7 +12,11 @@ class CommentInline(admin.TabularInline):
         queryset = super().get_queryset(request)
         return queryset.select_related('author','product')
     
+    def get_readonly_fields(self, request, obj = None):
+        if obj:
+            return ['author']
 
+    
 class ProductImageInline(admin.TabularInline):
     model=ProductImage
     fields=['id','image']

@@ -43,13 +43,13 @@
                     {% for order in orders %}
                         <tr>
                             <td>
-                                <a href="{% url 'order_detail' order.id %}">{{order.id}}</a>
+                                <a href="{% url 'order_detail' order.id %}">{{order.id|translate_number}}</a>
                             </td>
                             <td>
                                 {{ order.get_total_price|convert_currency|translate_number }}
                             </td>
                             <td>
-                                {{ order.datetime_created}}
+                                {{ order.datetime_created|translate_datetime|translate_number}}
                             </td>
                             <td>
                             {{order.get_status_display}}

@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-21 20:51+0400\n"
-"PO-Revision-Date: 2025-02-21 20:57+0400\n"
-"Last-Translator:   <majid@majid.com>\n"
+"POT-Creation-Date: 2025-04-09 23:34+0400\n"
+"PO-Revision-Date: 2025-04-10 09:55+0400\n"
+"Last-Translator: majid Mohammadi <majid@majid.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -27,7 +27,7 @@ msgstr "البريد الإلكتروني"
 msgid "User"
 msgstr "المستخدم"
 
-#: .\accounts\models.py:15
+#: .\accounts\models.py:15 .\orders\forms.py:11
 msgid "Phone Number"
 msgstr " رقم الهاتف"
 
@@ -39,33 +39,373 @@ msgstr "تاريخ الميلاد"
 msgid "Customer"
 msgstr "العميل"
 
-#: .\accounts\models.py:28
+#: .\accounts\models.py:28 .\orders\forms.py:14
 msgid "Street"
 msgstr "الشارع"
 
-#: .\accounts\models.py:29
+#: .\accounts\models.py:29 .\orders\forms.py:15
 msgid "City"
 msgstr "المدينة"
 
-#: .\accounts\models.py:30
+#: .\accounts\models.py:30 .\orders\forms.py:16
 msgid "Province"
 msgstr "المحافظة"
 
-#: .\accounts\models.py:31
+#: .\accounts\models.py:31 .\orders\forms.py:17
 msgid "Postal Code"
 msgstr "الرمز البريدي"
 
-#: .\accounts\models.py:32
+#: .\accounts\models.py:32 .\orders\forms.py:18
 msgid "Country"
 msgstr "الدولة"
+
+#: .\cart\cart.py:40
+#| msgid "Product has been created successfully!"
+msgid "Product added to cart successfully."
+msgstr "تم إضافة المنتج إلى سلة الشراء بنجاح."
+
+#: .\cart\cart.py:42
+msgid "Sorry, The selected quantity exceeds the available stock."
+msgstr "عذرًا، الكمية المحددة تتجاوز المخزون المتوفر."
+
+#: .\cart\cart.py:60
+#| msgid "Product has been created successfully!"
+msgid "product removed from the cart successfully."
+msgstr "تم حذف المنتج من سلة الشراء بنجاح."
+
+#: .\cart\templates\cart\cart_detail.html:7
+#: .\cart\templates\cart\cart_detail.html:11
+#| msgid "Product Details"
+msgid "Cart Detail"
+msgstr "تفاصيل السلة"
+
+#: .\cart\templates\cart\cart_detail.html:23
+#: .\products\templates\products\product_delete.html:7
+#: .\products\templates\products\product_delete.html:18
+#: .\products\templates\products\product_detail.html:37
+msgid "Delete"
+msgstr "حذف"
+
+#: .\cart\templates\cart\cart_detail.html:26
+#| msgid "Product Images"
+msgid "Product Image"
+msgstr "صورة المنتج"
+
+#: .\cart\templates\cart\cart_detail.html:29 .\products\models.py:28
+msgid "Product Name"
+msgstr "اسم المنتج"
+
+#: .\cart\templates\cart\cart_detail.html:32 .\orders\models.py:52
+#: .\orders\templates\orders\order_detail.html:31 .\products\models.py:33
+msgid "Price"
+msgstr "السعر"
+
+#: .\cart\templates\cart\cart_detail.html:35 .\orders\models.py:51
+#: .\orders\templates\orders\order_create.html:53
+#: .\orders\templates\orders\order_detail.html:28
+msgid "Quantity"
+msgstr "الكمية"
+
+#: .\cart\templates\cart\cart_detail.html:38
+#: .\products\templates\products\product_detail.html:64
+msgid "Total"
+msgstr "المجموع"
+
+#: .\cart\templates\cart\cart_detail.html:92
+msgid "Empty Cart"
+msgstr "إفراغ السلة"
+
+#: .\cart\templates\cart\cart_detail.html:97
+#: .\cart\templates\cart\cart_sidebar.html:38
+#: .\orders\templates\orders\order_create.html:68
+msgid "Overall Total"
+msgstr "الإجمالي الكلي"
+
+#: .\cart\templates\cart\cart_detail.html:99 .\orders\models.py:42
+#| msgid "Over"
+msgid "Order"
+msgstr "الطلب"
+
+#: .\cart\templates\cart\cart_detail.html:107
+#, python-format
+msgid ""
+"\n"
+"        Cart is Empty, Please <a href=\"%(product_list_url)s\">add some items</a> to the cart.\n"
+"        "
+msgstr ""
+"\n"
+"السلة فارغة، من فضلك <a href=\"%(product_list_url)s\">أضف بعض المنتجات</a> إلى السلة."
 
 #: .\cart\templates\cart\cart_sidebar.html:8
 msgid "Cart"
 msgstr "سلة التسوق"
 
-#: .\cart\templates\cart\cart_sidebar.html:13
-msgid "Cart is empty"
-msgstr "سلة التسوق فارغة"
+#: .\cart\templates\cart\cart_sidebar.html:42
+#| msgid "Add To Cart"
+msgid "Go to Cart"
+msgstr "الانتقال إلى السلة"
+
+#: .\cart\templates\cart\cart_sidebar.html:43
+#: .\orders\templates\orders\my_orders.html:74
+#: .\orders\templates\orders\order_create.html:43
+msgid "Checkout"
+msgstr "إنهاء الشراء"
+
+#: .\cart\templates\cart\cart_sidebar.html:48
+msgid "Cart is Empty!, please add some products to the cart"
+msgstr "السلة فارغة! يرجى إضافة بعض المنتجات إلى السلة."
+
+#: .\cart\templates\cart\cart_sidebar.html:51
+#| msgid "Shopping"
+msgid "Go shopping"
+msgstr "متابعة التسوق"
+
+#: .\cart\views.py:45
+msgid "All products successfully removed from your cart."
+msgstr "تم إزالة جميع المنتجات من السلة بنجاح."
+
+#: .\cart\views.py:47
+#| msgid "Cart is empty"
+msgid "Your cart is already empty."
+msgstr "سلة الشراء فارغة بالفعل."
+
+#: .\faq\models.py:6
+#| msgid "Categories"
+msgid "Category Title"
+msgstr "عنوان الفئة"
+
+#: .\faq\models.py:12 .\faq\models.py:34 .\products\models.py:29
+msgid "Category"
+msgstr "الفئة"
+
+#: .\faq\models.py:13
+#| msgid "Description"
+msgid "Question"
+msgstr "سؤال"
+
+#: .\faq\models.py:14
+#| msgid "User"
+msgid "Answer"
+msgstr "الإجابة"
+
+#: .\faq\models.py:15 .\faq\models.py:43 .\orders\models.py:26
+#: .\pages\models.py:9 .\products\models.py:35 .\products\models.py:109
+msgid "Date Time Created"
+msgstr "تاريخ ووقت الإنشاء"
+
+#: .\faq\models.py:16 .\faq\models.py:44 .\orders\models.py:27
+#: .\products\models.py:36 .\products\models.py:110
+msgid "Date Time Modified"
+msgstr "تاريخ ووقت التعديل"
+
+#: .\faq\models.py:17 .\faq\models.py:45 .\products\models.py:38
+#: .\products\models.py:112
+msgid "Active"
+msgstr "نشط"
+
+#: .\faq\models.py:24
+#| msgid "Categories"
+msgid "CategoryTitle (English)"
+msgstr "عنوان الفئة (بالإنجليزية)"
+
+#: .\faq\models.py:25
+#| msgid "Categories"
+msgid "CategoryTitle (Persian)"
+msgstr "عنوان الفئة (بالفارسية)"
+
+#: .\faq\models.py:26
+msgid "CategoryTitle (Arabic)"
+msgstr "عنوان الفئة (بالعربية)"
+
+#: .\faq\models.py:35
+msgid "Question (English)"
+msgstr "السؤال (بالإنجليزية)"
+
+#: .\faq\models.py:36
+msgid "Question (Persian)"
+msgstr "سؤال (فارسي)"
+
+#: .\faq\models.py:37
+msgid "Question (Arabic)"
+msgstr "سؤال (عربي)"
+
+#: .\faq\models.py:39
+msgid "Answer (English)"
+msgstr "إجابة (بالإنجليزية)"
+
+#: .\faq\models.py:40
+msgid "Answer (Persian)"
+msgstr "إجابة (فارسي)"
+
+#: .\faq\models.py:41
+msgid "Answer (Arabic)"
+msgstr "إجابة (عربي)"
+
+#: .\faq\templates\faq\faq_list.html:7 .\faq\templates\faq\faq_list.html:12
+#: .\faq\templates\faq\faq_list_trans.html:7
+#: .\faq\templates\faq\faq_list_trans.html:12
+#: .\pages\templates\pages\footer.html:65 .\templates\_base.html:95
+#| msgid "FAQ's"
+msgid "FAQ"
+msgstr "الأسئلة الشائعة"
+
+#: .\faq\templates\faq\faq_list.html:26
+#: .\faq\templates\faq\faq_list_trans.html:20
+#: .\faq\templates\faq\faq_list_trans.html:21
+#: .\products\templates\products\search.html:7 .\templates\_base.html:168
+#: .\templates\_base.html:169
+msgid "Search"
+msgstr "بحث"
+
+#: .\faq\templates\faq\faq_list.html:70 .\faq\templates\faq\faq_list.html:95
+#: .\faq\templates\faq\faq_list_trans.html:79
+#| msgid "No products found"
+msgid "No results found."
+msgstr "لم يتم العثور على نتائج."
+
+#: .\orders\forms.py:9
+#| msgid "Birth Date"
+msgid "first name"
+msgstr "الاسم الأول"
+
+#: .\orders\forms.py:10
+msgid "last name"
+msgstr "اسم العائلة"
+
+#: .\orders\forms.py:12
+#| msgid "Your Email Address"
+msgid "email address"
+msgstr "عنوان البريد الإلكتروني"
+
+#: .\orders\forms.py:27
+msgid "If you have any notes, please enter here otherwise leave it empty."
+msgstr "إذا كان لديك أي ملاحظات، يرجى إدخالها هنا وإلا يمكنك تركها فارغة."
+
+#: .\orders\models.py:15
+msgid "Paid"
+msgstr "مدفوع"
+
+#: .\orders\models.py:16
+msgid "Unpaid"
+msgstr "غير مدفوع"
+
+#: .\orders\models.py:17
+msgid "Canceled"
+msgstr "ملغى"
+
+#: .\orders\models.py:21
+msgid "Note"
+msgstr "ملاحظة"
+
+#: .\orders\models.py:22
+#| msgid "Author"
+msgid "Authority"
+msgstr "المرجع / رمز التفويض (حسب السياق)"
+
+#: .\orders\models.py:23
+msgid "Reference ID"
+msgstr "رقم المرجع"
+
+#: .\orders\models.py:50 .\orders\templates\orders\order_create.html:52
+#: .\orders\templates\orders\order_detail.html:25 .\products\models.py:53
+#: .\products\models.py:105
+msgid "Product"
+msgstr "منتج"
+
+#: .\orders\templates\orders\my_orders.html:8
+#: .\orders\templates\orders\my_orders.html:13 .\templates\_base.html:92
+#| msgid "No. of Orders"
+msgid "My Orders"
+msgstr "طلباتي"
+
+#: .\orders\templates\orders\my_orders.html:26
+msgid "Order ID/View"
+msgstr "رقم الطلب / عرض"
+
+#: .\orders\templates\orders\my_orders.html:29
+#| msgid "Price"
+msgid "Total Price"
+msgstr "السعر الإجمالي"
+
+#: .\orders\templates\orders\my_orders.html:32
+#| msgid "Delete"
+msgid "Date"
+msgstr "التاريخ"
+
+#: .\orders\templates\orders\my_orders.html:35 .\products\models.py:111
+msgid "Status"
+msgstr "الحالة"
+
+#: .\orders\templates\orders\my_orders.html:38
+msgid "Payment"
+msgstr "الدفع"
+
+#: .\orders\templates\orders\my_orders.html:67
+msgid "PayPal"
+msgstr "باي بال"
+
+#: .\orders\templates\orders\my_orders.html:71
+msgid "ZarinPal"
+msgstr "زرین‌پال"
+
+#: .\orders\templates\orders\my_orders.html:88
+#, python-format
+msgid ""
+"\n"
+"            There is no order in your account, Please <a href=\"%(product_list_url)s\">add some items</a> to the cart.\n"
+"            "
+msgstr ""
+"\n"
+"لا يوجد أي طلب في حسابك، من فضلك <a href=\"%(product_list_url)s\">أضف بعض المنتجات</a> إلى السلة."
+
+#: .\orders\templates\orders\my_orders.html:100
+msgid "Please select one of the payment methods."
+msgstr "من فضلك اختر إحدى طرق الدفع."
+
+#: .\orders\templates\orders\order_create.html:8
+msgid "Order create"
+msgstr "إنشاء الطلب"
+
+#: .\orders\templates\orders\order_create.html:13
+msgid "Order Create"
+msgstr "إنشاء الطلب"
+
+#: .\orders\templates\orders\order_create.html:23
+#: .\orders\templates\orders\order_detail.html:8
+#: .\orders\templates\orders\order_detail.html:13
+#| msgid "Product Details"
+msgid "Order Details"
+msgstr "تفاصيل الطلب"
+
+#: .\orders\templates\orders\order_create.html:30
+msgid "Payment Method"
+msgstr "طريقة الدفع"
+
+#: .\orders\templates\orders\order_create.html:34
+msgid "PayPal online portal"
+msgstr "بوابة باي بال الإلكترونية"
+
+#: .\orders\templates\orders\order_create.html:38
+msgid "ZarinPal online portal"
+msgstr "بوابة زرین‌پال الإلكترونية"
+
+#: .\orders\templates\orders\order_create.html:47
+#| msgid "Your Name"
+msgid "Your Order"
+msgstr "طلبك"
+
+#: .\orders\templates\orders\order_create.html:54
+#| msgid "Price"
+msgid "Final Price"
+msgstr "السعر النهائي"
+
+#: .\orders\views.py:26
+msgid "You can not proceed to checkout page, because your cart is empty!"
+msgstr "لا يمكنك الانتقال إلى صفحة الدفع لأن سلة الشراء فارغة!"
+
+#: .\orders\views.py:72
+msgid "Please fill in all fields and select a payment method."
+msgstr "يرجى تعبئة جميع الحقول واختيار طريقة الدفع."
 
 #: .\pages\models.py:6
 msgid "Name"
@@ -75,12 +415,8 @@ msgstr "الاسم"
 msgid "message"
 msgstr "الرسالة"
 
-#: .\pages\models.py:9 .\products\models.py:35 .\products\models.py:108
-msgid "Date Time Created"
-msgstr "تاريخ ووقت الإنشاء"
-
 #: .\pages\templates\pages\aboutus.html:7
-#: .\pages\templates\pages\footer.html:48 .\templates\_base.html:91
+#: .\pages\templates\pages\footer.html:48 .\templates\_base.html:98
 msgid "About Us"
 msgstr "معلومات عنا"
 
@@ -118,7 +454,7 @@ msgstr ""
 
 #: .\pages\templates\pages\contact_us.html:7
 #: .\pages\templates\pages\contact_us.html:12
-#: .\pages\templates\pages\footer.html:54 .\templates\_base.html:94
+#: .\pages\templates\pages\footer.html:54 .\templates\_base.html:101
 msgid "Contact Us"
 msgstr "اتصل بنا"
 
@@ -179,10 +515,6 @@ msgstr " مساعدة"
 msgid "Information"
 msgstr "معلومات"
 
-#: .\pages\templates\pages\footer.html:65
-msgid "FAQ's"
-msgstr "الأسئلة الشائعة"
-
 #: .\pages\templates\pages\footer.html:68
 msgid "Shipping"
 msgstr "الشحن"
@@ -195,7 +527,7 @@ msgstr "رقم التتبع"
 msgid "Design"
 msgstr "التصميم"
 
-#: .\pages\templates\pages\home.html:7 .\templates\_base.html:65
+#: .\pages\templates\pages\home.html:7 .\templates\_base.html:66
 msgid "Home"
 msgstr "الرئيسية"
 
@@ -288,7 +620,7 @@ msgstr "أنواع مختلفة"
 msgid "Over"
 msgstr " أكثر من"
 
-#: .\pages\templates\pages\home.html:204 .\templates\_base.html:85
+#: .\pages\templates\pages\home.html:204 .\templates\_base.html:86
 msgid "Products"
 msgstr "منتجات"
 
@@ -388,9 +720,64 @@ msgstr "فيسبوك"
 msgid "Instagram"
 msgstr "إنستغرام"
 
-#: .\pages\views.py:53
+#: .\pages\views.py:50
 msgid "Your message sent successfully"
 msgstr "تم إرسال رسالتك بنجاح"
+
+#: .\payment\views.py:150 .\payment\views.py:274
+msgid "Not enough inventory for {item.product.name}."
+msgstr "لا يوجد مخزون كافٍ لـ {item.product.name}."
+
+#: .\payment\views.py:243
+#| msgid "Your message sent successfully"
+msgid "Your payment was successful."
+msgstr "تم الدفع بنجاح."
+
+#: .\payment\views.py:247
+msgid ""
+"Your payment was successful. However, this transaction has already recorded."
+msgstr "تم الدفع بنجاح، ولكن هذه المعاملة تم تسجيلها مسبقًا."
+
+#: .\payment\views.py:255
+msgid "The transaction was unsuccessful.{error_code:} {error_message}"
+msgstr "المعاملة لم تنجح. {error_code:} {error_message}"
+
+#: .\payment\views.py:261
+msgid "The transaction was unsuccessful."
+msgstr "المعاملة لم تنجح."
+
+#: .\payment\views.py:291
+msgid "Failed to retrieve access token"
+msgstr "فشل في استرجاع رمز الوصول (Access Token)"
+
+#: .\payment\views.py:323
+msgid "Authentication failed with PayPal"
+msgstr "فشل التحقق من الهوية مع باي بال"
+
+#: .\payment\views.py:327
+msgid "Unable to create PayPal order"
+msgstr "لا يمكن إنشاء طلب باي بال"
+
+#: .\payment\views.py:337
+msgid "Invalid request"
+msgstr "طلب غير صالح"
+
+#: .\payment\views.py:375
+#| msgid "Product has been created successfully!"
+msgid "Payment captured successfully"
+msgstr "تم تسجيل الدفع بنجاح"
+
+#: .\payment\views.py:380
+msgid "This order has already been captured"
+msgstr "تم تسجيل هذا الطلب مسبقًا"
+
+#: .\payment\views.py:384
+msgid "Authentication failed"
+msgstr "فشل التحقق من الهوية"
+
+#: .\payment\views.py:388
+msgid "Payment capture failed"
+msgstr "فشل تسجيل الدفع"
 
 #: .\products\models.py:12
 msgid "Title"
@@ -404,14 +791,6 @@ msgstr "الوصف"
 msgid "Discount"
 msgstr "الخصم"
 
-#: .\products\models.py:28
-msgid "Product Name"
-msgstr "اسم المنتج"
-
-#: .\products\models.py:29
-msgid "Category"
-msgstr "الفئة"
-
 #: .\products\models.py:30
 msgid "Slug"
 msgstr "العنوان الثابت"
@@ -420,85 +799,65 @@ msgstr "العنوان الثابت"
 msgid "Short Description"
 msgstr "الوصف القصير"
 
-#: .\products\models.py:33
-msgid "Price"
-msgstr "السعر"
-
 #: .\products\models.py:34
 msgid "Inventory"
 msgstr "المخزون"
 
-#: .\products\models.py:36 .\products\models.py:109
-msgid "Date Time Modified"
-msgstr "تاريخ ووقت التعديل"
-
-#: .\products\models.py:38 .\products\models.py:111
-msgid "Active"
-msgstr "نشط"
-
-#: .\products\models.py:52 .\products\models.py:104
-msgid "Product"
-msgstr "منتج"
-
-#: .\products\models.py:53
+#: .\products\models.py:54
 msgid "Product image"
 msgstr "صورة المنتج"
 
-#: .\products\models.py:91
+#: .\products\models.py:92
 msgid "Waiting"
 msgstr " في الانتظار"
 
-#: .\products\models.py:92
+#: .\products\models.py:93
 msgid "Approved"
 msgstr "معتمد"
 
-#: .\products\models.py:93
+#: .\products\models.py:94
 msgid "Not Approved"
 msgstr "غير معتمد"
 
-#: .\products\models.py:97
+#: .\products\models.py:98
 msgid "Very Bad"
 msgstr " سيء جدًا"
 
-#: .\products\models.py:98
+#: .\products\models.py:99
 msgid "Bad"
 msgstr "سيء"
 
-#: .\products\models.py:99
+#: .\products\models.py:100
 msgid "Normal"
 msgstr "عادي"
 
-#: .\products\models.py:100
+#: .\products\models.py:101
 msgid "Good"
 msgstr "جيد"
 
-#: .\products\models.py:101
+#: .\products\models.py:102
 msgid "Perfect"
 msgstr "ممتاز"
 
-#: .\products\models.py:105
+#: .\products\models.py:106
 msgid "Author"
 msgstr "المؤلف"
 
-#: .\products\models.py:106
+#: .\products\models.py:107
 msgid "Comment Text"
 msgstr "نص التعليق"
 
-#: .\products\models.py:107
-#: .\products\templates\products\product_detail.html:111
+#: .\products\models.py:108
+#: .\products\templates\products\product_detail.html:115
 msgid "Product Rating"
 msgstr "تقييم المنتج"
-
-#: .\products\models.py:110
-msgid "Status"
-msgstr "الحالة"
 
 #: .\products\templates\products\product_create.html:11
 msgid "Create Product"
 msgstr "إنشاء منتج"
 
 #: .\products\templates\products\product_create.html:16
-#: .\templates\_base.html:88
+#: .\templates\_base.html:89
 msgid "Add Product"
 msgstr "إضافة منتج"
 
@@ -511,14 +870,7 @@ msgstr " صور المنتج"
 msgid "Submit"
 msgstr "إرسال"
 
-#: .\products\templates\products\product_delete.html:7
-#: .\products\templates\products\product_delete.html:18
-#: .\products\templates\products\product_detail.html:37
-msgid "Delete"
-msgstr "حذف"
-
 #: .\products\templates\products\product_delete.html:12
-#| msgid "Product detail"
 msgid "Product Delete"
 msgstr "حذف المنتج"
 
@@ -536,7 +888,6 @@ msgid "Product detail"
 msgstr "تفاصيل المنتج"
 
 #: .\products\templates\products\product_detail.html:14
-#| msgid "Product detail"
 msgid "Product Details"
 msgstr "تفاصيل المنتج"
 
@@ -544,35 +895,27 @@ msgstr "تفاصيل المنتج"
 msgid "Edit"
 msgstr "تعديل"
 
-#: .\products\templates\products\product_detail.html:40
-msgid "$"
-msgstr "ريال عماني"
-
-#: .\products\templates\products\product_detail.html:50
+#: .\products\templates\products\product_detail.html:53
 msgid "No. of Orders"
 msgstr "عدد الطلبات"
 
-#: .\products\templates\products\product_detail.html:61
-msgid "Total"
-msgstr "المجموع"
-
-#: .\products\templates\products\product_detail.html:63
+#: .\products\templates\products\product_detail.html:66
 msgid "Add To Cart"
 msgstr "إضافة إلى السلة"
 
-#: .\products\templates\products\product_detail.html:76
+#: .\products\templates\products\product_detail.html:80
 msgid "Comments List"
 msgstr "قائمة التعليقات"
 
-#: .\products\templates\products\product_detail.html:100
+#: .\products\templates\products\product_detail.html:104
 msgid "No comments available"
 msgstr "لا توجد تعليقات متاحة"
 
-#: .\products\templates\products\product_detail.html:120
+#: .\products\templates\products\product_detail.html:124
 msgid "Send"
 msgstr "إرسال"
 
-#: .\products\templates\products\product_detail.html:124
+#: .\products\templates\products\product_detail.html:128
 msgid "You must be logged in to leave a comment"
 msgstr "يجب أن تكون مسجلاً للدخول لترك تعليق"
 
@@ -589,6 +932,11 @@ msgid "Check out all of our products"
 msgstr "تصفح جميع منتجاتنا"
 
 #: .\products\templates\products\product_display.html:72
+#: .\products\templates\products\products_home.html:48
+msgid "Stock"
+msgstr "المخزون"
+
+#: .\products\templates\products\product_display.html:77
 msgid "No products found"
 msgstr "لم يتم العثور على منتجات"
 
@@ -597,7 +945,6 @@ msgid "Kid's Product"
 msgstr "منتج للأطفال"
 
 #: .\products\templates\products\product_kids.html:10
-#| msgid "Kid's Product"
 msgid "Kids Products"
 msgstr "منتج للأطفال"
 
@@ -606,7 +953,6 @@ msgid "Product List"
 msgstr " قائمة المنتجات"
 
 #: .\products\templates\products\product_list.html:10
-#| msgid "Product List"
 msgid "Products List"
 msgstr " قائمة المنتجات"
 
@@ -615,7 +961,6 @@ msgid "Men's Product"
 msgstr "منتج رجالي"
 
 #: .\products\templates\products\product_men.html:10
-#| msgid "Men's Product"
 msgid "Mens Products"
 msgstr "منتج رجالي"
 
@@ -624,7 +969,6 @@ msgid "Produc Update"
 msgstr "تحديث المنتج"
 
 #: .\products\templates\products\product_update.html:17
-#| msgid "Produc Update"
 msgid "Product Update"
 msgstr "تحديث المنتج"
 
@@ -649,90 +993,90 @@ msgid "Women's Product"
 msgstr "منتج نسائي"
 
 #: .\products\templates\products\product_women.html:10
-#| msgid "Women's Product"
 msgid "Womens Products"
 msgstr "منتج نسائي"
-
-#: .\products\templates\products\search.html:7 .\templates\_base.html:161
-#: .\templates\_base.html:162
-msgid "Search"
-msgstr "بحث"
 
 #: .\products\templates\products\search.html:16
 msgid "Please enter your product to search"
 msgstr "يرجى إدخال منتجك للبحث"
 
-#: .\products\views.py:89
+#: .\products\views.py:93
 msgid "Comment successfully created."
 msgstr "تم إنشاء التعليق بنجاح."
 
-#: .\products\views.py:109
+#: .\products\views.py:113
 msgid "You don't have permission to add products.(Only admin)"
 msgstr "ليس لديك إذن لإضافة منتجات. (فقط المسؤول)"
 
-#: .\products\views.py:123
+#: .\products\views.py:127
 msgid "Product has been created successfully!"
 msgstr "تم إنشاء المنتج بنجاح!"
 
-#: .\products\views.py:137
+#: .\products\views.py:141
 msgid "You don't have permission to Edit products.(Only admin)"
 msgstr "ليس لديك إذن لتعديل المنتجات. (فقط المسؤول)"
 
-#: .\products\views.py:151
+#: .\products\views.py:159
 msgid "Product has been updated successfully!"
 msgstr "تم تحديث المنتج بنجاح!"
 
-#: .\products\views.py:156
+#: .\products\views.py:164
 msgid "There are errors in the form. Please fix them."
 msgstr "هناك أخطاء في النموذج. يرجى إصلاحها."
 
-#: .\products\views.py:169
+#: .\products\views.py:177
 msgid "You don't have permission to delete products.(Only admin)"
 msgstr "ليس لديك إذن لحذف المنتجات. (فقط المسؤول)"
 
-#: .\products\views.py:175
+#: .\products\views.py:189
+#, python-format
+msgid ""
+"Cannot delete %(name)s because it is associated with order items: %(order)s."
+msgstr "لا يمكن حذف %(name)s لأنه مرتبط بعناصر الطلب: %(order)s."
+
+#: .\products\views.py:195
 #, python-format
 msgid "%(name)s was deleted successfully!"
 msgstr " تم حذف %(name)s بنجاح!"
 
-#: .\templates\_base.html:70
+#: .\templates\_base.html:71
 msgid "Men's"
 msgstr "الرجال"
 
-#: .\templates\_base.html:75
+#: .\templates\_base.html:76
 msgid "Women's"
 msgstr "النساء"
 
-#: .\templates\_base.html:79
+#: .\templates\_base.html:80
 msgid "Kid's"
 msgstr "الأطفال"
 
-#: .\templates\_base.html:82
+#: .\templates\_base.html:83
 msgid "Pages"
 msgstr "الصفحات"
 
-#: .\templates\_base.html:115
+#: .\templates\_base.html:122
 msgid "Explore"
 msgstr "استكشاف"
 
-#: .\templates\_base.html:118
+#: .\templates\_base.html:125
 msgid "Languages"
 msgstr "اللغات"
 
-#: .\templates\_base.html:144
+#: .\templates\_base.html:151
 msgid "Profile"
 msgstr "الملف الشخصي"
 
-#: .\templates\_base.html:147 .\templates\account\logout.html:5
+#: .\templates\_base.html:154 .\templates\account\logout.html:5
 msgid "Logout"
 msgstr "تسجيل الخروج"
 
-#: .\templates\_base.html:151 .\templates\account\login.html:6
+#: .\templates\_base.html:158 .\templates\account\login.html:6
 #: .\templates\account\login.html:14
 msgid "Login"
 msgstr "تسجيل الدخول"
 
-#: .\templates\_base.html:154 .\templates\account\signup.html:6
+#: .\templates\_base.html:161 .\templates\account\signup.html:6
 msgid "Sign Up"
 msgstr "تسجيل حساب"
 
@@ -745,6 +1089,12 @@ msgid ""
 "\t    %(activate_url)s\n"
 "    "
 msgstr ""
+"\n"
+"مرحبًا من %(site_name)s\n"
+"\n"
+"إذا كنت قد طلبت هذا البريد الإلكتروني، يرجى الضغط على الرابط أدناه:\n"
+"\n"
+"%(activate_url)s"
 
 #: .\templates\account\email\email_confirmation_subject.txt:3
 msgid "Please confirm email"
@@ -761,6 +1111,8 @@ msgid ""
 "Please confirm that <a href=\"mailto:%(email)s\">%(email)s</a> is an email "
 "address for user %(user_display)s."
 msgstr ""
+"يرجى تأكيد أن <a href=\"mailto:%(email)s\">%(email)s</a> هو عنوان البريد "
+"الإلكتروني للمستخدم %(user_display)s."
 
 #: .\templates\account\email_confirm.html:18
 msgid "Confirm"
@@ -772,6 +1124,8 @@ msgid ""
 "This email confirmation link expired or is invalid. Please <a "
 "href=\"%(email_url)s\">issue a new email confirmation request</a>."
 msgstr ""
+"رابط تأكيد البريد الإلكتروني منتهي الصلاحية أو غير صالح. يرجى <a "
+"href=\"%(email_url)s\">إصدار طلب جديد لتأكيد البريد الإلكتروني</a>."
 
 #: .\templates\account\logout.html:10
 msgid "Are you sure you want to logout?"
@@ -784,3 +1138,6 @@ msgstr "نعم، أنا متأكد"
 #: .\templates\account\signup.html:14
 msgid "Signup"
 msgstr "تسجيل حساب"
+
+#~ msgid "$"
+#~ msgstr "ريال عماني"

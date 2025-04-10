@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-21 20:51+0400\n"
-"PO-Revision-Date: 2025-02-21 20:45+0400\n"
-"Last-Translator:   <majid@majid.com>\n"
+"POT-Creation-Date: 2025-04-09 23:27+0400\n"
+"PO-Revision-Date: 2025-04-09 23:30+0400\n"
+"Last-Translator: majid Mohammadi <majid@majid.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -27,7 +27,7 @@ msgstr "ايميل"
 msgid "User"
 msgstr "كاربر"
 
-#: .\accounts\models.py:15
+#: .\accounts\models.py:15 .\orders\forms.py:11
 msgid "Phone Number"
 msgstr "شماره تلفن"
 
@@ -39,33 +39,350 @@ msgstr "تاريخ تولد"
 msgid "Customer"
 msgstr "مشترى"
 
-#: .\accounts\models.py:28
+#: .\accounts\models.py:28 .\orders\forms.py:14
 msgid "Street"
 msgstr "خيابان"
 
-#: .\accounts\models.py:29
+#: .\accounts\models.py:29 .\orders\forms.py:15
 msgid "City"
 msgstr "شهر"
 
-#: .\accounts\models.py:30
+#: .\accounts\models.py:30 .\orders\forms.py:16
 msgid "Province"
 msgstr "استان"
 
-#: .\accounts\models.py:31
+#: .\accounts\models.py:31 .\orders\forms.py:17
 msgid "Postal Code"
 msgstr "كد پستى"
 
-#: .\accounts\models.py:32
+#: .\accounts\models.py:32 .\orders\forms.py:18
 msgid "Country"
 msgstr "كشور"
+
+#: .\cart\cart.py:40
+msgid "Product added to cart successfully."
+msgstr "محصول با موفقیت به سبد خرید اضافه شد."
+
+#: .\cart\cart.py:42
+msgid "Sorry, The selected quantity exceeds the available stock."
+msgstr "متأسفیم، تعداد انتخاب‌شده بیشتر از موجودی انبار است."
+
+#: .\cart\cart.py:60
+msgid "product removed from the cart successfully."
+msgstr "محصول با موفقیت از سبد خرید حذف شد."
+
+#: .\cart\templates\cart\cart_detail.html:7
+#: .\cart\templates\cart\cart_detail.html:11
+msgid "Cart Detail"
+msgstr "جزئیات سبد خرید"
+
+#: .\cart\templates\cart\cart_detail.html:23
+#: .\products\templates\products\product_delete.html:7
+#: .\products\templates\products\product_delete.html:18
+#: .\products\templates\products\product_detail.html:37
+msgid "Delete"
+msgstr "حذف"
+
+#: .\cart\templates\cart\cart_detail.html:26
+msgid "Product Image"
+msgstr "عكس محصول"
+
+#: .\cart\templates\cart\cart_detail.html:29 .\products\models.py:28
+msgid "Product Name"
+msgstr "نام محصول"
+
+#: .\cart\templates\cart\cart_detail.html:32 .\orders\models.py:52
+#: .\orders\templates\orders\order_detail.html:31 .\products\models.py:33
+msgid "Price"
+msgstr "قيمت"
+
+#: .\cart\templates\cart\cart_detail.html:35 .\orders\models.py:51
+#: .\orders\templates\orders\order_create.html:53
+#: .\orders\templates\orders\order_detail.html:28
+msgid "Quantity"
+msgstr "تعداد"
+
+#: .\cart\templates\cart\cart_detail.html:38
+#: .\products\templates\products\product_detail.html:64
+msgid "Total"
+msgstr "مجموع"
+
+#: .\cart\templates\cart\cart_detail.html:92
+msgid "Empty Cart"
+msgstr "خالی کردن سبد خرید"
+
+#: .\cart\templates\cart\cart_detail.html:97
+#: .\cart\templates\cart\cart_sidebar.html:38
+#: .\orders\templates\orders\order_create.html:68
+msgid "Overall Total"
+msgstr "مجموع کل"
+
+#: .\cart\templates\cart\cart_detail.html:99 .\orders\models.py:42
+msgid "Order"
+msgstr "سفارش"
+
+#: .\cart\templates\cart\cart_detail.html:107
+#, python-format
+msgid ""
+"\n"
+"        Cart is Empty, Please <a href=\"%(product_list_url)s\">add some items</a> to the cart.\n"
+"        "
+msgstr ""
+"\n"
+"سبد خرید خالی است، لطفاً <a href=\"%(product_list_url)s\">چند محصول</a> به سبد خرید اضافه کنید."
 
 #: .\cart\templates\cart\cart_sidebar.html:8
 msgid "Cart"
 msgstr "سبد خرید"
 
-#: .\cart\templates\cart\cart_sidebar.html:13
-msgid "Cart is empty"
-msgstr "سبد خرید خالی است"
+#: .\cart\templates\cart\cart_sidebar.html:42
+msgid "Go to Cart"
+msgstr "رفتن به سبد خرید"
+
+#: .\cart\templates\cart\cart_sidebar.html:43
+#: .\orders\templates\orders\my_orders.html:74
+#: .\orders\templates\orders\order_create.html:43
+msgid "Checkout"
+msgstr "پرداخت نهایی"
+
+#: .\cart\templates\cart\cart_sidebar.html:48
+msgid "Cart is Empty!, please add some products to the cart"
+msgstr "سبد خرید خالی است! لطفاً چند محصول به سبد خرید اضافه کنید."
+
+#: .\cart\templates\cart\cart_sidebar.html:51
+msgid "Go shopping"
+msgstr "ادامه خرید"
+
+#: .\cart\views.py:45
+msgid "All products successfully removed from your cart."
+msgstr "همه محصولات با موفقیت از سبد خرید شما حذف شدند."
+
+#: .\cart\views.py:47
+msgid "Your cart is already empty."
+msgstr "سبد خرید شما قبلاً خالی است."
+
+#: .\faq\models.py:6
+msgid "Category Title"
+msgstr "عنوان دسته‌بندی"
+
+#: .\faq\models.py:12 .\faq\models.py:34 .\products\models.py:29
+msgid "Category"
+msgstr "دسته بندى"
+
+#: .\faq\models.py:13
+msgid "Question"
+msgstr "سوال"
+
+#: .\faq\models.py:14
+msgid "Answer"
+msgstr "پاسخ"
+
+#: .\faq\models.py:15 .\faq\models.py:43 .\orders\models.py:26
+#: .\pages\models.py:9 .\products\models.py:35 .\products\models.py:109
+msgid "Date Time Created"
+msgstr "تارخ ساخت"
+
+#: .\faq\models.py:16 .\faq\models.py:44 .\orders\models.py:27
+#: .\products\models.py:36 .\products\models.py:110
+msgid "Date Time Modified"
+msgstr "تاربخ ويرايش"
+
+#: .\faq\models.py:17 .\faq\models.py:45 .\products\models.py:38
+#: .\products\models.py:112
+msgid "Active"
+msgstr "فعال"
+
+#: .\faq\models.py:24
+msgid "CategoryTitle (English)"
+msgstr "عنوان دسته‌بندی (انگلیسی)"
+
+#: .\faq\models.py:25
+msgid "CategoryTitle (Persian)"
+msgstr "عنوان دسته‌بندی (فارسی)"
+
+#: .\faq\models.py:26
+msgid "CategoryTitle (Arabic)"
+msgstr "عنوان دسته‌بندی (عربی)"
+
+#: .\faq\models.py:35
+msgid "Question (English)"
+msgstr "سوال (انگلیسی)"
+
+#: .\faq\models.py:36
+msgid "Question (Persian)"
+msgstr "سوال (فارسی)"
+
+#: .\faq\models.py:37
+msgid "Question (Arabic)"
+msgstr "سؤال (عربی)"
+
+#: .\faq\models.py:39
+msgid "Answer (English)"
+msgstr "پاسخ (انگلیسی)"
+
+#: .\faq\models.py:40
+msgid "Answer (Persian)"
+msgstr "پاسخ (فارسی)"
+
+#: .\faq\models.py:41
+msgid "Answer (Arabic)"
+msgstr "جواب (عربی)"
+
+#: .\faq\templates\faq\faq_list.html:7 .\faq\templates\faq\faq_list.html:12
+#: .\faq\templates\faq\faq_list_trans.html:7
+#: .\faq\templates\faq\faq_list_trans.html:12
+#: .\pages\templates\pages\footer.html:65 .\templates\_base.html:95
+msgid "FAQ"
+msgstr "سؤالات متداول"
+
+#: .\faq\templates\faq\faq_list.html:26
+#: .\faq\templates\faq\faq_list_trans.html:20
+#: .\faq\templates\faq\faq_list_trans.html:21
+#: .\products\templates\products\search.html:7 .\templates\_base.html:168
+#: .\templates\_base.html:169
+msgid "Search"
+msgstr "جستجو"
+
+#: .\faq\templates\faq\faq_list.html:70 .\faq\templates\faq\faq_list.html:95
+#: .\faq\templates\faq\faq_list_trans.html:79
+msgid "No results found."
+msgstr "هیچ محصولی یافت نشد"
+
+#: .\orders\forms.py:9
+msgid "first name"
+msgstr "نام"
+
+#: .\orders\forms.py:10
+msgid "last name"
+msgstr "نام خانوادگی"
+
+#: .\orders\forms.py:12
+msgid "email address"
+msgstr "آدرس ایمیل"
+
+#: .\orders\forms.py:27
+msgid "If you have any notes, please enter here otherwise leave it empty."
+msgstr ""
+"اگر یادداشتی دارید، لطفاً در اینجا وارد کنید وگرنه آن را خالی بگذارید."
+
+#: .\orders\models.py:15
+msgid "Paid"
+msgstr "پرداخت شده"
+
+#: .\orders\models.py:16
+msgid "Unpaid"
+msgstr "پرداخت نشده"
+
+#: .\orders\models.py:17
+msgid "Canceled"
+msgstr "لغو شده"
+
+#: .\orders\models.py:21
+msgid "Note"
+msgstr "یادداشت"
+
+#: .\orders\models.py:22
+msgid "Authority"
+msgstr "نويسنده"
+
+#: .\orders\models.py:23
+msgid "Reference ID"
+msgstr "شناسه مرجع"
+
+#: .\orders\models.py:50 .\orders\templates\orders\order_create.html:52
+#: .\orders\templates\orders\order_detail.html:25 .\products\models.py:53
+#: .\products\models.py:105
+msgid "Product"
+msgstr "محصول"
+
+#: .\orders\templates\orders\my_orders.html:8
+#: .\orders\templates\orders\my_orders.html:13 .\templates\_base.html:92
+msgid "My Orders"
+msgstr "سفارش‌های من"
+
+#: .\orders\templates\orders\my_orders.html:26
+msgid "Order ID/View"
+msgstr "شناسه سفارش / مشاهده"
+
+#: .\orders\templates\orders\my_orders.html:29
+msgid "Total Price"
+msgstr "قیمت کل"
+
+#: .\orders\templates\orders\my_orders.html:32
+msgid "Date"
+msgstr "تاريخ"
+
+#: .\orders\templates\orders\my_orders.html:35 .\products\models.py:111
+msgid "Status"
+msgstr "وضعيت"
+
+#: .\orders\templates\orders\my_orders.html:38
+msgid "Payment"
+msgstr "پرداخت"
+
+#: .\orders\templates\orders\my_orders.html:67
+msgid "PayPal"
+msgstr "پی‌پال"
+
+#: .\orders\templates\orders\my_orders.html:71
+msgid "ZarinPal"
+msgstr "زرین‌پال"
+
+#: .\orders\templates\orders\my_orders.html:88
+#, python-format
+msgid ""
+"\n"
+"            There is no order in your account, Please <a href=\"%(product_list_url)s\">add some items</a> to the cart.\n"
+"            "
+msgstr ""
+"\n"
+"هیچ سفارشی در حساب شما وجود ندارد، لطفاً <a href=\"%(product_list_url)s\">چند محصول</a> به سبد خرید اضافه کنید."
+
+#: .\orders\templates\orders\my_orders.html:100
+msgid "Please select one of the payment methods."
+msgstr "لطفاً یکی از روش‌های پرداخت را انتخاب کنید."
+
+#: .\orders\templates\orders\order_create.html:8
+msgid "Order create"
+msgstr "ایجاد سفارش"
+
+#: .\orders\templates\orders\order_create.html:13
+msgid "Order Create"
+msgstr "ایجاد سفارش"
+
+#: .\orders\templates\orders\order_create.html:23
+#: .\orders\templates\orders\order_detail.html:8
+#: .\orders\templates\orders\order_detail.html:13
+msgid "Order Details"
+msgstr "جزئيات سفارش"
+
+#: .\orders\templates\orders\order_create.html:30
+msgid "Payment Method"
+msgstr "روش پرداخت"
+
+#: .\orders\templates\orders\order_create.html:34
+msgid "PayPal online portal"
+msgstr "درگاه آنلاین پی‌پال"
+
+#: .\orders\templates\orders\order_create.html:38
+msgid "ZarinPal online portal"
+msgstr "درگاه آنلاین زرین‌پال"
+
+#: .\orders\templates\orders\order_create.html:47
+msgid "Your Order"
+msgstr "سفارش شما"
+
+#: .\orders\templates\orders\order_create.html:54
+msgid "Final Price"
+msgstr "قیمت نهایی"
+
+#: .\orders\views.py:26
+msgid "You can not proceed to checkout page, because your cart is empty!"
+msgstr "شما نمی‌توانید به صفحه پرداخت بروید، زیرا سبد خرید شما خالی است!"
+
+#: .\orders\views.py:72
+msgid "Please fill in all fields and select a payment method."
+msgstr "لطفاً همه فیلدها را پر کنید و یک روش پرداخت انتخاب کنید."
 
 #: .\pages\models.py:6
 msgid "Name"
@@ -75,12 +392,8 @@ msgstr "نام "
 msgid "message"
 msgstr "پیام"
 
-#: .\pages\models.py:9 .\products\models.py:35 .\products\models.py:108
-msgid "Date Time Created"
-msgstr "تارخ ساخت"
-
 #: .\pages\templates\pages\aboutus.html:7
-#: .\pages\templates\pages\footer.html:48 .\templates\_base.html:91
+#: .\pages\templates\pages\footer.html:48 .\templates\_base.html:98
 msgid "About Us"
 msgstr "درباره ما"
 
@@ -113,12 +426,12 @@ msgid ""
 "From casual to formal wear, shoes, and trendy accessories, Tara Store has "
 "everything you need to express your unique style"
 msgstr ""
-"از پوشاک روزمره تا لباس‌های رسمی، کفش و اکسسوری‌های مدرن، فروشگاه تارا هر آنچه "
-"را که برای بیان استایل منحصربه‌فرد خود نیاز دارید، فراهم کرده است"
+"از پوشاک روزمره تا لباس‌های رسمی، کفش و اکسسوری‌های مدرن، فروشگاه تارا هر "
+"آنچه را که برای بیان استایل منحصربه‌فرد خود نیاز دارید، فراهم کرده است"
 
 #: .\pages\templates\pages\contact_us.html:7
 #: .\pages\templates\pages\contact_us.html:12
-#: .\pages\templates\pages\footer.html:54 .\templates\_base.html:94
+#: .\pages\templates\pages\footer.html:54 .\templates\_base.html:101
 msgid "Contact Us"
 msgstr "تماس با ما"
 
@@ -131,7 +444,8 @@ msgstr "سلام كن. خجالت نکش"
 #: .\pages\templates\pages\home.html:147 .\pages\templates\pages\home.html:222
 msgid ""
 "Details to details is what makes Tara Store different from the other themes"
-msgstr "توجه به جزئیات چیزی است که فروشگاه تارا را از دیگر تم‌ها متمایز می‌کند"
+msgstr ""
+"توجه به جزئیات چیزی است که فروشگاه تارا را از دیگر تم‌ها متمایز می‌کند"
 
 #: .\pages\templates\pages\footer.html:16
 msgid "Muscat"
@@ -179,10 +493,6 @@ msgstr "کمک"
 msgid "Information"
 msgstr "اطلاعات"
 
-#: .\pages\templates\pages\footer.html:65
-msgid "FAQ's"
-msgstr "سؤالات متداول"
-
 #: .\pages\templates\pages\footer.html:68
 msgid "Shipping"
 msgstr "ارسال"
@@ -195,7 +505,7 @@ msgstr "شناسه رهگیری"
 msgid "Design"
 msgstr "طراحى"
 
-#: .\pages\templates\pages\home.html:7 .\templates\_base.html:65
+#: .\pages\templates\pages\home.html:7 .\templates\_base.html:66
 msgid "Home"
 msgstr "خانه"
 
@@ -264,10 +574,10 @@ msgid ""
 "exploring today and experience excellence"
 msgstr ""
 "یک مجموعه گسترده از محصولات باکیفیت را کشف کنید که متناسب با نیازهای شما "
-"طراحی شده‌اند. از جدیدترین ترندها تا کلاسیک‌های جاودانه، ما برای همه سلیقه‌ها "
-"چیزی داریم. در مجموعه‌های ما جستجو کنید و گزینه‌ی مناسب برای سبک خود را پیدا "
-"کنید. با پرداخت امن و ارسال سریع، خریدی بی‌دغدغه را تجربه کنید. همین امروز "
-"جستجو را آغاز کنید و کیفیت برتر را تجربه کنید."
+"طراحی شده‌اند. از جدیدترین ترندها تا کلاسیک‌های جاودانه، ما برای همه "
+"سلیقه‌ها چیزی داریم. در مجموعه‌های ما جستجو کنید و گزینه‌ی مناسب برای سبک "
+"خود را پیدا کنید. با پرداخت امن و ارسال سریع، خریدی بی‌دغدغه را تجربه کنید. "
+"همین امروز جستجو را آغاز کنید و کیفیت برتر را تجربه کنید."
 
 #: .\pages\templates\pages\home.html:178
 msgid "Discover More"
@@ -289,7 +599,7 @@ msgstr "انواع مختلف"
 msgid "Over"
 msgstr "بيش از"
 
-#: .\pages\templates\pages\home.html:204 .\templates\_base.html:85
+#: .\pages\templates\pages\home.html:204 .\templates\_base.html:86
 msgid "Products"
 msgstr "محصولات"
 
@@ -338,7 +648,8 @@ msgstr "با عضویت در خبرنامه ما، می‌توانید ۳۰٪ ت
 #: .\pages\templates\pages\subscribe.html:11
 msgid ""
 "Details to details is what makes Tara Store different from the other themes."
-msgstr "توجه به جزئیات چیزی است که فروشگاه تارا را از دیگر تم‌ها متمایز می‌کند"
+msgstr ""
+"توجه به جزئیات چیزی است که فروشگاه تارا را از دیگر تم‌ها متمایز می‌کند"
 
 #: .\pages\templates\pages\subscribe.html:17
 msgid "Your Name"
@@ -389,9 +700,63 @@ msgstr "فیسبوک"
 msgid "Instagram"
 msgstr "اینستاگرام"
 
-#: .\pages\views.py:53
+#: .\pages\views.py:50
 msgid "Your message sent successfully"
 msgstr "پیام شما با موفقیت ارسال شد!"
+
+#: .\payment\views.py:150 .\payment\views.py:274
+msgid "Not enough inventory for {item.product.name}."
+msgstr "موجودی کافی برای {item.product.name} وجود ندارد."
+
+#: .\payment\views.py:243
+msgid "Your payment was successful."
+msgstr "پرداخت شما با موفقیت انجام شد."
+
+#: .\payment\views.py:247
+msgid ""
+"Your payment was successful. However, this transaction has already recorded."
+msgstr ""
+"پرداخت شما با موفقیت انجام شد. با این حال، این تراکنش قبلاً ثبت شده است."
+
+#: .\payment\views.py:255
+msgid "The transaction was unsuccessful.{error_code:} {error_message}"
+msgstr "تراکنش ناموفق بود. {error_code:} {error_message}"
+
+#: .\payment\views.py:261
+msgid "The transaction was unsuccessful."
+msgstr "تراکنش ناموفق بود."
+
+#: .\payment\views.py:291
+msgid "Failed to retrieve access token"
+msgstr "بازیابی توکن دسترسی ناموفق بود."
+
+#: .\payment\views.py:323
+msgid "Authentication failed with PayPal"
+msgstr "احراز هویت با پی‌پال ناموفق بود."
+
+#: .\payment\views.py:327
+msgid "Unable to create PayPal order"
+msgstr "قادر به ایجاد سفارش پی‌پال نیستیم."
+
+#: .\payment\views.py:337
+msgid "Invalid request"
+msgstr "درخواست نامعتبر است."
+
+#: .\payment\views.py:375
+msgid "Payment captured successfully"
+msgstr "پرداخت با موفقیت ثبت شد"
+
+#: .\payment\views.py:380
+msgid "This order has already been captured"
+msgstr "این سفارش قبلاً ثبت شده است."
+
+#: .\payment\views.py:384
+msgid "Authentication failed"
+msgstr "احراز هویت ناموفق بود."
+
+#: .\payment\views.py:388
+msgid "Payment capture failed"
+msgstr "ثبت پرداخت ناموفق بود."
 
 #: .\products\models.py:12
 msgid "Title"
@@ -405,14 +770,6 @@ msgstr "توضيحات"
 msgid "Discount"
 msgstr "تخفيف"
 
-#: .\products\models.py:28
-msgid "Product Name"
-msgstr "نام محصول"
-
-#: .\products\models.py:29
-msgid "Category"
-msgstr "دسته بندى"
-
 #: .\products\models.py:30
 msgid "Slug"
 msgstr "مسير URL"
@@ -421,85 +778,65 @@ msgstr "مسير URL"
 msgid "Short Description"
 msgstr "توضيحات كوتاه"
 
-#: .\products\models.py:33
-msgid "Price"
-msgstr "قيمت"
-
 #: .\products\models.py:34
 msgid "Inventory"
 msgstr "موجودى"
 
-#: .\products\models.py:36 .\products\models.py:109
-msgid "Date Time Modified"
-msgstr "تاربخ ويرايش"
-
-#: .\products\models.py:38 .\products\models.py:111
-msgid "Active"
-msgstr "فعال"
-
-#: .\products\models.py:52 .\products\models.py:104
-msgid "Product"
-msgstr "محصول"
-
-#: .\products\models.py:53
+#: .\products\models.py:54
 msgid "Product image"
 msgstr "عكس محصول"
 
-#: .\products\models.py:91
+#: .\products\models.py:92
 msgid "Waiting"
 msgstr "انتظار"
 
-#: .\products\models.py:92
+#: .\products\models.py:93
 msgid "Approved"
 msgstr "تاييد شده"
 
-#: .\products\models.py:93
+#: .\products\models.py:94
 msgid "Not Approved"
 msgstr "تاييد نشده"
 
-#: .\products\models.py:97
+#: .\products\models.py:98
 msgid "Very Bad"
 msgstr "خيلي بد"
 
-#: .\products\models.py:98
+#: .\products\models.py:99
 msgid "Bad"
 msgstr "بد"
 
-#: .\products\models.py:99
+#: .\products\models.py:100
 msgid "Normal"
 msgstr "معمولى"
 
-#: .\products\models.py:100
+#: .\products\models.py:101
 msgid "Good"
 msgstr "خوب"
 
-#: .\products\models.py:101
+#: .\products\models.py:102
 msgid "Perfect"
 msgstr "عالى"
 
-#: .\products\models.py:105
+#: .\products\models.py:106
 msgid "Author"
 msgstr "نويسنده"
 
-#: .\products\models.py:106
+#: .\products\models.py:107
 msgid "Comment Text"
 msgstr "متن ديدگاه"
 
-#: .\products\models.py:107
-#: .\products\templates\products\product_detail.html:111
+#: .\products\models.py:108
+#: .\products\templates\products\product_detail.html:115
 msgid "Product Rating"
 msgstr "امتياز محصول"
-
-#: .\products\models.py:110
-msgid "Status"
-msgstr "وضعيت"
 
 #: .\products\templates\products\product_create.html:11
 msgid "Create Product"
 msgstr "اضافه كردن محصول"
 
 #: .\products\templates\products\product_create.html:16
-#: .\templates\_base.html:88
+#: .\templates\_base.html:89
 msgid "Add Product"
 msgstr "اضافه كردن محصول"
 
@@ -511,12 +848,6 @@ msgstr "عكس محصول"
 #: .\products\templates\products\product_create.html:32
 msgid "Submit"
 msgstr "ارسال"
-
-#: .\products\templates\products\product_delete.html:7
-#: .\products\templates\products\product_delete.html:18
-#: .\products\templates\products\product_detail.html:37
-msgid "Delete"
-msgstr "حذف"
 
 #: .\products\templates\products\product_delete.html:12
 msgid "Product Delete"
@@ -543,35 +874,27 @@ msgstr "جزئيات محصول"
 msgid "Edit"
 msgstr "ويرايش"
 
-#: .\products\templates\products\product_detail.html:40
-msgid "$"
-msgstr "تومان"
-
-#: .\products\templates\products\product_detail.html:50
+#: .\products\templates\products\product_detail.html:53
 msgid "No. of Orders"
 msgstr "تعداد سفارشات"
 
-#: .\products\templates\products\product_detail.html:61
-msgid "Total"
-msgstr "مجموع"
-
-#: .\products\templates\products\product_detail.html:63
+#: .\products\templates\products\product_detail.html:66
 msgid "Add To Cart"
 msgstr "افزودن به سبد خرید"
 
-#: .\products\templates\products\product_detail.html:76
+#: .\products\templates\products\product_detail.html:80
 msgid "Comments List"
 msgstr "ديدگاه ها"
 
-#: .\products\templates\products\product_detail.html:100
+#: .\products\templates\products\product_detail.html:104
 msgid "No comments available"
 msgstr "هيج ديدگاهى موجود نيست"
 
-#: .\products\templates\products\product_detail.html:120
+#: .\products\templates\products\product_detail.html:124
 msgid "Send"
 msgstr "ارسال"
 
-#: .\products\templates\products\product_detail.html:124
+#: .\products\templates\products\product_detail.html:128
 msgid "You must be logged in to leave a comment"
 msgstr "برای گذاشتن نظر باید ثبت نام كنيد"
 
@@ -588,6 +911,11 @@ msgid "Check out all of our products"
 msgstr "مشاهده همه محصولات"
 
 #: .\products\templates\products\product_display.html:72
+#: .\products\templates\products\products_home.html:48
+msgid "Stock"
+msgstr "موجودی"
+
+#: .\products\templates\products\product_display.html:77
 msgid "No products found"
 msgstr "هیچ محصولی یافت نشد"
 
@@ -647,86 +975,88 @@ msgstr "محصولات زنانه"
 msgid "Womens Products"
 msgstr "محصولات زنانه"
 
-#: .\products\templates\products\search.html:7 .\templates\_base.html:161
-#: .\templates\_base.html:162
-msgid "Search"
-msgstr "جستجو"
-
 #: .\products\templates\products\search.html:16
 msgid "Please enter your product to search"
 msgstr "لطفاً محصول خود را برای جستجو وارد کنید"
 
-#: .\products\views.py:89
+#: .\products\views.py:93
 msgid "Comment successfully created."
 msgstr "نظر با موفقيت ساخته شد."
 
-#: .\products\views.py:109
+#: .\products\views.py:113
 msgid "You don't have permission to add products.(Only admin)"
 msgstr "شما مجوز افزودن محصولات را ندارید. (فقط مدیر)"
 
-#: .\products\views.py:123
+#: .\products\views.py:127
 msgid "Product has been created successfully!"
 msgstr "محصول با موفقيت ايجاد شده است!"
 
-#: .\products\views.py:137
+#: .\products\views.py:141
 msgid "You don't have permission to Edit products.(Only admin)"
 msgstr "شما مجوز ویرایش محصولات را ندارید. (فقط مدیر)"
 
-#: .\products\views.py:151
+#: .\products\views.py:159
 msgid "Product has been updated successfully!"
 msgstr "محصول با موفقیت به‌روزرسانی شد!"
 
-#: .\products\views.py:156
+#: .\products\views.py:164
 msgid "There are errors in the form. Please fix them."
 msgstr "در فرم خطاهایی وجود دارد. لطفاً آن‌ها را اصلاح کنید."
 
-#: .\products\views.py:169
+#: .\products\views.py:177
 msgid "You don't have permission to delete products.(Only admin)"
 msgstr "شما مجوز حذف محصولات را ندارید. (فقط مدیر)"
 
-#: .\products\views.py:175
+#: .\products\views.py:189
+#, python-format
+msgid ""
+"Cannot delete %(name)s because it is associated with order items: %(order)s."
+msgstr ""
+"نمی‌توان %(name)s را حذف کرد زیرا با موارد سفارش مرتبط است: %(order)s."
+
+#: .\products\views.py:195
 #, python-format
 msgid "%(name)s was deleted successfully!"
 msgstr "%(name)s با موفقیت حذف شد!"
 
-#: .\templates\_base.html:70
+#: .\templates\_base.html:71
 msgid "Men's"
 msgstr "مردانه"
 
-#: .\templates\_base.html:75
+#: .\templates\_base.html:76
 msgid "Women's"
 msgstr "زنانه"
 
-#: .\templates\_base.html:79
+#: .\templates\_base.html:80
 msgid "Kid's"
 msgstr "بچگانه"
 
-#: .\templates\_base.html:82
+#: .\templates\_base.html:83
 msgid "Pages"
 msgstr "صفحات"
 
-#: .\templates\_base.html:115
+#: .\templates\_base.html:122
 msgid "Explore"
 msgstr "مشاهده محصولات"
 
-#: .\templates\_base.html:118
+#: .\templates\_base.html:125
 msgid "Languages"
 msgstr "زبان ها"
 
-#: .\templates\_base.html:144
+#: .\templates\_base.html:151
 msgid "Profile"
 msgstr "پروفایل"
 
-#: .\templates\_base.html:147 .\templates\account\logout.html:5
+#: .\templates\_base.html:154 .\templates\account\logout.html:5
 msgid "Logout"
 msgstr "خروج"
 
-#: .\templates\_base.html:151 .\templates\account\login.html:6
+#: .\templates\_base.html:158 .\templates\account\login.html:6
 #: .\templates\account\login.html:14
 msgid "Login"
 msgstr "ورود"
 
-#: .\templates\_base.html:154 .\templates\account\signup.html:6
+#: .\templates\_base.html:161 .\templates\account\signup.html:6
 msgid "Sign Up"
 msgstr "ثبت نام"
 
@@ -739,6 +1069,11 @@ msgid ""
 "\t    %(activate_url)s\n"
 "    "
 msgstr ""
+"\n"
+"سلام از طرف %(site_name)s\n"
+"\n"
+"اگر شما این ایمیل را درخواست کرده‌اید، لطفاً روی لینک زیر کلیک کنید:\n"
+"%(activate_url)s"
 
 #: .\templates\account\email\email_confirmation_subject.txt:3
 msgid "Please confirm email"
@@ -755,6 +1090,8 @@ msgid ""
 "Please confirm that <a href=\"mailto:%(email)s\">%(email)s</a> is an email "
 "address for user %(user_display)s."
 msgstr ""
+"لطفاً تأیید کنید که <a href=\"mailto:%(email)s\">%(email)s</a> آدرس ایمیل "
+"کاربر %(user_display)s است."
 
 #: .\templates\account\email_confirm.html:18
 msgid "Confirm"
@@ -763,9 +1100,11 @@ msgstr "تایید"
 #: .\templates\account\email_confirm.html:23
 #, python-format
 msgid ""
-"This email confirmation link expired or is invalid. Please <a href=\"%"
-"(email_url)s\">issue a new email confirmation request</a>."
+"This email confirmation link expired or is invalid. Please <a "
+"href=\"%(email_url)s\">issue a new email confirmation request</a>."
 msgstr ""
+"لینک تأیید ایمیل منقضی شده یا نامعتبر است. لطفاً <a "
+"href=\"%(email_url)s\">درخواست تأیید ایمیل جدید</a> ارسال کنید."
 
 #: .\templates\account\logout.html:10
 msgid "Are you sure you want to logout?"
@@ -778,6 +1117,9 @@ msgstr "بله، مطمئن هستم"
 #: .\templates\account\signup.html:14
 msgid "Signup"
 msgstr "ثبت نام"
+
+#~ msgid "$"
+#~ msgstr "تومان"
 
 #~ msgid ""
 #~ "Details to details is what makes Tara Tara Store different from the other "
