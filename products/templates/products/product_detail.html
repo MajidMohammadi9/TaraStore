@@ -37,6 +37,7 @@
               <a href="{% url 'product_delete' product.id %}" class="btn btn-success">{% trans 'Delete' %}</a>
             </div>
             <h6 style="padding-top: 10px;">{{ product.name }}</h6>
+            {% trans "Stock" %}: {{product.inventory|translate_number}}
             <span class="price">{{ product.unit_price|convert_currency|translate_number }}</span>
             {% include 'products/stars.html' %}
             {% if product.short_description %}
