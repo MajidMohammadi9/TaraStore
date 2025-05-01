@@ -6,15 +6,16 @@ from .models import Product, Category, Comment, ProductImage
 class CommentInline(admin.TabularInline):
     model=Comment
     fields=['id', 'author','body', 'stars', 'status','active']
+    autocomplete_fields=['author']
     extra=0
     
     def get_queryset(self, request):
         queryset = super().get_queryset(request)
         return queryset.select_related('author','product')
     
-    def get_readonly_fields(self, request, obj = None):
-        if obj:
-            return ['author']
+    # def get_readonly_fields(self, request, obj = None):
+    #     if obj:
+    #         return ['author']
 
     
 class ProductImageInline(admin.TabularInline):
